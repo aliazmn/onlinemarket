@@ -15,7 +15,7 @@ class Category(models.Model):
 class Product(models.Model):
     name=models.CharField(max_length=150)
     description=models.TextField(null=True)
-    brand=models.CharField(max_length=50,null=True)
+    brand=models.CharField(max_length=50,null=True ,blank=True)
     price=models.BigIntegerField(null=True)
     amount=models.IntegerField(null=True)
     activate=models.BooleanField(default=False)
@@ -33,7 +33,7 @@ class Product(models.Model):
 
 
     def __str__(self) -> str:
-        return f"{self.name}{self.brand}"
+        return f"{self.name}-{self.brand}"
 
          
 
