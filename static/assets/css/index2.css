@@ -1,0 +1,236 @@
+/*--------------------- Copyright (c) 2020 ----------------------- 
+[Dark Stylesheet] 
+Project: Shopmartio - Responsive HTML Template 
+Version: 1.0.0 
+Author: Kamleshyadav
+ ------------------------------------------------------------------- 
+[Table of contents] 
+    1. Preloader CSS Start
+    2. Global CSS Start
+    3. header  CSS Start
+    4. Banner CSS Start
+    5. New arrivals CSS Start
+    6. Shipping features CSS Start
+    7. top Products CSS Start
+    8. Footer CSS Start
+    9. Media CSS Start
+-------------------------------------------------------------------*/
+/********************************************************
+    1. Global CSS Start
+********************************************************/
+body{
+    color: var(--fur-text-color);
+}
+/********************************************************
+    1. PreLoader CSS
+*******************************************************/
+.preloader-active .preloader-holder .preloader span {
+    box-shadow: 0px 0px 0px 0px var(--fur-primary-color);
+}
+@-webkit-keyframes loadingCircles{
+    0%{-webkit-transform: scale(0); opacity: 1; box-shadow: 0px 0px 0px 10px var(--fur-primary-color);}
+    100%{-webkit-transform: scale(1); opacity: 0; box-shadow: 0px 0px 0px 2px var(--fur-primary-color);}
+}
+@-moz-keyframes loadingCircles{
+    0%{-moz-transform: scale(0); opacity: 1; box-shadow: 0px 0px 0px 10px var(--fur-primary-color);}
+    100%{-moz-transform: scale(1); opacity: 0; box-shadow: 0px 0px 0px 2px var(--fur-primary-color);}
+}
+@keyframes loadingCircles{
+    0%{transform: scale(0); opacity: 1; box-shadow: 0px 0px 0px 10px var(--fur-primary-color);}
+    100%{transform: scale(1); opacity: 0; box-shadow: 0px 0px 0px 2px var(--fur-primary-color);}
+}
+/********************************************************
+    2. header  CSS Start
+********************************************************/
+.header-wrap-fur .menu-list > li > a {
+    color: var(--fur-text-color);
+    text-transform: uppercase;
+}
+.header-wrap-fur .menu-list > li > a:hover{
+    color: var(--fur-primary-color);
+}
+.header-wrap-fur .mega-menu-infobox svg path {
+    fill: var(--fur-primary-color);
+}
+/********************************************************
+    3. Banner CSS Start
+********************************************************/
+.e-banner-fur .e-banner-inwrap {
+    background: #d2e9e3;
+}
+.e-banner-fur .e-banner-subtitle {
+    font-size: 20px;
+    color: var(--fur-text-color);
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-transform: uppercase;
+}
+.e-banner-fur  .e-banner-title {
+    font-size: 72px;
+    line-height: 82px;
+    font-weight: 400;
+    color: var(--fur-primary-color);
+}
+.e-banner-fur .e-banner-des {
+    font-size: 14px;
+    color: var(--fur-text-color);
+}
+.e-banner-fur .e-banner-text {
+    color: var(--fur-text-color);
+    margin-bottom: 15px;
+}
+.e-banner-fur .e-banner-price {
+    display: flex;
+    align-items: center;
+    margin-bottom: 35px;
+}
+.e-banner-fur .e-banner-price > span {
+    font-size: 32px;
+    padding-right: 10px;
+}
+.e-banner-fur .e-swiper-next, .e-banner-fur .e-swiper-pre {
+    background: var(--fur-primary-color);
+}
+.e-banner-fur .e-swiper-next:hover, .e-banner-fur .e-swiper-pre:hover {
+    background:rgb(187, 213, 206);
+}
+.e-banner-fur .e-swiper-next svg path, .e-banner-fur .swiper-container-rtl .e-swiper-pre svg path, .e-banner-fur .e-swiper-pre svg path, .e-banner-fur .swiper-container-rtl .e-swiper-next svg path{
+fill:var(--white-color);
+}
+.e-banner-fur .swiper-pagination-bullet:after {
+    color: var(--fur-primary-color);
+}
+.e-banner-fur .swiper-pagination-bullet:before {
+    background: var(--fur-primary-color);
+}
+/********************************************************
+4. New arrivals CSS Start
+********************************************************/
+.e-newarivles-fur {
+    padding:74px 0 80px;
+}
+.e-newarivles-fur .na-top-sec {
+    background:#ecf5f6;
+    padding: 72px 20px;
+}
+.e-newarivles-fur .na-hover-content {
+    background: var(--fur-primary-color);
+}
+.e-newarivles-fur .na-hover-content > li > a {
+    background-color: var(--fur-primary-color);
+}
+.e-newarivles-fur .na-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--fur-text-color);
+}
+.e-newarivles-fur .na-price{
+    font-size: 18px;
+    color: var(--fur-primary-color);
+    font-weight: 700;
+}
+.e-newarivles-fur .na-price > del {
+    color: #cbcbcb;
+    padding-left: 8px;
+}
+.e-shipping-features-fur .e-shipping-des {
+    color: var(--white-color);
+}
+.e-newarivles-fur .e-gallery .gallery-nav ul li a {
+    color: var(--fur-text-color);
+    text-transform: uppercase;
+    letter-spacing: 0px;;
+}
+.e-newarivles-fur .e-gallery .gallery-nav ul li a.gallery-active, .e-newarivles-fur .e-gallery .gallery-nav ul li a:hover {
+    color: var(--white-color);
+    border-color: var(--fur-primary-color);
+    background: var(--fur-primary-color);
+}
+/********************************************************
+    5.Shipping features CSS Start
+********************************************************/
+.e-shipping-features-fur {
+    padding: 70px 0 44px;
+}
+.e-shipping-features-fur .e-shipping-inner:hover .e-shipping-icon span:after {
+    border-color: #ffffff;
+    border-width: 2px;
+}
+/********************************************************
+    6.top Products CSS Start
+********************************************************/
+.e-top-products-fur {
+    padding: 0px 0 80px;
+}
+/********************************************************
+7. Footer CSS Start
+********************************************************/
+.e-footer-fur .efoot-list > li > a {
+    color: var(--fur-text-color);
+}
+.e-footer-fur .efoot-list > li > a:after {
+    background: var(--fur-text-color);
+}
+.e-footer-fur .efoot-list > li > a:hover{
+    color: var(--fur-primary-color);
+}
+.e-footer-fur .efoot-list > li > a:before, .e-footer-fur .efoot-list > li > a:hover::after  {
+    background: var(--fur-primary-color);
+}
+.e-footer-fur .efoot-about {
+    margin: 25px 0 29px;
+}
+/* bottom footer */
+.e-bfooter-fur {
+    background: var(--fur-primary-color);
+}
+/********************************************************
+8. Media CSS Start
+********************************************************/
+@media (max-width: 991px){
+    .e-banner-fur .e-inner-slide {
+        text-align: center;
+        padding: 35px 0 83px;
+    }
+}
+@media (max-width: 1199px){
+    .header-wrap-fur .menu-list > li.open > a, .drop-menu .sub-menu > li.open > a {
+        color: var(--fur-primary-color);
+    }
+}
+@media (min-width: 1200px){
+    .header-wrap-fur .drop-menu .sub-menu > li > a {
+    color: var(--fur-primary-color);
+}
+}
+
+@media (min-width: 992px) {
+    .e-banner-fur .e-inner-slide.slide1 {
+        background:url(../images/index2/banner_bg01.jpg)no-repeat center;
+        background-size: cover;
+    }
+    .e-banner-fur .e-inner-slide.slide2 {
+        background:url(../images/index2/banner_bg02.html)no-repeat center;
+        background-size: cover;
+    }
+    .e-banner-fur .e-inner-slide.slide3 {
+        background:url(../images/index2/banner_bg03.html)no-repeat center;
+        background-size: cover;
+    }
+    .e-banner-fur .e-inner-slide.slide3 {
+        background-size: cover;
+    }
+    .e-inner-slide.slide1 {
+        padding: 97px 15px 271px;
+    }
+}
+@media (min-width: 1200px) {
+    .e-inner-slide.slide1 {
+        padding: 137px 15px 311px;
+    }
+}
+@media (min-width: 1600px) {
+    .e-inner-slide.slide1 {
+        padding: 177px 105px 351px;
+    }
+}

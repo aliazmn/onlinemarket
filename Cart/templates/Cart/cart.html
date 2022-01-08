@@ -1,0 +1,240 @@
+{% extends 'home.html' %}
+{% load static %}   
+
+{% block main %}
+
+<!-- Breadcumbs start -->
+<div class="e-breadcumb-wrap text-center">
+    <h2 class="e-breadcumb-title">سبد خرید </h2>
+    <ul class="e-breadcumb-kist">
+        <li>
+            <a href="index.html">خانه </a>
+        </li>
+        <li>
+            <a href='{%static "javascript:void(0);" %}'> صفحات </a>
+        </li>
+        <li>
+            <a href='{%static "javascript:void(0);" %}'>سبد خرید  </a>
+        </li>
+    </ul>
+</div>
+<!-- Product Category start -->
+<section class="e-shopcart-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 col-lg-12">
+                <div class="e-shopcart-sec">                    
+                    <div class="shopcart-table-wrap mb-30">
+                        <form class="table-responsive">
+                            <table class="shopcart-table">
+                                <thead>
+                                  <tr>
+                                    <th>محصول </th>
+                                    <th>تعداد </th>
+                                    <th>قیمت </th>
+                                    <th>قیمت جمع </th>
+                                    <th>&nbsp;</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                        <div class="sc-productwrap">
+                                            <a href="product_details.html" class="sc-product-thumb">
+                                                <img src='{% static "assets/images/index1/shopcart01.jpg"%}' alt="محصول" class="img-fluid">
+                                            </a>
+                                            <div class="sc-product-details">
+                                                <a href="product_details.html" class="sc-product-ttl">کت کلاه دار خاکستری مشکی</a>
+                                                <p class="sc-product-sz">اندازه: متوسط </p>
+                                            </div>
+                                        </div>      
+                                    </td>
+                                    <td> 
+                                        <div class="quantity-box">
+                                            <input type="text" class="quantity" value="2">
+                                            <span class="quantity-minus pa-sub quantity-icon"> - </span>                                                
+                                            <span class="quantity-plus  pa-add quantity-icon"> + </span>                                            
+                                        </div>
+                                    </td>
+                                    <td><span class="sc-product-prc">120000 تومان</span></td>
+                                    <td><span class="sc-product-prc">2,240</span></td>
+                                    <td>
+                                        <a href='{%static "javascript:void(0);" %}' class="sc-produc-remove e-remove-product">
+                                            <img src='{% static "assets/images/index1/svg/cut.svg"%}' alt="icon">
+                                        </a>
+                                    </td>
+                                  </tr>                                                                  
+                                  <tr>
+                                    <td>
+                                        <div class="sc-productwrap">
+                                            <a href="product_details.html" class="sc-product-thumb">
+                                                <img src='{% static "assets/images/index1/shopcart02.jpg"%}' alt="محصول" class="img-fluid">
+                                            </a>
+                                            <div class="sc-product-details">
+                                                <a href="product_details.html" class="sc-product-ttl">کت بچه دار زرد</a>
+                                                <p class="sc-product-sz">اندازه: متوسط </p>
+                                            </div>
+                                        </div>      
+                                    </td>
+                                    <td> 
+                                        <div class="quantity-box">
+                                            <input type="text" class="quantity" value="2">
+                                            <span class="quantity-minus pa-sub quantity-icon"> - </span>                                                
+                                            <span class="quantity-plus  pa-add quantity-icon"> + </span>                                           
+                                        </div>
+                                    </td>
+                                    <td><span class="sc-product-prc">120000 تومان</span></td>
+                                    <td><span class="sc-product-prc">2,240</span></td>
+                                    <td>
+                                        <a href='{%static "javascript:void(0);" %}' class="sc-produc-remove e-remove-product">
+                                            <img src='{% static "assets/images/index1/svg/cut.svg"%}' alt="icon">
+                                        </a>
+                                    </td>
+                                  </tr>                                                                  
+                                  <tr>
+                                    <td>
+                                        <div class="sc-productwrap">
+                                            <a href="product_details.html" class="sc-product-thumb">
+                                                <img src='{% static "assets/images/index1/shopcart03.jpg"%}' alt="محصول" class="img-fluid">
+                                            </a>
+                                            <div class="sc-product-details">
+                                                <a href="product_details.html" class="sc-product-ttl">کت بمب افکن سیاه</a>
+                                                <p class="sc-product-sz">اندازه: متوسط </p>
+                                            </div>
+                                        </div>      
+                                    </td>
+                                    <td> 
+                                        <div class="quantity-box">
+                                            <input type="text" class="quantity" value="2">
+                                            <span class="quantity-minus pa-sub quantity-icon"> - </span>                                                
+                                            <span class="quantity-plus  pa-add quantity-icon"> + </span>                                           
+                                        </div>
+                                    </td>
+                                    <td><span class="sc-product-prc">120000 تومان</span></td>
+                                    <td><span class="sc-product-prc">2,240</span></td>
+                                    <td>
+                                        <a href='{%static "javascript:void(0);" %}' class="sc-produc-remove e-remove-product">
+                                            <img src='{% static "assets/images/index1/svg/cut.svg"%}' alt="icon">
+                                        </a>
+                                    </td>
+                                  </tr>                                                                  
+                                  <tr>
+                                    <td>
+                                        <div class="sc-productwrap">
+                                            <a href="product_details.html" class="sc-product-thumb">
+                                                <img src='{% static "assets/images/index1/shopcart05.jpg"%}' alt="محصول" class="img-fluid">
+                                            </a>
+                                            <div class="sc-product-details">
+                                                <a href="product_details.html" class="sc-product-ttl">ژاکت بادکنک آستین کامل</a>
+                                                <p class="sc-product-sz">اندازه: متوسط </p>
+                                            </div>
+                                        </div>      
+                                    </td>
+                                    <td> 
+                                        <div class="quantity-box">
+                                            <input type="text" class="quantity" value="2">
+                                            <span class="quantity-minus pa-sub quantity-icon"> - </span>                                                
+                                            <span class="quantity-plus  pa-add quantity-icon"> + </span>                                           
+                                        </div>
+                                    </td>
+                                    <td><span class="sc-product-prc">120000 تومان</span></td>
+                                    <td><span class="sc-product-prc">2,240</span></td>
+                                    <td>
+                                        <a href='{%static "javascript:void(0);" %}' class="sc-produc-remove e-remove-product">
+                                            <img src='{% static "assets/images/index1/svg/cut.svg"%}' alt="icon">
+                                        </a>
+                                    </td>
+                                  </tr>                                                                  
+                                  <tr>
+                                    <td>
+                                        <div class="sc-productwrap">
+                                            <a href="product_details.html" class="sc-product-thumb">
+                                                <img src='{% static "assets/images/index1/shopcart04.jpg"%}' alt="محصول" class="img-fluid">
+                                            </a>
+                                            <div class="sc-product-details">
+                                                <a href="product_details.html" class="sc-product-ttl">کت دو یقه</a>
+                                                <p class="sc-product-sz">اندازه: متوسط </p>
+                                            </div>
+                                        </div>      
+                                    </td>
+                                    <td> 
+                                        <div class="quantity-box">
+                                            <input type="text" class="quantity" value="2">
+                                            <span class="quantity-minus pa-sub quantity-icon"> - </span>                                                
+                                            <span class="quantity-plus  pa-add quantity-icon"> + </span>                                           
+                                        </div>
+                                    </td>
+                                    <td><span class="sc-product-prc">120000 تومان</span></td>
+                                    <td><span class="sc-product-prc">2,240</span></td>
+                                    <td>
+                                        <a href='{%static "javascript:void(0);" %}' class="sc-produc-remove e-remove-product">
+                                            <img src='{% static "assets/images/index1/svg/cut.svg"%}' alt="icon">
+                                        </a>
+                                    </td>
+                                  </tr>                                                                  
+                                </tbody>
+                              </table>
+                        </form>
+                    </div>
+                    <div class="shopcart-bottom mb-30">
+                        <ul class="shopcart-dis-list">
+                            <li>                                
+                                <div class="sc-dcinput">
+                                    <div class="sc-diswrap">
+                                        <img src='{% static "assets/images/index1/svg/discount_Per.svg"%}' alt="icon">
+                                        <span>کد تخفیف</span>
+                                    </div>
+                                    <div class="sc-disinputwrap">
+                                        <form>
+                                            <div class="e-nl-box boreder">
+                                                <input type="text" placeholder="کد تخفیف را وارد کنید">
+                                                <a href='{%static "javascript:void(0);" %}' class="e-btn newsletter-btn">اعمال کد تخفیف </a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>                                
+                                <a href='{%static "javascript:void(0);" %}' class="e-btn black update-cart">بروز رسانی سبد </a>
+                            </li>
+                        </ul>
+                    </div> 
+                </div>                      
+            </div>            
+            <div class="col-xl-3 col-lg-12">
+                <div class="e-shopcart-sidebar">
+                    <div class="e-totalsumry mb-30">
+                        <div class="e-totalsumry-header">
+                            <h2 class="e-totalsumry-ttl">خلاصه مجموع سبد خرید</h2>
+                        </div>
+                        <div class="e-totalsumry-body">
+                            <ul class="e-totalsumry-list">
+                                <li>
+                                    <span class="ts-list-head">مجموع سبد:</span>
+                                    <span class="ts-list-shead">240000 تومان</span>
+                                </li>
+                                <li>
+                                    <span class="ts-list-head">حمل و نقل: </span>
+                                    <span class="ts-list-shead">22000 تومان</span>
+                                </li>
+                            </ul>
+                            <!-- <a href='{%static "javascript:void(0);" %}' class="ts-chngadd">Change Address
+                                <img src='{% static "assets/images/index1/svg/edit.svg"%}' alt="edit">
+                            </a> -->
+                        </div>  
+                        <div class="e-totalsumry-fotr">
+                            <ul class="e-totalsumry-list total">
+                                <li>
+                                    <span class="ts-list-head">گراند توتال</span>
+                                    <span class="ts-list-shead">26000 تومان</span>
+                                </li>
+                            </ul>
+                        </div>  
+                    </div> 
+                    <a href="shipping_cart.html" class="e-btn">پرداخت صورتحساب </a>
+                </div>                      
+            </div>            
+        </div>
+    </div>
+</section>
+{% endblock main %}

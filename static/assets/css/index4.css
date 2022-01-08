@@ -1,0 +1,289 @@
+/*--------------------- Copyright (c) 2021 ----------------------- 
+[Dark Stylesheet] 
+Project: Shopmartio - Responsive HTML Template 
+Version: 1.0.0 
+Author: Kamleshyadav
+ ------------------------------------------------------------------- 
+[Table of contents] 
+    1. Global CSS Start
+    2. Comman CSS Start
+    3. Preloader CSS Start
+    4. sidebar cartbox CSS Start
+    5.  Header CSS Start
+    6. login CSS Start
+    7. Banner CSS Start
+    8. New Arrivals CSS Start
+    9. Newsletter CSS Start
+    10. Footer CSS Start
+    11. Media CSS Start
+-------------------------------------------------------------------*/
+/********************************************************
+    1. Global CSS Start
+********************************************************/
+:root {
+    --bg-color:#333646;
+    --dark-color:#252734;
+    --primary-color:#ffaf29;
+    --sub-txt-color:#ffffff;
+    --line-color:#5c5e6b;
+}
+body{
+    background:var(--bg-color);
+    color:var(--white-color);
+}
+/* nice select start */
+.nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {
+    background-color: #6a6d7d;
+}
+.nice-select .list {
+    background-color: var(--dark-color);
+    box-shadow: 0 0 0 1px var(--line-color);
+}
+/********************************************************
+    2. Common CSS Start
+********************************************************/
+.e-cads-inner a:after {
+    background: rgb(255 255 255 / 32%);
+}
+ svg path {
+    fill: var(--white-color);
+}
+.nice-select {
+    background-color: transparent;
+}
+.ht-info-list .nice-select .current {
+    color: var(--white-color);
+}
+.e-heading-title {
+    color:  var(--white-color);
+}
+/* btn start */
+.e-btn.white {
+    color:  var(--white-color);
+}
+.e-btn.white:after {
+    background:var(--primary-color);
+}
+.e-btn.light {
+    background-color:var(--bg-color);
+}
+.e-btn.light:before {
+    border-color: var(--line-color);
+}
+.e-btn.newsletter-btn {
+    background: var(--white-color);
+}
+.e-btn.newsletter-btn:hover {
+    color: var(--dark-color);
+}
+/********************************************************
+    3. PreLoader CSS
+*******************************************************/
+.preloader-open:before, .preloader-open:after, .preloader-active .preloader-holder {
+    background-color: var(--bg-color);
+}
+/********************************************************
+    4. sidebar cartbox  CSS
+*******************************************************/
+.sb-cartbox {
+    background: var(--bg-color);
+}
+.sb-cartbox-list li, .sb-cartbox-total {
+    border-color: var(--line-color);
+}
+/********************************************************
+    5. Header CSS
+*******************************************************/
+.header-main-wrapper {
+    background: var(--bg-color);
+}
+.menu-list > li > a {
+    color:var(--white-color);
+}
+.menu-list > li > a:after {
+    border-color:  var(--white-color);
+}
+.hs-cart-value {
+    color:  var(--white-color);
+}
+.super-sub-menu > li > a {
+    color:  var(--white-color);
+}
+.mega-menu-infobox > .e-mm-ib-ttl {
+    color:var(--primary-color);
+}
+.mega-menu-infobox > p {
+    color:  var(--white-color)
+}
+.header-top-wrapper {
+    border-color: var(--line-color);
+}
+/********************************************************
+    6. login CSS
+*******************************************************/
+.e-autho-model .modal-body {
+    background: var(--bg-color);
+}
+.autho-model-ttl {
+    color:  var(--white-color);
+}
+.e-field-inner {
+    border: 1px solid var(--line-color);
+    background-color: rgb(255 255 255 / 0%);
+    color:  var(--white-color);
+}
+.e-comn-link {
+    color:var(--white-color);
+}
+.e-checkbox:before {
+    background: rgb(252 252 253 / 0%);
+}
+.e-checkbox-input:checked + .e-checkbox:after {
+    border-color:var(--primary-color);
+}
+/********************************************************
+    7. Banner CSS
+*******************************************************/
+.e-banner-cloth .e-banner-inwrap {
+    background: var(--dark-color);
+    background-image: -moz-linear-gradient( 65deg, #252734 0%, #252734 100%);
+    background-image: -webkit-linear-gradient( 65deg, #252734 0%, #252734 100%);
+    background-image: -ms-linear-gradient( 65deg, #252734 0%, #252734 100%);
+}
+.e-swiper-next, .e-swiper-pre {
+    background: var(--primary-color);
+}
+.e-swiper-next:hover, .e-swiper-pre:hover {
+    background: var(--bg-color);
+}
+.e-banner-title > span {
+    color: var(--primary-color);
+}
+.e-bg-subtitle {
+    background: var(--primary-color);
+    color:  var(--white-color);
+}
+.e-bg-subtitle:after {
+    border-left-color:var(--dark-color);
+}
+/********************************************************
+    8. New Arrivals CSS
+*******************************************************/
+.e-gallery .gallery-nav ul li a {
+    border-color: var(--dark-color);
+    background-color: var(--dark-color);
+}
+.na-top-sec {
+    background:var(--dark-color);
+}
+.na-top-sec:after {
+    background: linear-gradient(0deg, rgb(255 175 41), rgb(37 39 52));
+}
+.load-more-wrap .e-btn {
+    box-shadow: 0px 0px 0px 10px var(--bg-color);
+}
+.e-line:after {
+    background: rgb(255 255 255 / 0.2);
+}
+.e-best-slr-wrap .na-top-sec:after {
+    background: rgb(255 255 255 / 8%);
+}
+.na-hover-content > li > a {
+    background-color: var(--primary-color);
+}
+.na-hover-content > li > a:hover {
+    background:rgb(104 106 117);
+}
+/********************************************************
+    9 Newsletter CSS
+*******************************************************/
+.e-nl-icon > svg path {
+    fill: var(--primary-color);
+}
+.e-nl-title {
+    color:  var(--white-color);
+}
+.e-newsletter-cloth {
+    background: var(--dark-color);
+    background: url(../images/index4/newsletter_bg.jpg) no-repeat center;
+    background-size: cover;
+}
+.e-nl-box input {
+    background: var(--bg-color);
+}
+.c-social-list > li > a {
+    background: var(--bg-color);
+}
+.c-social-list > li > a:after {
+    box-shadow: inset 0 0 0 35px var(--bg-color);
+}
+.c-social-list > li > a:hover::after {
+    box-shadow: inset 0 0 0 1px var(--primary-color);
+}
+.c-social-list > li > a:hover > svg path {
+    fill: var(--primary-color);
+}
+/********************************************************
+    10. Footer CSS
+*******************************************************/
+.efoot-heading {
+    color:  var(--white-color);
+}
+.efoot-list > li > a {
+    color:  var(--white-color);
+}
+.efoot-list > li > a:after {
+    background:  var(--white-color);
+}
+.efoot-payment{
+    margin: 13px -5px 0;
+}
+.efoot-payment > li {
+    margin: 5px 5px;
+}
+.efoot-payment > li > a {
+    background:  var(--white-color);
+    padding: 3px 5px;
+}
+.e-bfooter-wrap {
+    background: rgb(37, 39, 52);
+}
+#scroll {
+    background:var(--primary-color);
+}
+
+/********************************************************
+    11. Media CSS
+*******************************************************/
+@media (min-width: 1200px){
+.drop-menu {
+    background:var(--bg-color);
+}
+.mega-menu-infobox > svg path {
+    fill: var(--primary-color);
+}
+}
+@media (max-width: 1199px) {
+.menu-btn span {
+    background:  var(--white-color);
+}
+.hs-medium {
+    background: var(--bg-color);
+}
+.menu-list > li {
+    border-color: var(--line-color);
+}
+.drop-menu .sub-menu > li > a {
+    border-color: var(--line-color);
+    color:  var(--white-color);
+}
+.sub-menu > li > a:after {
+    border-color:  var(--white-color);
+}
+.super-sub-menu {
+    background: var(--bg-color);
+}
+.super-sub-menu > li > a {
+    border-color: var(--line-color);
+}
+}

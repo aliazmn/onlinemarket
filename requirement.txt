@@ -1,0 +1,11 @@
+asgiref==3.4.1
+backports.zoneinfo==0.2.1
+Django==4.0
+django-extensions==3.1.5
+django-js-asset==1.2.2
+django-mptt==0.13.4
+Pillow==8.4.0
+psycopg2-binary==2.9.2
+pygraphviz==1.7
+python-dotenv==0.19.2
+sqlparse==0.4.2

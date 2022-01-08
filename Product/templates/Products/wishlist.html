@@ -1,0 +1,163 @@
+{% extends 'home.html' %}
+{%load static %}
+
+{% block main %}
+<!-- Breadcumbs start -->
+<div class="e-breadcumb-wrap text-center">
+    <h2 class="e-breadcumb-title">علاقه مندیها</h2>
+    <ul class="e-breadcumb-kist">
+        <li>
+            <a href="index.html">خانه </a>
+        </li>
+        <li>
+            <a href='{%static  "javascript:void(0);" %}'> صفحات </a>
+        </li>
+        <li>
+            <a href='{%static  "javascript:void(0);" %}'>علاقه مندیها </a>
+        </li>
+    </ul>
+</div>
+<!-- Product Category start -->
+<div class="e-shopcart-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="e-shopcart-sec">                    
+                    <div class="shopcart-table-wrap mb-30">
+                        <form class="table-responsive">
+                            <table class="shopcart-table">
+                                <thead>
+                                  <tr>
+                                    <th>محصول </th>
+                                    <th>قیمت </th>                                    
+                                    <th>وضعیت</th>
+                                    <th>گزینه</th>
+                                    <th>&nbsp;</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr class="e-remove-wrap">
+                                    <td >
+                                        <div class="sc-productwrap">
+                                            <a href="product_details.html" class="sc-product-thumb">
+                                                <img src='{%static "assets/images/index1/shopcart01.jpg"%}'  alt="محصول" class="img-fluid">
+                                            </a>
+                                            <div class="sc-product-details">
+                                                <a href="product_details.html" class="sc-product-ttl">کت کلاه دار خاکستری مشکی</a>
+                                                <p class="sc-product-sz">اندازه: متوسط </p>
+                                            </div>
+                                        </div>      
+                                    </td>
+                                    <td><span class="sc-product-prc">2,240</span></td>
+                                    <td><span class="sc-wishlist-status stock-availble">در انبار</span></td>
+                                    <td>
+                                        <a href='{%static  "javascript:void(0);" %}' class="e-btn wishlist-ac">افزودن به سبد </a>
+                                    </td>                                    
+                                    <td>
+                                        <a href='{%static  "javascript:void(0);" %}' class="sc-produc-remove e-remove-product">
+                                            <img src='{%static "assets/images/index1/svg/cut.svg"%}'  alt="icon">
+                                        </a>
+                                    </td>
+                                  </tr>                                                                  
+                                  <tr>
+                                    <td>
+                                        <div class="sc-productwrap">
+                                            <a href="product_details.html" class="sc-product-thumb">
+                                                <img src='{%static "assets/images/index1/shopcart02.jpg"%}'  alt="محصول" class="img-fluid">
+                                            </a>
+                                            <div class="sc-product-details">
+                                                <a href="product_details.html" class="sc-product-ttl">کت بچه دار زرد</a>
+                                                <p class="sc-product-sz">اندازه: متوسط </p>
+                                            </div>
+                                        </div>      
+                                    </td>
+                                    <td><span class="sc-product-prc">2,240</span></td>
+                                    <td><span class="sc-wishlist-status stock-availble">در انبار</span></td>
+                                    <td>
+                                        <a href='{%static  "javascript:void(0);" %}' class="e-btn wishlist-ac">افزودن به سبد </a>
+                                    </td> 
+                                    <td>
+                                        <a href='{%static  "javascript:void(0);" %}' class="sc-produc-remove e-remove-product">
+                                            <img src='{%static "assets/images/index1/svg/cut.svg" %}' alt="icon">
+                                        </a>
+                                    </td>
+                                  </tr>                                                                  
+                                  <tr>
+                                    <td>
+                                        <div class="sc-productwrap">
+                                            <a href="product_details.html" class="sc-product-thumb">
+                                                <img src='{%static "assets/images/index1/shopcart03.jpg" %}' alt="محصول" class="img-fluid">
+                                            </a>
+                                            <div class="sc-product-details">
+                                                <a href="product_details.html" class="sc-product-ttl">کت بمب افکن سیاه</a>
+                                                <p class="sc-product-sz">اندازه: متوسط </p>
+                                            </div>
+                                        </div>      
+                                    </td>
+                                    <td><span class="sc-product-prc">2,240</span></td>
+                                    <td><span class="sc-wishlist-status stock-availble">در انبار</span></td>
+                                    <td>
+                                        <a href='{%static  "javascript:void(0);" %}' class="e-btn wishlist-ac">افزودن به سبد </a>
+                                    </td> 
+                                    <td>
+                                        <a href='{%static  "javascript:void(0);" %}' class="sc-produc-remove e-remove-product">
+                                            <img src='{%static "assets/images/index1/svg/cut.svg"%}'  alt="icon">
+                                        </a>
+                                    </td>
+                                  </tr>                                                                  
+                                  <tr>
+                                    <td>
+                                        <div class="sc-productwrap">
+                                            <a href="product_details.html" class="sc-product-thumb">
+                                                <img src='{%static "assets/images/index1/shopcart05.jpg"%}'  alt="محصول" class="img-fluid">
+                                            </a>
+                                            <div class="sc-product-details">
+                                                <a href="product_details.html" class="sc-product-ttl">ژاکت بادکنک آستین کامل</a>
+                                                <p class="sc-product-sz">اندازه: متوسط </p>
+                                            </div>
+                                        </div>      
+                                    </td>
+                                    <td><span class="sc-product-prc">2,240</span></td>
+                                    <td><span class="sc-wishlist-status stock-out">تمام شده</span></td>
+                                    <td>
+                                        <a href='{%static  "javascript:void(0);" %}' class="e-btn wishlist-ac">افزودن به سبد </a>
+                                    </td> 
+                                    <td>
+                                        <a href='{%static  "javascript:void(0);" %}' class="sc-produc-remove e-remove-product">
+                                            <img src='{%static "assets/images/index1/svg/cut.svg"%}'  alt="icon">
+                                        </a>
+                                    </td>
+                                  </tr>                                                                  
+                                  <tr>
+                                    <td>
+                                        <div class="sc-productwrap">
+                                            <a href="product_details.html" class="sc-product-thumb">
+                                                <img src='{%static "assets/images/index1/shopcart04.jpg" %}' alt="محصول" class="img-fluid">
+                                            </a>
+                                            <div class="sc-product-details">
+                                                <a href="product_details.html" class="sc-product-ttl">کت دو یقه</a>
+                                                <p class="sc-product-sz">اندازه: متوسط </p>
+                                            </div>
+                                        </div>      
+                                    </td>
+                                    <td><span class="sc-product-prc">2,240</span></td>
+                                    <td><span class="sc-wishlist-status stock-availble">در انبار</span></td>
+                                    <td>
+                                        <a href='{%static  "javascript:void(0);" %}' class="e-btn wishlist-ac">افزودن به سبد </a>
+                                    </td> 
+                                    <td>
+                                        <a href='{%static  "javascript:void(0);" %}' class="sc-produc-remove e-remove-product">
+                                            <img src='{%static "assets/images/index1/svg/cut.svg"%}'  alt="icon">
+                                        </a>
+                                    </td>
+                                  </tr>                                                                  
+                                </tbody>
+                              </table>
+                        </form>
+                    </div>
+                </div>                      
+            </div>          
+        </div>
+    </div>
+</div>
+{% endblock main %}

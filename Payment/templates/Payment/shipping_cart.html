@@ -1,0 +1,211 @@
+{% extends 'home.html' %}
+{%load static %}
+
+{% block main %}
+<!-- Breadcumbs start -->
+<div class="e-breadcumb-wrap text-center">
+    <h2 class="e-breadcumb-title">بررسی و پرداخت</h2>
+    <ul class="e-breadcumb-kist">
+        <li>
+            <a href="index.html">خانه </a>
+        </li>
+        <li>
+            <a href='{%static  "javascript:void(0);" %}'> صفحات </a>
+        </li>
+        <li>
+            <a href='{%static  "javascript:void(0);" %}'> بررسی و پرداخت </a>
+        </li>
+    </ul>
+</div>
+<!-- Product Category start -->
+<section class="e-checkout-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 col-lg-12">
+                <div class="e-checkout-sec mb-80"> 
+                    <div class="cmn-ck-wrap mb-30">
+                        <div class="cmn-ck-header">
+                            <h2 class="cmn-ck-heading">بررسی و پرداخت </h2>
+                        </div> 
+                        <div class="cmn-ck-body">
+                            <div class="cmn-ck-box mb-20">
+                                <h4 class="cmn-brdr-ttle mb-20">اطلاعات تماس</h4>                                
+                                <div class="row">
+                                    <div class="col-md-6">                                       
+                                        <div class="e-form-field mb-30">
+                                            <label>نام </label>
+                                            <input class="e-field-inner" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">                                       
+                                        <div class="e-form-field mb-30">
+                                            <label>ایمیل </label>
+                                            <input class="e-field-inner" type="email">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cmn-ck-box mb-20">
+                                <h4 class="cmn-brdr-ttle mb-20">آدرس حمل و نقل</h4>                                
+                                <div class="row">
+                                    <div class="col-md-6">                                       
+                                        <div class="e-form-field mb-30">
+                                            <label>نام اصلی </label>
+                                            <input class="e-field-inner" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">                                       
+                                        <div class="e-form-field mb-30">
+                                            <label>نام خانوادگی </label>
+                                            <input class="e-field-inner" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">                                       
+                                        <div class="e-form-field mb-30">
+                                            <label>آدرس 01</label>
+                                            <input class="e-field-inner" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">                                       
+                                        <div class="e-form-field mb-30">
+                                            <label>آدرس 02</label>
+                                            <input class="e-field-inner" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">                                       
+                                        <div class="e-form-field mb-30">
+                                            <label>کشور</label>                                           
+                                            <select class="e-field-inner e-field-select">
+                                                <option data-display="انتخاب کشور">انتخاب کشور خود</option>
+                                                <option value="1">ایران</option>
+                                                <option value="2">کانادا</option>
+                                                <option value="3">آمریکا</option>
+                                                <option value="4">هندی</option>
+                                                <option value="5">استرالیا</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">                                       
+                                        <div class="e-form-field mb-30">
+                                            <label>شهر</label>
+                                            <select class="e-field-inner e-field-select">
+                                                <option data-display="انتخاب شهر">انتخاب شهر</option>
+                                                <option value="1">ارومیه</option>
+                                                <option value="2">تبریز</option>
+                                                <option value="3">تهران</option>
+                                                <option value="4">بیهار</option>
+                                                <option value="5">کرج</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">                                       
+                                        <div class="e-form-field mb-30">
+                                            <label>کد پستی</label>
+                                            <input class="e-field-inner" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cmn-ck-box">
+                                <h4 class="cmn-brdr-ttle mb-20">گزینه های پرداختی</h4>                                
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6">                                       
+                                        <div class=" mb-30">
+                                            <input type="radio" name="payment" id="payment1" class="cstm-fileinput">
+                                            <label for="payment1" class="pay-checkbox">
+                                                <span class="pay-circle"></span>
+                                                <img src='{%static "assets/images/index1/mastercard.png" %}' alt="image">
+                                                مستر کارت
+                                            </label> 
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">                                       
+                                        <div class=" mb-30">
+                                            <input type="radio" name="payment" id="payment2" class="cstm-fileinput">
+                                            <label for="payment2" class="pay-checkbox">
+                                                <span class="pay-circle"></span>
+                                                <img src='{%static "assets/images/index1/visa.png" %}' alt="image">
+                                                Visa Card
+                                            </label> 
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">                                       
+                                        <div class=" mb-30">
+                                            <input type="radio" name="payment" id="payment3" class="cstm-fileinput">
+                                            <label for="payment3" class="pay-checkbox">
+                                                <span class="pay-circle"></span>
+                                                <img src='{%static "assets/images/index1/paypal.png" %}' alt="image">
+                                                پی پال
+                                            </label> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">                                       
+                                        <div class="e-form-field mb-30">
+                                            <label>نام دارنده کارت </label>
+                                            <input class="e-field-inner" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">                                       
+                                        <div class="e-form-field mb-30">
+                                            <label>نام کارت </label>
+                                            <input class="e-field-inner" type="text">
+                                        </div>
+                                    </div> 
+                                    <div class="col-lg-4 col-md-6">                                       
+                                        <div class="e-form-field mb-30">
+                                            <label>تاریخ انقضا</label>
+                                            <input class="e-field-inner" type="text" placeholder="MM / YY">
+                                        </div>
+                                    </div> 
+                                    <div class="col-lg-3 col-md-6">                                       
+                                        <div class="e-form-field mb-30">
+                                            <label>CVV کد</label>
+                                            <div class="e-form-fieldicon position-relative">
+                                                <input class="e-field-inner" type="text">                                            
+                                                <img src='{%static "assets/images/index1/svg/ccv.svg" %}' alt="edit" class="ccv-icon">
+                                            </div>
+                                        </div>
+                                    </div>                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                    <a href='{%static  "javascript:void(0);" %}' class="e-btn">پرداخت صورتحساب </a>
+                </div>                      
+            </div>            
+            <div class="col-xl-3 col-lg-12">
+                <div class="e-shopcart-sidebar mb-80">
+                    <div class="e-totalsumry mb-30">
+                        <div class="e-totalsumry-header">
+                            <h2 class="e-totalsumry-ttl">خلاصه مجموع سبد خرید</h2>
+                        </div>
+                        <div class="e-totalsumry-body">
+                            <ul class="e-totalsumry-list">
+                                <li>
+                                    <span class="ts-list-head">مجموع سبد:</span>
+                                    <span class="ts-list-shead">240000 تومان</span>
+                                </li>
+                                <li>
+                                    <span class="ts-list-head">حمل و نقل: </span>
+                                    <span class="ts-list-shead">22000 تومان</span>
+                                </li>
+                            </ul>
+                             {% comment %} <a href='{%static "javascript:void(0);" %}'class="ts-chngadd">Change Address
+                                <img src='{% static "assets/images/index1/svg/edit.svg" %}' alt="edit">
+                            </a>  {% endcomment %}
+                        </div>  
+                        <div class="e-totalsumry-fotr">
+                            <ul class="e-totalsumry-list total">
+                                <li>
+                                    <span class="ts-list-head">گراند توتال</span>
+                                    <span class="ts-list-shead">26000 تومان</span>
+                                </li>
+                            </ul>
+                        </div>  
+                    </div> 
+                </div>                      
+            </div>            
+        </div>
+    </div>
+</section>
+{% endblock main %}

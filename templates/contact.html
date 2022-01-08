@@ -1,0 +1,108 @@
+{% extends 'home.html' %}
+{% load static %}   
+
+{%block main %}
+<!-- Breadcumbs start -->
+<div class="e-breadcumb-wrap text-center">
+    <h2 class="e-breadcumb-title">تماس با ما</h2>
+    <ul class="e-breadcumb-kist">
+        <li>
+            <a href="index.html">خانه </a>
+        </li>
+        <li>
+            <a href='{%static "javascript:void(0);" %}'> صفحات </a>
+        </li>
+        <li>
+            <a href='{%static "javascript:void(0);" %}'> تماس با ما </a>
+        </li>
+    </ul>
+</div>
+<!-- contact box start -->
+<section class="e-contact-wrap mb-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-5 align-self-center">
+                <div class="e-contact-info">
+                    <div class="lbel-wrap"> <h2 class="e-contact-lbel">دفاتر ما در واقع شده اند</h2></div>                   
+                    <ul class="cntc-infobox-list">
+                        <li>
+                            <div class="contact-infobox">
+                                <h4 class="cmn-brdr-ttle">عراق</h4>
+                                <p class="cntc-infobox-des">خ دانش، ک شهید عباسی / منطقه شهرک,<br> شهر شاهین دژ</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-infobox">
+                                <h4 class="cmn-brdr-ttle">ایران</h4>
+                                <p class="cntc-infobox-des">خ دانش، ک شهید عباسی / منطقه شهرک,<br>شهر شاهین دژ</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-infobox">
+                                <h4 class="cmn-brdr-ttle">ترکیه</h4>
+                                <p class="cntc-infobox-des">خ دانش، ک شهید عباسی / منطقه شهرک,<br>شهر شاهین دژ</p>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                </div>             
+            </div>             
+            <div class="col-xl-7 col-lg-7 align-self-center">
+                <div class="e-contact-box">
+                    <h4 class="cmn-brdr-ttle">برای تماس با ما احساس رایگان کنید</h4>
+                    <p class="contact-box-des">رعایت نکات برجسته چربی ، خستگی ناپذیر و سرزندگی ، به طوری که زحمت و غم و اندوه ، برخی از کارهای مهم برای انجام ایسود. چه کسی آن بسکتبال باردار را توصیه کرده است.</p>
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 ">                                       
+                                <div class="e-form-field mb-26">
+                                    <label>نام کوچک </label>
+                                    <input class="e-field-inner require" type="text" name="first_name" id="first_name">
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">                                       
+                                <div class="e-form-field mb-26">
+                                    <label>نام خانوادگی  </label>
+                                    <input class="e-field-inner require" type="text" name="last_name" id="last_name">
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">                                       
+                                <div class="e-form-field mb-26">
+                                    <label>ایمیل </label>
+                                    <input class="e-field-inner require" type="email" name="email" id="email" data-valid="email" data-error="ایمیل باید معتبر باشد.">
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">                                       
+                                <div class="e-form-field mb-26">
+                                    <label>وب سایت</label>
+                                    <input class="e-field-inner require" type="text" name="website" id="website">
+                                </div>
+                            </div>                                    
+                            <div class="col-md-12">                                       
+                                <div class="e-form-field mb-26">
+                                    <label>پیام </label>
+                                    <textarea class="e-field-inner require" name="message" id="message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">                                       
+                                <div class="">
+                                    <button type="button" class="e-btn submitForm">در تماس باشید</button>
+                                    <div class="response"></div>
+                                </div>
+                            </div>
+                        </div> 
+                    </form>
+                </div>                  
+            </div>             
+        </div>
+    </div>
+</section>
+<div class="e-contact-map">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="contant-innermap">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7915.525673176609!2d46.32542404246615!3d38.06389198146334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDAzJzUzLjgiTiA0NsKwMTknMzkuNCJF!5e0!3m2!1sen!2s!4v1545664085241" style="border:0; width: 100%; height: 500px;"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock main%}

@@ -1,0 +1,154 @@
+/*--------------------- Copyright (c) 2020 ----------------------- 
+[Dark Stylesheet] 
+Project: Shopmartio - Responsive HTML Template 
+Version: 1.0.0 
+Author: Kamleshyadav
+ ------------------------------------------------------------------- 
+[Table of contents] 
+    1. Global CSS Start
+    2. Comman CSS Start
+    3. Banner CSS Start
+    4. New Arrivals CSS Start
+    5. Best Seller CSS Start
+    6. Media CSS Start
+-------------------------------------------------------------------*/
+/********************************************************
+    1. Global CSS Start
+********************************************************/
+:root {
+   
+    --primary-color:#4eca66;
+}
+/********************************************************
+   2. Common  CSS Start
+********************************************************/
+.e-btn.white:after {
+    background:var(--primary-color);
+}
+.e-btn.white {
+    color: var(--white-color);
+}
+.e-btn.white span svg path {
+    fill: var(--white-color);
+}
+.e-btn.white:hover {
+    color: var(--primary-color);
+}
+.e-btn.white:hover span svg path {
+    fill: var(--primary-color);
+}
+.e-btn.white:before {
+    border-color: var(--primary-color);
+}
+.e-btn:hover span::after {
+    background: var(--primary-color);
+}
+.e-checkbox-input:checked + .e-checkbox:after {
+    border-color: var(--primary-color);
+}
+/********************************************************
+    3. Banner CSS Start
+********************************************************/
+.e-header-main-plant .mega-menu-infobox svg path {
+    fill: var(--primary-color);
+}
+.e-banner-plant .e-banner-inwrap {
+    background: #e3ecd9;
+}
+.e-banner-plant .e-banner-title {
+    color: #2f3942;
+    margin-top: 0;
+}
+.e-banner-plant .e-banner-title > span {
+    color:var(--primary-color);
+}
+.e-banner-plant .e-banner-des {
+    color: #8c8c8c;
+}
+.e-banner-plant .swiper-pagination-bullet:after {
+    color: var(--primary-color);
+}
+.e-banner-plant .swiper-pagination-bullet:before {
+    background: var(--primary-color);
+}
+.e-banner-plant .e-swiper-next, .e-swiper-pre {
+    background: var(--primary-color);
+}
+.e-banner-plant .e-swiper-next:hover, .e-swiper-pre:hover {
+    background: rgb(78 202 102 / 20%);
+}
+.e-banner-plant .e-swiper-next svg path, .e-swiper-pre svg path {
+    fill: var(--white-color);
+}
+/********************************************************
+    4.  New Arrivals CSS Start
+********************************************************/
+.e-newarivles-plant {
+    padding: 74px 0 80px;
+}
+.e-newarivles-plant .na-top-sec {
+    background: #f3f8ee;
+}
+/********************************************************
+    5. Best Seller CSS Start
+********************************************************/
+.e-best-slr-plant{
+    padding: 74px 0 70px;
+}
+/********************************************************
+    6. Newsletter CSS Start
+********************************************************/
+#scroll {
+    background: var(--primary-color);
+}
+.e-newsletter-plant .c-social-list > li > a:hover::after {
+    box-shadow: inset 0 0 0 1px var(--primary-color);
+}
+.e-newsletter-plant .e-nl-icon > svg path {
+    fill: var(--primary-color);
+}
+.e-newsletter-plant {
+    background: url(../images/index3/newsletter_bg.jpg) no-repeat center;
+    padding: 80px 0;
+    background-size: cover;
+}
+.e-newsletter-plant .c-social-list > li > a:hover > svg path {
+    fill: var(--primary-color);
+}
+/********************************************************
+    7. Media CSS Start
+********************************************************/
+@media (min-width: 992px) {
+    .e-banner-plant .e-inner-slide.slide1 {
+        background:url(../images/index3/banner_bg01.jpg)no-repeat center;
+        background-size: cover;
+    }
+    .e-banner-plant .e-inner-slide.slide2 {
+        background:url(../images/index3/banner_bg02.jpg)no-repeat center;
+        background-size: cover;
+    }
+    .e-banner-plant .e-inner-slide.slide3 {
+        background:url(../images/index3/banner_bg03.jpg)no-repeat center;
+        background-size: cover;
+    }
+    .e-banner-plant .e-inner-slide {
+        padding: 121px 15px 131px;
+    }
+
+}
+@media (min-width: 1200px) {
+    .e-banner-plant .e-inner-slide {
+        padding: 171px 15px 181px;
+    }
+}
+@media (min-width: 1600px) {
+    .e-banner-plant .e-inner-slide {
+        padding: 228px 104px 241px;
+    }
+}
+
+@media (max-width: 991px) {
+    .e-banner-plant .e-inner-slide {
+        padding: 30px 0 83px;
+    }
+}

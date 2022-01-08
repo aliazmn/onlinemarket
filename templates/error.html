@@ -1,0 +1,31 @@
+{% extends 'home.html' %}
+{% load static %}   
+{% block main %}
+<!-- Breadcumbs start -->
+<div class="e-breadcumb-wrap text-center">
+    <h2 class="e-breadcumb-title">404 یافت نشد</h2>
+    <ul class="e-breadcumb-kist">
+        <li>
+            <a href='{%static "javascript:void(0);" %}'>404 یافت نشد</a>
+        </li>
+    </ul>
+</div>
+<!-- Product Category start -->
+<section class="e-error-wrap e-error-cloth">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="e-error-info text-center">
+                    <div class="e-error-img">
+                        <img class="parallax" src='{%static "assets/images/404.png"%}' alt="error 404" title="404">
+                    </div>
+                    <h4>به نظر می رسد در این مکان چیزی پیدا نشده است.</h4>     
+                    <div class="e-error-btn">
+                        <a href="index.html" class="e-btn">برگرد به خانه اصلی </a>
+                    </div> 
+                  </div>                    
+            </div>          
+        </div>
+    </div>
+</section>
+{% endblock main %}
