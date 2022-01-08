@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+admin.site.register(CartMe)
+admin.site.register(CartItem)
+admin.site.register(History)
