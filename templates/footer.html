@@ -13,7 +13,7 @@
                     <form>
                         <div class="e-nl-box">
                             <input type="text" placeholder="ایمیل خود را وارد کنید...">
-                            <a href="javascript:void(0);" class="e-btn newsletter-btn">عضویت اکنون  </a>
+                            <a href='{% static "javascript:void(0);" %}' class="e-btn newsletter-btn">عضویت اکنون  </a>
                         </div>
                     </form>
                     <ul class="c-social-list">
@@ -44,10 +44,10 @@
     </div>
     <div class="newletter-moving-wrap">
         <ul class="newletter-moving-list">
-            <li><img src="assets/images/index1/news_move1.png" alt="image" class="img-fluid"></li>
-            <li><img src="assets/images/index1/news_move2.png" alt="image" class="img-fluid"></li>
-            <li><img src="assets/images/index1/news_move3.png" alt="image" class="img-fluid"></li>
-            <li><img src="assets/images/index1/news_move4.png" alt="image" class="img-fluid"></li>
+            <li><img src='{%static "assets/images/index1/news_move1.png"%}' alt="image" class="img-fluid"></li>
+            <li><img src='{%static "assets/images/index1/news_move2.png"%}' alt="image" class="img-fluid"></li>
+            <li><img src='{%static "assets/images/index1/news_move3.png" %}'alt="image" class="img-fluid"></li>
+            <li><img src='{%static "assets/images/index1/news_move4.png"%}' alt="image" class="img-fluid"></li>
         </ul>        
     </div>
     
@@ -60,14 +60,14 @@
             <div class="row">
                 <div class="col-md-3 col-sm-6">
                     <div class="e-footer-inner">
-                        <a href="index.html"><img src="assets/images/index1/logo.png" alt="logo" class="img-fluid"></a>
+                        <a href="index.html"><img src='{%static "assets/images/index1/logo.png"%}' alt="logo" class="img-fluid"></a>
                         <p class="efoot-about">ون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخص می باشد. این سایت توسط جعفر عباسی طراحی شده است.</p>
                         <h2 class="efoot-heading">گزینه های پرداخت </h2>
                         <ul class="efoot-payment">
-                            <li><a href="shipping_cart.html"><img src="assets/images/index1/payment1.png" alt="payment" class="img-fluid"></a></li>
-                            <li><a href="shipping_cart.html"><img src="assets/images/index1/payment2.png" alt="payment" class="img-fluid"></a></li>
-                            <li><a href="shipping_cart.html"><img src="assets/images/index1/payment3.png" alt="payment" class="img-fluid"></a></li>
-                            <li><a href="shipping_cart.html"><img src="assets/images/index1/payment4.png" alt="payment" class="img-fluid"></a></li>
+                            <li><a href="shipping_cart.html"><img src='{%static "assets/images/index1/payment1.png"%}' alt="payment" class="img-fluid"></a></li>
+                            <li><a href="shipping_cart.html"><img src='{%static "assets/images/index1/payment2.png"%}' alt="payment" class="img-fluid"></a></li>
+                            <li><a href="shipping_cart.html"><img src='{%static "assets/images/index1/payment3.png"%}' alt="payment" class="img-fluid"></a></li>
+                            <li><a href="shipping_cart.html"><img src='{%static "assets/images/index1/payment4.png"%}' alt="payment" class="img-fluid"></a></li>
                         </ul>
                     </div>
                 </div>

@@ -21,21 +21,24 @@ def login(request):
     if request.method == "GET":
         return render(request, 'User/login_page.html', {'login_form': login_form})
     else:
-        if login_form.is_valid():
+        if not login_form.is_valid():
             email = request.POST.get("email", "")
             password = request.POST.get("password", "")
             user = authenticate(request, email=email, password=password)
+            
             if user is not None:
                 _login(request, user)
                 next = request.GET.get("next", "")
                 if next:
                     return redirect(next)
+                print("999999999999999999999999999999999999")
                 return redirect('home')
+
             else:
-                return render(request, 'User/register_page.html', {'register_form': login_form})
+                return redirect('User:register')
 
         else:
-            return render(request, 'User/register_page.html', {'register_form': login_form})
+            return redirect('User:register')
                 
 
 

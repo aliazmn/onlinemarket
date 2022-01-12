@@ -126,8 +126,8 @@ class LoginForm(ModelForm):
             'email' : _('ایمیل'),
             'password' : _('کلمه عبور'),
         }
+#==================for test dont check hash and max len and ...
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+        return password
 
-        validators = {
-            'email' : EmailValidator('ایمیل وارد شده معتبر نمیباشد')
-        }
-    

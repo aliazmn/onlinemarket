@@ -31,13 +31,16 @@
                     <li><a href="wishlist.html">لیست علاقه مندیها </a></li>
                     <li>
                         
-                        {% if not user.is_authenticated %}
-                        <a href='{% url "user:register" %}' >ثبت نام </a> یا
-                        <a href='{% url "user:login" %}' >ورود </a>
+                        {% if user.is_authenticated %}
+
+                        <a href='{% url "user:logout" %}' >خروج از</a>
+                            <a href="">{{user.email}}</a> 
+                             
+                        
                         
                         {% else %}
-                        <a href="">سلام{{user.first_name}}</p>/
-                        <a href='{% url "user:logout" %}' >خروج</a> 
+                            <a href='{% url "user:register" %}' >ثبت نام </a> یا
+                            <a href='{% url "user:login" %}' >ورود </a>
       
                         {% endif %}
                     </li>
