@@ -11,10 +11,23 @@ from django.contrib.auth.base_user import BaseUserManager
 
 
 
+class Address(models.Model):
+    add=models.CharField(max_length=255,verbose_name=_("address"),help_text="ادرس خود را وارد کنید")
+    postalcode=models.CharField(max_length=10, verbose_name = _("postalcode"),)
+
+    class Meta:
+        verbose_name="Address"
+        verbose_name_plural="Addresses"
+
+    def __str__(self) -> str:
+        return self.add        
 
 class Profile(AbstractUser):
     username = None
     email = models.EmailField('email address', unique=True)
+    address=models.TextField(null=True,blank=True)
+    postal_code=models.CharField(max_length=10,null=True,blank=True)
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -28,16 +41,6 @@ class Profile(AbstractUser):
  
 
 
-class Address(models.Model):
-    add=models.CharField(max_length=255,verbose_name=_("address"),help_text="ادرس خود را وارد کنید")
-    postalcode=models.CharField(max_length=10, verbose_name = _("postalcode"),)
-
-    class Meta:
-        verbose_name="Address"
-        verbose_name_plural="Addresses"
-
-    def __str__(self) -> str:
-        return self.add        
 
 
 class Admin(models.Model):
@@ -51,7 +54,7 @@ class Admin(models.Model):
 
 
     def __str__(self) -> str:
-        return self.profile_ptr.firstname
+        return self.profile.first_name
 
 
 
@@ -68,7 +71,7 @@ class Customer(models.Model):
 
 
     def __str__(self) -> str:
-        return self.profile_ptr.firstname
+        return self.profile.first_name
 
 
 class SalesMan(models.Model):
@@ -86,7 +89,7 @@ class SalesMan(models.Model):
         
 
     def __str__(self) -> str:
-        return self.profile_ptr.firstname
+        return self.profile.first_name
 
 
 

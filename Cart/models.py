@@ -18,7 +18,7 @@ class CartMe(models.Model):
         verbose_name_plural="Carts"
     
     def __str__(self) -> str:
-        return self.profile_ptr.username
+        return self.profile.username
 
 
 
@@ -47,6 +47,6 @@ class History(models.Model):
         verbose_name_plural="Historys"
     
     def __str__(self) -> str:
-        return self.profile_ptr.username
+        return self.profile.firstname
 
     

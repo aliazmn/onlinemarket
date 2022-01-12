@@ -17,7 +17,7 @@ class notif_user(models.Model):
         verbose_name_plural ="notif_users"
 
     def __str__(self) -> str:
-        return self.user.profile_ptr.username
+        return self.user.profile.first_name
 
 class News(models.Model):
     image_news =models.ImageField(upload_to="Notification/News",null=True, blank=True, help_text="تصویر خود را آپلود کنید ",verbose_name=_('image'))
