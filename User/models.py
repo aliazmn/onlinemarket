@@ -56,7 +56,7 @@ class Admin(models.Model):
 
 
     def __str__(self) -> str:
-        return self.profile_ptr.firstname
+        return self.profile.first_name
 
 
 
@@ -73,7 +73,7 @@ class Customer(models.Model):
 
 
     def __str__(self) -> str:
-        return self.profile_ptr.firstname
+        return self.profile.first_name
 
 
 class SalesMan(models.Model):
@@ -91,7 +91,7 @@ class SalesMan(models.Model):
         
 
     def __str__(self) -> str:
-        return self.profile_ptr.firstname
+        return self.profile.firs_tname
 
 
 
