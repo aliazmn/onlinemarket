@@ -1,12 +1,12 @@
 from django.utils.translation import gettext as _
 from User.models import Customer
 from django.db import models
-from django.db.models.deletion import DO_NOTHING, SET_NULL
+
 
 
 class Category(models.Model):
     cat_title=models.CharField(max_length=150)
-    sub_cat=models.ForeignKey('self',on_delete=SET_NULL,null=True, blank=True, related_name='cattocat')
+    sub_cat=models.ForeignKey('self',on_delete=models.CASCADE,null=True, blank=True, related_name='cattocat')
     
     def __str__(self) -> str:
         return self.cat_title
@@ -20,10 +20,11 @@ class Product(models.Model):
     amount=models.IntegerField(null=True)
     activate=models.BooleanField(default=False)
     img=models.ImageField(upload_to="Products/",null=True,blank=True)
+    img1=models.ImageField(upload_to="Products/",null=True,blank=True)
+    img2=models.ImageField(upload_to="Products/",null=True,blank=True)
     date_create=models.DateField(auto_now_add=True)
     data_update=models.DateField(auto_now=True)
-
-    cat_id=models.ForeignKey(Category, on_delete=models.CASCADE,related_name='producttocat' )
+    cat_id=models.ForeignKey(Category, on_delete=models.CASCADE,  related_name='producttocat' )
 
 
 
@@ -39,7 +40,7 @@ class Product(models.Model):
 
 class Property(models.Model):
     property_name=models.CharField(max_length=50,null=True,blank=True)
-    cat_id=models.ForeignKey(Category,on_delete=models.CASCADE, related_name='propertytocat')
+    cat_id=models.ForeignKey(Category,on_delete=models.CASCADE, null=True,blank=True,related_name='propertytocat')
 
     def __str__(self) -> str:
         return self.property_name

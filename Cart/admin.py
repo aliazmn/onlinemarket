@@ -11,3 +11,6 @@ class CartItemInline(admin.StackedInline):
 class CartModelAdmin(admin.ModelAdmin):
     inlines = [CartItemInline]
 
+
+
+

@@ -1,0 +1,21 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+<<<<<<< HEAD
+            "name": "now",
+            "database": "projectdb",
+            "username": "admin",
+            "password": "1651374"
+=======
+            "name": "ali",
+            "database": "projectdb",
+            "username": "ali",
+            "password": "qwer!@#"
+>>>>>>> c221f239a9881dde4344648dad888c683f1dd9f9
+        }
+    ]
+}

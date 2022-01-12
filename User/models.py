@@ -38,11 +38,6 @@ class Profile(AbstractUser):
     
 
 
- 
-
-
-
-
 class Admin(models.Model):
     add=models.ManyToManyField(Address)
     profile=models.OneToOneField(Profile,on_delete=models.CASCADE,related_name="admintoprofile")
