@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
 from django.forms import ModelForm, widgets, TextInput, EmailInput, PasswordInput
-from django.forms.fields import CharField
+from django.forms.fields import CharField, EmailField
 from django.utils.translation import gettext_lazy as _
 from User.models import Customer,Profile
 from django.core.validators import EmailValidator
@@ -91,6 +91,7 @@ class RegisterForm(ModelForm):
 
         return email
 
+    
 
     def clean_re_password(self):
         password = self.cleaned_data.get('password')
@@ -109,25 +110,19 @@ class RegisterForm(ModelForm):
 
 
 
-class LoginForm(ModelForm):
-    
-    class Meta:
-        model = Profile
+class LoginForm(forms.Form):
+        email=forms.EmailField(widget=EmailInput(attrs={'placeholder': 'لطفا ایمیل خود را وارد نمایید', 'type':'email', 'required':'', 'class':'e-field-inner','label':'ایمیل'}))
+        password=forms.CharField(max_length=16,widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را وارد نمایید', 'type':'password', 'required':'', 'class':'e-field-inner','lable':'پسورد'}))
 
         
         fields = ['email','password']
 
-        widgets = {
-            'email': EmailInput(attrs={'placeholder': 'لطفا ایمیل خود را وارد نمایید', 'type':'email', 'required':'', 'class':'e-field-inner'}),
-            'password': PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را وارد نمایید', 'type':'password', 'required':'', 'class':'e-field-inner'}),
-        }
+
 
         labels = {
             'email' : _('ایمیل'),
             'password' : _('کلمه عبور'),
         }
-#==================for test dont check hash and max len and ...
-    def clean_password(self):
-        password = self.cleaned_data.get('password')
-        return password
 
+class ForgetPasswordForm(forms.Form):
+    pass

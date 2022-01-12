@@ -1,6 +1,7 @@
 from django.urls import path
+from django.urls.conf import re_path
 
-from .views import login, logout, register, profile_user
+from .views import forget_password, login, logout, register, activate,forget_pass
 
 app_name="User"
 
@@ -8,7 +9,11 @@ urlpatterns = [
     path("login/", login, name="login"),
     path("logout/", logout, name="logout"),
     path("register/", register, name="register"),
-    path("profile/", profile_user, name="profile_user"),
+    path("activate/<str:valid>", activate, name="activate"),
+    path("forget_password/", forget_password, name="forget_password"),
+    path("forget_pass/", forget_pass, name="forget_pass"),
+
+
 
 
 ]
