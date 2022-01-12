@@ -182,7 +182,7 @@ Assigned to: Theme Forest
 						autoHeight: false,
 						spaceBetween: 30,
 						slidesPerView: 4,
-						loop: true,
+						loop: false,
 						autoplay: true,
 						speed: 1500,
 						centeredSlides: false,

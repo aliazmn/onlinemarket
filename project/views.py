@@ -1,6 +1,6 @@
 
 from django.shortcuts import render
-from typing import Coroutine, ValuesView
+
 from django.views.generic import View, ListView
 
 from Product.models import Category, Product
