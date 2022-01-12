@@ -7,7 +7,7 @@ from django.db.models.deletion import DO_NOTHING, SET_NULL
 class Category(models.Model):
     cat_title=models.CharField(max_length=150)
     sub_cat=models.ForeignKey('self',on_delete=SET_NULL,null=True, blank=True, related_name='cattocat')
-    
+    # cat_update=models.DateTimeField(auto_now=True , null=True)
     def __str__(self) -> str:
         return self.cat_title
 
