@@ -11,28 +11,6 @@ from django.contrib.auth.base_user import BaseUserManager
 
 
 
-
-class Profile(AbstractUser):
-    username = None
-    email = models.EmailField('email address', unique=True)
-    address=models.TextField(null=True,blank=True)
-    postal_code=models.CharField(max_length=10,null=True,blank=True)
-
-
-
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-    objects = CustomUserManager()
-
-    def __str__(self):
-        return self.email
-    
-
-
- 
-
-
 class Address(models.Model):
     add=models.CharField(max_length=255,verbose_name=_("address"),help_text="ادرس خود را وارد کنید")
     postalcode=models.CharField(max_length=10, verbose_name = _("postalcode"),)
@@ -43,6 +21,21 @@ class Address(models.Model):
 
     def __str__(self) -> str:
         return self.add        
+
+class Profile(AbstractUser):
+    username = None
+    email = models.EmailField('email address', unique=True)
+    address=models.TextField(null=True,blank=True)
+    postal_code=models.CharField(max_length=10,null=True,blank=True)
+
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return self.email
+    
 
 
 class Admin(models.Model):
@@ -91,7 +84,7 @@ class SalesMan(models.Model):
         
 
     def __str__(self) -> str:
-        return self.profile.firs_tname
+        return self.profile.first_name
 
 
 

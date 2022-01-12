@@ -13,8 +13,19 @@
                     <li><a href="'users:login'">حساب کاربری </a></li>
                     <li><a href=" url product:wishlist">لیست علاقه مندیها </a></li>
                     <li>
-                        <a href='{%static "javascript:void(0);" %}' data-toggle="modal" data-target="#register">ثبت نام </a> یا
-                        <a href='{%static "javascript:void(0);" %}' data-toggle="modal" data-target="#login">ورود </a>
+                        
+                        {% if user.is_authenticated %}
+
+                        <a href='{% url "user:logout" %}' >خروج از</a>
+                            <a href="">{{user.email}}</a> 
+                             
+                        
+                        
+                        {% else %}
+                            <a href='{% url "user:register" %}' >ثبت نام </a> یا
+                            <a href='{% url "user:login" %}' >ورود </a>
+      
+                        {% endif %}
                     </li>
                     
                 </ul>

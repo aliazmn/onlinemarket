@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+from django.contrib import admin
+from django.urls import path, include
+from .views import index
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path("", index, name="home"),
+    path("", include("User.urls", namespace='user')),
+
+    
+=======
 
 from django.urls.conf import include
 from .views import Home, searchbox
@@ -15,6 +27,7 @@ urlpatterns = [
     path('product/',include("Product.urls",namespace="product") ),
 
 
+>>>>>>> 1be6c836f417ba9a945f338c8dee82dda93cf4a6
 ]
 
 

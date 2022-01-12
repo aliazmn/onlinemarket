@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+from django.shortcuts import render
+
+def index(request):
+    ctx = {}
+    return render(request, "home.html", ctx)
+=======
 
 from django.shortcuts import render
 
@@ -45,3 +52,4 @@ def searchbox(request):
 
 
 
+>>>>>>> 1be6c836f417ba9a945f338c8dee82dda93cf4a6

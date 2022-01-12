@@ -1,0 +1,53 @@
+{%load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href='{%static "assets/css/bootstrap.min.css"%}' >
+    <link rel="stylesheet" href='{%static "assets/css/nice-select.css"%}' >
+    <link rel="stylesheet" href='{%static "assets/css/font.css"%}' >
+    <link rel="stylesheet" href='{%static "assets/css/swiper-bundle.min.css"%}' >
+    <link rel="stylesheet" href='{%static "assets/css/comman.css"%}' >
+    <link rel="stylesheet" href='{%static "assets/css/style.css"%}' >
+    <!-- Favicon Link -->
+    <link rel="shortcut icon" type="image/png" href='{%static "assets/images/index1/favicon.png"%}'>
+    {%block title%}<title>شاپ مارشو - قالب فروشگاهی ریسپانسیو HTML</title>{%endblock title%}
+  </head>
+
+<body>
+    <!-- main-wrapper start -->
+<div class="main-wrapper">
+<!-- Preloader Box -->
+<div class="preloader-wrapper preloader-active preloader-open">
+    <div class="preloader-holder">
+        <div class="preloader d-flex justify-content-center align-items-center h-100">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+    {% block header %}
+    {% include "header.html" %}
+{% endblock header %}
+    <div>
+
+{% block main %}
+
+{% endblock main%}
+
+
+
+
+    {% block footer %}
+        {% include 'footer.html' %}
+    {% endblock footer%}   
+
+</div>
+ 
+  
+
+
+</body>
+</html>
