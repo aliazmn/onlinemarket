@@ -6,7 +6,7 @@ from django.db import models
 
 class Category(models.Model):
     cat_title=models.CharField(max_length=150)
-    sub_cat=models.ForeignKey('self',on_delete=models.SET_NULL,null=True, blank=True, related_name='cattocat')
+    sub_cat=models.ForeignKey('self',on_delete=models.CASCADE,null=True, blank=True, related_name='cattocat')
     
     def __str__(self) -> str:
         return self.cat_title
@@ -15,7 +15,7 @@ class Category(models.Model):
 class Product(models.Model):
     name=models.CharField(max_length=150)
     description=models.TextField(null=True)
-    brand=models.CharField(max_length=50,null=True)
+    brand=models.CharField(max_length=50,null=True ,blank=True)
     price=models.BigIntegerField(null=True)
     amount=models.IntegerField(null=True)
     activate=models.BooleanField(default=False)
@@ -34,7 +34,7 @@ class Product(models.Model):
 
 
     def __str__(self) -> str:
-        return f"{self.name}{self.brand}"
+        return f"{self.name}-{self.brand}"
 
          
 
