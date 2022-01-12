@@ -15,6 +15,11 @@ from django.contrib.auth.base_user import BaseUserManager
 class Profile(AbstractUser):
     username = None
     email = models.EmailField('email address', unique=True)
+    address=models.TextField(null=True,blank=True)
+    postal_code=models.CharField(max_length=10,null=True,blank=True)
+
+
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

@@ -26,7 +26,7 @@
                     <div class="e-filter-leftbar">
                     </div>
                     <div class="e-filter-rightbar">
-                        <form action="{% url 'product:filter' %}" method="GET">
+                    <form action="{% url 'product:filter' %}" method="GET">
                         <ul class="e-filter-list">
                             <li><input type="submit" value= "فیلتر"  />
                                 
@@ -40,7 +40,7 @@
                                       <option value="500000,990000">500000 تومان - 990000 تومان</option>
                                     <option value="1000000,2000000">1000000 تومان - 2000000 تومان</option>
                                     <option value="3000000,5000000">3000000 تومان - 5000000 تومان</option>
-                                    <option value="5000000,9000000">5000000 تومان - 900000 تومان</option>
+                                    <option value="5000000,9000000">5000000 تومان - 9000000 تومان</option>
                                 </select>
                             </li>
                             <li>
@@ -113,7 +113,7 @@
                 <div class="e-pagination-wrap mt-10">
                     <ul class="e-pagination justify-content-center e-line">
                         {% if page_obj.has_previous %}
-                        <li class="e-page-item disabled"><a class="e-btn light" href="product/show-product-by-category/?page={{ page_obj.previous_page_number }}&c={{c_get}}"> قبلی </a></li>
+                        <li class="e-page-item disabled"><a class="e-btn light" href="product/product-filter/?page={{ page_obj.previous_page_number }}&price={{p_get}}&brand={{b_get}}"> قبلی </a></li>
                         {% else %}
                         <li class="e-page-item disabled"><a class="e-btn light" href=""> قبلی </a></li>
 
@@ -124,10 +124,9 @@
                         <li class="e-page-item"><a class="e-btn light" href='{%static   "javascript:void(0);" %}'>08</a></li>
                         <li class="e-page-item"><a class="e-btn light" href='{%static   "javascript:void(0);" %}'>09</a></li> {% endcomment %}
                         {% if page_obj.has_next %}
-                        <li class="e-page-item"><a class="e-btn light" href="product/show-product-by-category/?page={{ page_obj.next_page_number }}&c={{c_get}}">بعدی </a></li>
+                        <li class="e-page-item"><a class="e-btn light" href="product/product-filter/?page={{ page_obj.next_page_number }}&price={{p_get}}&brand={{b_get}}">بعدی </a></li>
                         {% else %}
                         <li class="e-page-item disabled"><a class="e-btn light" href=""> بعدی </a></li>
-
                         {% endif %}
                       </ul>
                 </div>        
