@@ -1,8 +1,9 @@
-
 from django.shortcuts import render
 from django.views.generic import DetailView,ListView
 from .models import Product,Category,Details,Property
 from django.db.models import Q
+from Comment.models import CommentMe
+from Comment.forms import CommentForm
 
 
 
@@ -29,6 +30,14 @@ class ProductDetail(DetailView):
 
         product_best=Product.objects.filter(cat_id=cat)
         ctnx["listproduct"]=product_best
+
+
+        comments=CommentMe.objects.all().filter(product=self.kwargs["product_id"])
+        print(comments.values())
+
+        ctnx["form"]=CommentForm()
+        ctnx["comment"]=comments
+        
 
 
         return ctnx

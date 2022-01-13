@@ -212,7 +212,9 @@
                                         </ul>
                                     </div>
                                     <div class="na-top-heading text-center">
-                                        <a href="{% url 'product/detailproduct' elm.id %}" class="na-name">{{elm.name}}</a>
+
+                                        <a href="{% url 'product:detailproduct' elm.id %}" class="na-name">{{elm.name}}</a>
+
                                         <h2 class="">{{elm.price}}ریال</h2>
                                     </div>
                                 </div>                                	
@@ -223,11 +225,7 @@
                 </div>
                 
             </div>
-            <div class="col-12 text-center">
-                <div class="load-more-wrap e-line">
-                    <a class="e-btn light" href="product_category.html">نمایش بیشتر </a>
-                </div>
-            </div>
+  
         </div>
     </div>
 </section>
@@ -256,8 +254,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="e-heading-wrap mb-43 text-center">
-                    <h2 class="e-heading-title">برترین ها </h2>
-                    <p class="e-heading-subtitle">محصولات انحصاری تازه وارد شده اند. آنها را بررسی کنید</p>
+                    <h2 class="e-heading-title">محصولات دیگر  </h2>
+                    
                 </div>
             </div>
         </div>

@@ -17,7 +17,8 @@ class Home(ListView):
 
         newproduct=Product.objects.all().order_by('date_create')[:8]
 
-        product=Product.objects.all().order_by('date_create')[8:20]
+        product=Product.objects.all().order_by('date_create')[8:22]
+
 
         
         context = { 

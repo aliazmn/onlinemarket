@@ -1,3 +1,4 @@
+
 from django.contrib import admin
 from .views import Home, searchbox
 from django.contrib import admin
