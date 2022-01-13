@@ -1,7 +1,5 @@
-from django.contrib import admin
-from django.urls import path, include
 
-from django.urls.conf import include
+from django.contrib import admin
 from .views import Home, searchbox
 from django.contrib import admin
 from django.urls import path,include

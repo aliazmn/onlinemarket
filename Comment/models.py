@@ -22,7 +22,7 @@ class rate(models.Model):
         verbose_name_plural="rates"
 
     def __str__(self) -> str:
-        return self.user.username        
+        return f"{self.user.first_name}+{self.id}"        
 
 class CommentMe(models.Model):
     user=models.ForeignKey(Customer,on_delete=models.CASCADE,related_name="commenttouser",verbose_name=_("comment"))   
@@ -35,4 +35,4 @@ class CommentMe(models.Model):
         verbose_name_plural="comments"
 
     def __str__(self) -> str:
-        return self.user.username        
+        return f"{self.id}"   
