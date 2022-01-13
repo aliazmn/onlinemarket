@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-from django.shortcuts import render
-
-def index(request):
-    ctx = {}
-    return render(request, "home.html", ctx)
-=======
 
 from django.shortcuts import render
 
@@ -23,10 +16,14 @@ class Home(ListView):
         #     sub_cat.append(cat.cattocat.all())
 
         newproduct=Product.objects.all().order_by('date_create')[:8]
+
+        product=Product.objects.all().order_by('date_create')[8:20]
+
         
         context = { 
             
-            'new_products':newproduct
+            'new_products':newproduct,
+            'product':product
              }
         return render(request , 'home.html' ,context)
 
@@ -44,7 +41,7 @@ def searchbox(request):
     conetxt={
         'result':result,
         } 
-    return render(request ,'Products/product_category_name.html', conetxt)
+    return render(request ,'Product/product_category_name.html', conetxt)
 
 
        
@@ -52,4 +49,3 @@ def searchbox(request):
 
 
 
->>>>>>> 1be6c836f417ba9a945f338c8dee82dda93cf4a6
