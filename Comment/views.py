@@ -4,31 +4,26 @@ from Comment.forms import CommentForm
 from Comment.models import CommentMe
 
 from Product.models import Product
+from User.models import Customer
 # Create your views here.
 def detail(request):
-    return render(request , 'Products/product_details.html')
+    return render(request , 'Product/product_details-comment.html')
 
 
-@login_required(login_url="")
+@login_required(login_url="login/")
 def add_comment(request, product_id):
-    if request.method=="GET":
-        comments=CommentMe.objects.all().filter(product=product_id)
 
-        context = {
-            'form': CommentForm(),
-            'comment':comments
-        }
-        return render(request, "Products/product_details.html",context)
-        
+    form = CommentForm(request.POST or None)
     if request.method == "POST":
-        user=request.user
         product = get_object_or_404(Product, id=product_id)
-        form = CommentForm(request.POST)
+        customer=get_object_or_404(Customer,profile=request.user)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.user = request.user
+            comment.user = customer
             comment.product = product
             comment.save()
-        return redirect("product:detailproduct")
+            return redirect("product:detailproduct",int(product_id))
+        
     else:
-        return redirect("product:detailproduct")
+        return redirect("product:detailproduct",int(product_id))
+

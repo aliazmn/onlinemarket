@@ -171,7 +171,6 @@
                         <li>
                         <a class="active" data-toggle="pill" href="#descrtiption" role="tab" aria-controls="descrtiption" aria-selected="true">توضیحات </a>
                         </li>
-
                         <li>
                         <a data-toggle="pill" href="#review" role="tab" aria-controls="review" aria-selected="false">نظرات </a>
                         </li>
@@ -181,33 +180,51 @@
                             <div class="tab-content-inner">
                                 <p class="mb-20"> {{singleproduct.description}} </p>
                                 
+                            
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="addi_info" role="tabpanel" >
+                            <div class="tab-content-inner">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <ul class="pdtab-addinfo">
+                                            <li><p> <span> اندازه </span> - بزرگ ، متوسط ، کوچک</p></li>
+                                            <li><p> <span> رنگ </span>  - صورتی ، مشکی</p></li>
+                                            <li><p> <span> شماره مدل </span>  - کد 1323</p></li>
+                                            <li><p> <span> نام محصول </span> - کت تابستانی</p></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <ul class="pdtab-addinfo ">
+                                            <li><p> <span> امتیاز سیستمی  </span> - عالی </p></li>
+                                            <li><p> <span> طراحی </span> - متریال</p></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="review" role="tabpanel" >
                             <div class="tab-content-inner">
+                                {% if not comment %}
                                 <h2 class="pdtab-rev-title">هنوز هیچ نظری وجود ندارد.</h2>
-                                <h2 class="pdtab-rev-stitle">اولین نفری باشید که این محصول را مورد بازنگری قرار میدهد"</h2>
-                                <form>
+
+                                <h2 class="pdtab-rev-stitle">اولین نفری باشید که این محصول را مورد بازنگری قرار میدهد</h2>
+    
+                               {% else %}
+                                {% for elm in comment%}
+                                <h2 class="pdtab-rev-title">{{elm.user}}: </h2><br>
+                                <h4 class="pdtab-rev-title">  {{elm.comment }}</h4><hr>
+                                {% endfor %}
+                                {% endif %}
+                                <form action="{% url 'comment:comment' singleproduct.id %}" method="POST">
+                                    {% csrf_token %}
                                     <div class="row">
                                       <div class="col-md-6">
                                         <div class="e-form-field mb-30">
-                                          <input class="e-field-inner" type="text" placeholder="نام شما">
+                                         {{form}}
+                                        <button type="submit" class="e-btn">ارسال</button>
                                         </div>
                                       </div>
-                                      <div class="col-md-6">
-                                        <div class="e-form-field mb-30">
-                                          <input class="e-field-inner" type="email" placeholder="ایمیل">
-                                        </div>
-                                      </div>
-                                      <div class="col-12">
-                                        <div class="e-form-field mb-30">
-                                          <textarea class="e-field-inner" ></textarea>
-                                        </div>
-                                      </div>
-                                      <div class="col-12">
-                                        <div class="e-form-field">
-                                        <button type="button" class="e-btn">ارسال</button>
-                                        </div>
                                       </div>
                                     </div>
                                   </form>
