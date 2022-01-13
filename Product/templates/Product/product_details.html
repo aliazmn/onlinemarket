@@ -208,6 +208,7 @@
                                 {% if not comment %}
                                 <h2 class="pdtab-rev-title">هنوز هیچ نظری وجود ندارد.</h2>
 
+
                                 <h2 class="pdtab-rev-stitle">اولین نفری باشید که این محصول را مورد بازنگری قرار میدهد</h2>
     
                                {% else %}
@@ -218,12 +219,17 @@
                                 {% endif %}
                                 <form action="{% url 'comment:comment' singleproduct.id %}" method="POST">
                                     {% csrf_token %}
+
                                     <div class="row">
                                       <div class="col-md-6">
                                         <div class="e-form-field mb-30">
                                          {{form}}
+
                                         <button type="submit" class="e-btn">ارسال</button>
                                         </div>
+                                      </div>
+
+
                                       </div>
                                       </div>
                                     </div>
