@@ -86,7 +86,7 @@ def register(request):
     if request.method == "GET":
         return render(request, 'User/register_page.html', {'register_form': register_form})
     elif request.method == "POST":
-        register_form = RegisterForm(request.POST)
+        # register_form = RegisterForm(request.POST)
         if register_form.is_valid():
             user=register_form.save(commit=False)
             user.is_active = False
