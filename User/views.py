@@ -1,3 +1,4 @@
+from http.client import HTTPResponse
 from urllib import request
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
@@ -138,7 +139,7 @@ def activate(request, valid):
 def forget_password(request):
     forget_password_form = ForgetPasswordForm(request.POST or None)
     if request.method == "GET":
-        return render(request, 'User/forget_password_form.html', {'forget_password_form': forget_password_form})
+        return render(request, 'User/forget_password.html', {'forget_password_form': forget_password_form})
 
     else:
         
@@ -148,17 +149,18 @@ def forget_password(request):
             user = User.objects.get(email=miss_email)
             if user:
                 uid=str(uuid4())
-                link=reverse("user:set_True",kwargs={"auten":uid})
+                link=reverse("user:set_true",kwargs={"auten":uid})
                 current_site = get_current_site(request)
                 mail_subject = 'click on the link for change password.'
                 message = "127.0.0.1:8000"+link
+                print(message)
                 to_email = forget_password_form.cleaned_data.get('email')
                 # forget= f'{to_email}+flag'
                 # request.session["forget"]=forget
                 request.session["email"]=to_email
                 request.session["uid"]=uid
                 cache.set(to_email,uid,300)
-                cache.set("forget",False,300)
+                cache.set("forget",0,300)
 
                 send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [to_email])
 
@@ -168,22 +170,23 @@ def forget_password(request):
                 return redirect('user:forget_password')
 
 
-def set_true():
+def set_true(request,auten):
     user=Profile.objects.get(email=request.session.get("email"))
     ucode=cache.get(request.session.get("email"))
     if request.session.get("uid")==ucode:
-        cache.set("forget",True,300)
-        return # now you can set new password
+        cache.set("forget",1,300)
+        return redirect('user:forget_pass')
         
     else:
-        return #link motabar nist
+        return HTTPResponse("like is invalid ..!")
+
         
 
 
-def forget_pass(request,auten):
+def forget_pass(request):
     forget_pass_form = ForgetPassForm(request.POST or None)
     if request.method == "GET":
-        return render(request, 'User/forget_pass_form.html', {'forget_pass_form': forget_pass_form})
+        return render(request, 'User/forget_pass.html', {'forget_pass_form': forget_pass_form})
     
     else:
         user=Profile.objects.get(email=request.session.get("email"))
@@ -191,7 +194,7 @@ def forget_pass(request,auten):
         if request.session.get("uid")==ucode:
                 forg=cache.get("forget")
                 if forg:
-                    if ForgetPassForm.is_valid():
+                    if forget_pass_form.is_valid():
                         password = request.POST.get("password", "")
                         user.set_password(password)
                         user.save()
@@ -201,9 +204,10 @@ def forget_pass(request,auten):
                     else:
                         return redirect("user:forget_password")
                 else:
-                    return #bayad montazer taiid email bashid
+                    return HTTPResponse("bayad montazer email bashid..!")
+
         else:
-            return #link taiid eshtebah ast
+            return HTTPResponse("link taiid eshtebah ast...!")
 
 
 

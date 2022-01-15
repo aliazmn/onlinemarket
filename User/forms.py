@@ -138,31 +138,31 @@ class ForgetPasswordForm(forms.Form):
             }
 
 class ForgetPassForm(forms.Form):
+        password=forms.CharField(max_length=16,widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را وارد نمایید', 'type':'password', 'required':'', 'class':'e-field-inner','lable':'پسورد'}))
         re_password = forms.CharField(widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را تکرار نمایید', 'type':'password', 'required':'', 'class':'e-field-inner','label':'تکرار رمزعبور'}))
 
-        class Meta:
-            model = Profile
+
 
         
-            fields = ['password',"re_password"]
+        fields = ['password',"re_password"]
 
-            widgets = {
+        widgets = {
 
-                'password': PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را وارد نمایید', 'type':'password', 'required':'', 'class':'e-field-inner', "id":"password"}),
+            'password': PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را وارد نمایید', 'type':'password', 'required':'', 'class':'e-field-inner', "id":"password"}),
 
-            }
+        }
 
-            labels = {
+        labels = {
 
-                'password' : _('رمزعبور'),
-                're_password' :'تکرار رمزعبور',
+            'password' : _('رمزعبور'),
+            're_password' :'تکرار رمزعبور',
 
-            }
+        }
 
-            validators = {
-                
-            }
-        
+        validators = {
+            
+        }
+    
 
         def clean_re_password(self):
             password = self.cleaned_data.get('password')
