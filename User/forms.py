@@ -96,8 +96,8 @@ class RegisterForm(ModelForm):
     def clean_re_password(self):
         password = self.cleaned_data.get('password')
         re_password = self.cleaned_data.get('re_password')
-        print(password)
-        print(re_password)
+        # print(password)
+        # print(re_password)
 
         if password != re_password:
             raise forms.ValidationError('کلمه های عبور مغایرت دارند')
@@ -125,4 +125,56 @@ class LoginForm(forms.Form):
         }
 
 class ForgetPasswordForm(forms.Form):
-    pass
+            email=forms.EmailField(widget=EmailInput(attrs={'placeholder': 'لطفا ایمیل خود را وارد نمایید', 'type':'email', 'required':'', 'class':'e-field-inner','label':'ایمیل'}))
+            
+
+            
+            fields = ['email']
+
+
+
+            labels = {
+                'email' : _('ایمیل'),
+            }
+
+class ForgetPassForm(forms.Form):
+        re_password = forms.CharField(widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را تکرار نمایید', 'type':'password', 'required':'', 'class':'e-field-inner','label':'تکرار رمزعبور'}))
+
+        class Meta:
+            model = Profile
+
+        
+            fields = ['password',"re_password"]
+
+            widgets = {
+
+                'password': PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را وارد نمایید', 'type':'password', 'required':'', 'class':'e-field-inner', "id":"password"}),
+
+            }
+
+            labels = {
+
+                'password' : _('رمزعبور'),
+                're_password' :'تکرار رمزعبور',
+
+            }
+
+            validators = {
+                
+            }
+        
+
+        def clean_re_password(self):
+            password = self.cleaned_data.get('password')
+            re_password = self.cleaned_data.get('re_password')
+            # print(password)
+            # print(re_password)
+
+            if password != re_password:
+                raise forms.ValidationError('کلمه های عبور مغایرت دارند')
+
+            return password
+
+        def save(self, commit: bool = ...) :
+            self.instance.set_password(self.cleaned_data.get("password"))
+            return super().save(commit=commit)
