@@ -13,6 +13,10 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth import authenticate, logout as _logout, login as _login
 from django.core.cache import cache
 from project import settings
+from django.views.generic import DetailView
+from django.contrib.auth.decorators import login_required
+
+
 
 from User.forms import ForgetPassForm, ForgetPasswordForm, RegisterForm ,LoginForm
 
@@ -208,6 +212,14 @@ def forget_pass(request):
 
         else:
             return HTTPResponse("link taiid eshtebah ast...!")
+
+
+# @login_required
+class show_profile(DetailView):
+    model=Profile
+    template_name="User/profile.html"
+    context_object_name="profile_item"
+    pk_url_kwarg="id"
 
 
 
