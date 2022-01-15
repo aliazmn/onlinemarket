@@ -51,7 +51,7 @@ User = get_user_model()
 #========================================================================
 
 class RegisterForm(ModelForm):
-    re_password = forms.CharField(widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را تکرار نمایید', 'type':'password', 'required':'', 'class':'e-field-inner','label':'تکرار رمزعبور'}))
+    re_password = forms.CharField(widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را تکرار نمایید', 'type':'password', 'required':'', 'class':'e-field-inner'}),label='تکرار رمزعبور')
     
     class Meta:
         model = Profile
@@ -120,8 +120,8 @@ class LoginForm(forms.Form):
 
 
         labels = {
-            'email' : _('ایمیل'),
-            'password' : _('کلمه عبور'),
+            'email' : 'ایمیل',
+            'password' : 'کلمه عبور',
         }
 
 class ForgetPasswordForm(forms.Form):

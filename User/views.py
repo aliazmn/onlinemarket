@@ -81,7 +81,7 @@ def logout(request):
 
 def register(request):
     register_form = RegisterForm(request.POST or None)
-
+    print(register_form)
 
     if request.method == "GET":
         return render(request, 'User/register_page.html', {'register_form': register_form})
