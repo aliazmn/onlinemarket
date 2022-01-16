@@ -6,9 +6,6 @@ from Comment.models import CommentMe
 
 from Product.models import Product
 from User.models import Customer
-# Create your views here.
-def detail(request):
-    return render(request , 'Product/product_details-comment.html')
 
 
 @login_required(login_url="login/")
@@ -28,9 +25,3 @@ def add_comment(request, product_id):
     else:
         return redirect("product:detailproduct",int(product_id))
 
-
-def aa(request):
-    return JsonResponse(request.POST)
-
-def aa1(request):
-    return JsonResponse(request.POST)
