@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'Product',
     'Notify',
     'Payment',
+    'azbankgateways',
 ]
 
 
