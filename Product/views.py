@@ -18,22 +18,32 @@ class ProductDetail(DetailView):
         
         cat=Category.objects.get(pk=self.get_object().cat_id.id)
         ctnx["parent_cat"]=cat.sub_cat.cat_title
-        
-
-        
+               
         property_color=Property.objects.get(property_name="رنگ")
         detail_color=Details.objects.filter(Q(product_id=self.kwargs["product_id"]) & Q(pro_id=property_color.id))
         ctnx["color"]=detail_color
-        property_size=Property.objects.get(property_name="سایزلباس")
-        detail_size=Details.objects.filter(Q(product_id=self.kwargs["product_id"]) & Q(pro_id=property_size.id))
-        ctnx["size"]=detail_size
+
+        properties=Property.objects.filter(cat_id=cat.sub_cat)
+        lst_details=[]
+
+        for elm in properties:
+
+            details=Details.objects.filter(Q(product_id=self.kwargs["product_id"]) & Q(pro_id=elm.id))
+            if details:
+                lst_details.append(details)
+        
+    
+
+        ctnx["detail"]=lst_details
+        
+
+
 
         product_best=Product.objects.filter(cat_id=cat)
         ctnx["listproduct"]=product_best
 
 
         comments=CommentMe.objects.all().filter(product=self.kwargs["product_id"])
-        print(comments.values())
 
         ctnx["form"]=CommentForm()
         ctnx["comment"]=comments

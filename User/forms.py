@@ -111,8 +111,8 @@ class RegisterForm(ModelForm):
 
 
 class LoginForm(forms.Form):
-        email=forms.EmailField(widget=EmailInput(attrs={'placeholder': 'لطفا ایمیل خود را وارد نمایید', 'type':'email', 'required':'', 'class':'e-field-inner','label':'ایمیل'}))
-        password=forms.CharField(max_length=16,widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را وارد نمایید', 'type':'password', 'required':'', 'class':'e-field-inner','lable':'پسورد'}))
+        email=forms.EmailField(widget=EmailInput(attrs={'placeholder': 'لطفا ایمیل خود را وارد نمایید', 'type':'email', 'required':'', 'class':'e-field-inner'}),label='ایمیل')
+        password=forms.CharField(max_length=16,widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را وارد نمایید', 'type':'password', 'required':'', 'class':'e-field-inner'}),label='رمزعبور')
 
         
         fields = ['email','password']

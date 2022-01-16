@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from Comment.forms import CommentForm
@@ -27,3 +28,9 @@ def add_comment(request, product_id):
     else:
         return redirect("product:detailproduct",int(product_id))
 
+
+def aa(request):
+    return JsonResponse(request.POST)
+
+def aa1(request):
+    return JsonResponse(request.POST)
