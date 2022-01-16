@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from Comment.forms import CommentForm
@@ -5,9 +6,6 @@ from Comment.models import CommentMe
 
 from Product.models import Product
 from User.models import Customer
-# Create your views here.
-def detail(request):
-    return render(request , 'Product/product_details-comment.html')
 
 
 @login_required(login_url="login/")
