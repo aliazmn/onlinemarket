@@ -125,7 +125,7 @@ class LoginForm(forms.Form):
         }
 
 class ForgetPasswordForm(forms.Form):
-            email=forms.EmailField(widget=EmailInput(attrs={'placeholder': 'لطفا ایمیل خود را وارد نمایید', 'type':'email', 'required':'', 'class':'e-field-inner','label':'ایمیل'}))
+            email=forms.EmailField(widget=EmailInput(attrs={'placeholder': 'لطفا ایمیل خود را وارد نمایید', 'type':'email', 'required':'', 'class':'e-field-inner'}),label='ایمیل  ')
             
 
             
@@ -138,8 +138,8 @@ class ForgetPasswordForm(forms.Form):
             }
 
 class ForgetPassForm(forms.Form):
-        password=forms.CharField(max_length=16,widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را وارد نمایید', 'type':'password', 'required':'', 'class':'e-field-inner','lable':'پسورد'}))
-        re_password = forms.CharField(widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را تکرار نمایید', 'type':'password', 'required':'', 'class':'e-field-inner','label':'تکرار رمزعبور'}))
+        password=forms.CharField(max_length=16,widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را وارد نمایید', 'type':'password', 'required':'', 'class':'e-field-inner'}),label=' رمزعبور')
+        re_password = forms.CharField(widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را تکرار نمایید', 'type':'password', 'required':'', 'class':'e-field-inner'}),label='تکرار رمزعبور')
 
 
 

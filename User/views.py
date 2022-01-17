@@ -168,7 +168,7 @@ def forget_password(request):
 
                 send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [to_email])
 
-                return redirect('user:forget_pass')
+                return render(request,'User/forget_status.html',{'status':"please check your email for continue."})
 
             else:
                 return redirect('user:forget_password')
@@ -182,7 +182,7 @@ def set_true(request,auten):
         return redirect('user:forget_pass')
         
     else:
-        return HTTPResponse("like is invalid ..!")
+        return render(request,"User/forget_password.html")
 
         
 
@@ -206,12 +206,12 @@ def forget_pass(request):
                         _login(request,user)
                         return redirect("home")
                     else:
-                        return redirect("user:forget_password")
+                        return render(request,"User/forget_pass.html")
                 else:
-                    return HTTPResponse("bayad montazer email bashid..!")
+                    return render(request, "User/forget_pass.html")
 
         else:
-            return HTTPResponse("link taiid eshtebah ast...!")
+            return render(request,"User/forget_password.html")
 
 
 # @login_required
