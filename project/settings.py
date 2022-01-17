@@ -177,5 +177,28 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER ="onlinemarket.aas@gmail.com"
-EMAIL_HOST_PASSWORD ="Aas727480"
+EMAIL_HOST_USER =os.environ.get("EMAIL_HOST_USER","")
+EMAIL_HOST_PASSWORD =os.environ.get("EMAIL_HOST_PASSWORD","")
+
+
+
+AZ_IRANIAN_BANK_GATEWAYS = {
+   'GATEWAYS': {
+      
+       'IDPAY': {
+           'MERCHANT_CODE': os.environ.get("MERCHANT_CODE",""),
+           'METHOD': 'POST',  # GET or POST
+           'X_SANDBOX': 1,  # 0 disable, 1 active
+       }
+
+   },
+   'IS_SAMPLE_FORM_ENABLE': True, # اختیاری و پیش فرض غیر فعال است
+   'DEFAULT': 'IDPAY',
+   'CURRENCY': 'IRR', # اختیاری
+   'TRACKING_CODE_QUERY_PARAM': 'tc', # اختیاری
+   'TRACKING_CODE_LENGTH': 16, # اختیاری
+   'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader', # اختیاری
+   'BANK_PRIORITIES': [
+       # and so on ...
+   ], # اختیاری
+}

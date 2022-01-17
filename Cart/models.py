@@ -36,7 +36,6 @@ class CartItem(models.Model):
 
 class History(models.Model):
     customer=models.ForeignKey(Customer,on_delete=models.CASCADE,related_name='HistorytoCustomer',help_text="مشتری")
-    cartme=models.ManyToManyField(CartMe,help_text="کالاها")
     date=models.DateTimeField(auto_now_add=True)
     date_update=models.DateTimeField(auto_now=True)
     factor=models.JSONField(null=True,blank=True,verbose_name=_("factor"),help_text="فاکتور خرید")

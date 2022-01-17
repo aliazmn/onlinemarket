@@ -6,7 +6,6 @@ from django.views.generic import View, ListView
 from Product.models import Category, Product
 
 
-
 class Home(ListView):
 
     def get(self,request):
