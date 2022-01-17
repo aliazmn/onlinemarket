@@ -6,7 +6,7 @@
 <div class="e-breadcumb-wrap text-center">
     <h2 class="e-breadcumb-title">تک محصول</h2>
     <ul class="e-breadcumb-kist">
-        <li><a href="">صفحه اصلی </a></li>
+        <li><a href="{% url 'home' %}">صفحه اصلی </a></li>
         <li><a href=''>{{parent_cat}}</a></li>
         <li><a href=''>{{singleproduct.cat_id.cat_title}} </a></li>
     </ul>
@@ -164,7 +164,7 @@
                                 </ul>
                                 {% comment %} inja url bzn {% endcomment %}
                             </div>
-                            <input type="submit"class="e-btn light pd-heart"value="افزودن به سبد" formaction=""/>   
+                            <input type="submit"class="e-btn light pd-heart"value="افزودن به سبد" formaction="{% url 'comment:aa' %}"/>   
                             </li>
                         </ul>
                         
@@ -309,4 +309,3 @@
 </section>
 
 {% endblock main %}
-

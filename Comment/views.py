@@ -8,6 +8,7 @@ from Product.models import Product
 from User.models import Customer
 
 
+
 @login_required(login_url="login/")
 def add_comment(request, product_id):
 
@@ -25,3 +26,9 @@ def add_comment(request, product_id):
     else:
         return redirect("product:detailproduct",int(product_id))
 
+
+def aa(request):
+    return JsonResponse(request.POST)
+
+def aa1(request):
+    return JsonResponse(request.POST)

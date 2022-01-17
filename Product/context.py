@@ -16,7 +16,7 @@ def header(request):
         'parent_cats':parent_cat, 
         'sub_cats':sub_cat, 
         
-            }
+        }
         return context
 
             
