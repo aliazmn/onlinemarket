@@ -52,26 +52,6 @@ def login(request):
 
 
 
-# @require_http_methods(["GET", "POST"])
-# def login(request):
-#     if request.method == "GET":
-#         ctx = {}
-#         next = request.GET.get("next", "")
-#         if next:
-#             ctx["next"] = next
-#         return render(request, "User/login.html", ctx)
-#     else:
-#         email = request.POST.get("email", "")
-#         password = request.POST.get("password", "")
-#         user = authenticate(request, email=email, password=password)
-#         if user is not None:
-#             _login(request, user)
-#             next = request.GET.get("next", "")
-#             if next:
-#                 return redirect(next)
-#             return redirect('home')
-#         else:
-#             return redirect('users:login')
 
 
 def logout(request):

@@ -12,43 +12,6 @@ from django.core.validators import EmailValidator
 User = get_user_model()
 
 
-# class CustomUserCreationForm(UserCreationForm):
-
-#     class Meta:
-#         model = User
-#         fields = ["first_name","last_name",'email','password', 're_password',"address","postalcode"]
-#         labels = {
-#             "first_name":"نام",
-#             "last_name":"نام خانوادگی",
-#             "email": "ایمیل",
-#             "password1": "رمز عبور",
-#             "re_password": "تکرار رمز عبور",
-#             "address":"ادرس",
-#             "postalcode":"کد پستی",
-
-#         }
-
-#         help_texts = {
-#             "email": "ایمیل خود را به درستی وارد کنید",
-#         }
-
-#     def save(self, commit=True):
-#         '''
-#         override user create form to create profile after register!
-#         '''
-#         user = super().save(commit=False)
-#         user.set_password(self.cleaned_data["password"])
-#         user.save()
-#         return user
-
-
-# class CustomUserChangeForm(UserChangeForm):
-
-#     class Meta:
-#         model = User
-#         fields = ('first_name', 'last_name')
-
-#========================================================================
 
 class RegisterForm(ModelForm):
     re_password = forms.CharField(widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را تکرار نمایید', 'type':'password', 'required':'', 'class':'e-field-inner'}),label='تکرار رمزعبور')
