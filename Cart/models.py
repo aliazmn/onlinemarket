@@ -9,7 +9,7 @@ class CartMe(models.Model):
     user=models.ForeignKey(Customer,on_delete=models.CASCADE,related_name='CartmetoCustomer',help_text="نام کاربری")
     product=models.ManyToManyField(Product,through="CartItem",help_text="کالاها")
     priceTotla=models.PositiveIntegerField(verbose_name=_("priceTotla"),null=True,blank=True)
-    discount=models.CharField(max_length=10,verbose_name=_("discount"))
+    discount=models.CharField(max_length=10,verbose_name=_("discount"),null=True,blank=True)
     date=models.DateTimeField(auto_now=True)
     ispaid=models.BooleanField(default=False)
 
@@ -36,7 +36,6 @@ class CartItem(models.Model):
 
 class History(models.Model):
     customer=models.ForeignKey(Customer,on_delete=models.CASCADE,related_name='HistorytoCustomer',help_text="مشتری")
-    cartme=models.ManyToManyField(CartMe,help_text="کالاها")
     date=models.DateTimeField(auto_now_add=True)
     date_update=models.DateTimeField(auto_now=True)
     factor=models.JSONField(null=True,blank=True,verbose_name=_("factor"),help_text="فاکتور خرید")

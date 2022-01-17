@@ -12,11 +12,11 @@ def header(request):
         for cat in parent_cat:
             sub_cat.append(cat.cattocat.all())
 
-            context = { 
-            'parent_cats':parent_cat, 
-            'sub_cats':sub_cat, 
-            
-             }
+        context = { 
+        'parent_cats':parent_cat, 
+        'sub_cats':sub_cat, 
+        
+        }
         return context
 
             
