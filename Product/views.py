@@ -1,10 +1,15 @@
 from django.shortcuts import render
 from django.views.generic import DetailView,ListView
-from .models import Product,Category,Details,Property
+
+
+from .models import Product,Category,Details,Property, WishList
 from django.db.models import Q
 from Comment.models import CommentMe
 from Comment.forms import CommentForm
 
+
+from django.views.decorators.http import require_POST
+from django.shortcuts import get_object_or_404
 
 
 class ProductDetail(DetailView):
@@ -114,3 +119,31 @@ class Filtering(ListView):
         ctx["b_get"]=self.request.GET.get("brand")
 
         return ctx
+
+
+
+
+
+
+
+@require_POST
+def add_to_wishlist(request):
+    if request.user.is_authenticated:
+        user=request.user
+        count = int(request.POST.get('count'))
+        my_wishlist=WishList.objects.get_or_create(user_id=request.user.id) 
+        product = get_object_or_404(Product, name=request.POST.get("name"))
+        
+        if product.amount - count < 0 :
+            raise ValueError("product not exist")
+        else:
+            my_wishlist.product.add(product)
+            my_wishlist.save()
+            return render(request,"Product/product_category.html")
+
+    else:
+        pass
+
+
+# def test(request):
+#     return render(request,"Product/wishlist.html")

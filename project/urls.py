@@ -10,7 +10,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('search/',searchbox, name='serachbox'),
     path('' , Home.as_view() ,  name='home'),
-    path('pro/',include('Product.urls')),
     path('comment/',include('Comment.urls', namespace='comment')),
     path('product/',include("Product.urls",namespace="product") ),
     path("", include("User.urls", namespace='user')),
