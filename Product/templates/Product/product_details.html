@@ -1,3 +1,4 @@
+
 {% extends 'home.html' %}
 {%load static %}
 {% block main %}
@@ -52,10 +53,21 @@
             <div class="col-lg-6 col-md-12">
                 <div class="prodetails-info">
                     <form action="" method="POST">
-                        {% csrf_token %}
+                       {% csrf_token %}
                     <div class="pd-infotop">
                         <h2 class="pd-title">{{singleproduct.name}}</h2>
-                        <input type="hidden"  name="name" value={{singleproduct.name}}>  
+                        <input type="hidden"  name="name" value="{{singleproduct.name}}"> 
+                        <input type="hidden"  name="id" value="{{singleproduct.id}}">  
+                        {% if singleproduct.img %}
+                        <input type="hidden"  name="img" value="{{singleproduct.img.url}}">  
+                        {% else %}
+                        <input type="hidden"  name="img" value="">  
+
+                        {% endif %}
+                        <input type="hidden"  name="amount" value="{{singleproduct.amount}}">  
+                        
+                        
+
                         {% comment %} <div class="pd-special-price">
                             <span class="pd-price-end" id="headline">قیمت ویژه در کمتر از</span>                      
                             <div id="countdown">                            
@@ -71,7 +83,7 @@
                             {% comment %} <li><span class="pd-price-ttile">120000 تومان <span>90000 تومان</span></span></li>                            
                             <li><span class="pd-price-off">10% تخفیف </span></li>   {% endcomment %}
                             <li><span class="pd-price-ttile">{{singleproduct.price}}تومان</li>
-                            <input type="hidden"  name="price" value={{singleproduct.price}}>  
+                            <input type="hidden"  name="price" value="{{singleproduct.price}}">  
 
                         </ul>
                     </div>
@@ -83,7 +95,7 @@
                                 </div>
                                 <div class="ib-list-right">
                                     <span>{{singleproduct.brand}}</span>
-                                    <input type="hidden"  name="brand" value={{singleproduct.brand}}>  
+                                    <input type="hidden"  name="brand" value="{{singleproduct.brand}}">  
 
                                 </div>
                             </li>
@@ -96,7 +108,7 @@
                                 <div class="ib-list-right">
                                     <select name="color" >
                                         {% for elm in color %}
-                                            <option value={{elm.detail}}>{{elm.detail}}</option>
+                                            <option value="{{elm.detail}}">{{elm.detail}}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -140,7 +152,8 @@
                                     <ul class="pd-qua-wrap">
                                         <li>
                                             <div class="quantity-box">
-                                                <input type="text" name='count' class="quantity" >
+                                                <input type="text" name='count' class="quantity" value=1 >
+                                                
                                                 <span class="quantity-minus pa-sub quantity-icon"> - </span>                                                
                                                 <span class="quantity-plus  pa-add quantity-icon"> + </span>
                                                 <div class="clearfix"></div>
@@ -163,7 +176,7 @@
                                 </ul>
                                 {% comment %} inja url bzn {% endcomment %}
                             </div>
-                            <input type="submit"class="e-btn light pd-heart"value="افزودن به سبد" formaction="{% url 'comment:aa' %}"/>   
+                            <input type="submit"class="e-btn light pd-heart"value="افزودن به سبد" formaction="{% url 'cart:add-to-cart' %}"/>   
                             </li>
                         </ul>
                         
