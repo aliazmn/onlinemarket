@@ -1,6 +1,9 @@
+
 from urllib import request
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic import DetailView,ListView
+
+from User.models import Customer
 
 
 from .models import Product,Category,Details,Property, WishList
@@ -11,6 +14,9 @@ from Comment.forms import CommentForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class ProductDetail(DetailView):
@@ -126,13 +132,14 @@ class Filtering(ListView):
 
 
 
-@login_required(redirect_field_name='user:login')
+@login_required(login_url='user/login')
 @require_POST
 def add_to_wishlist(request):
-    
-    user=request.user
+    print(request.POST.get("name"))
+    user=get_object_or_404(Customer, profile__email=request.user.email)
+    # user=request.user
     count = int(request.POST.get('count'))
-    my_wishlist=WishList.objects.get_or_create(user_id=request.user.id) 
+    my_wishlist=WishList.objects.get_or_create(user=user) 
     product = get_object_or_404(Product, name=request.POST.get("name"))
     
     if product.amount - count < 0 :
@@ -140,7 +147,7 @@ def add_to_wishlist(request):
     else:
         my_wishlist.product.add(product)
         my_wishlist.save()
-        return render(request,"Product/product_category.html")
+        return redirect("product:showproduct")
 
 
 # @login_required(redirect_field_name='user:login')
@@ -152,5 +159,5 @@ class Show_wishList(ListView):
 
     def get_queryset(self) :
         qs= super().get_queryset()
-        qs=WishList.objects.filter(user_id=self.request.user.id)
+        qs=WishList.objects.filter(user_id=self.request.user)
         return qs
