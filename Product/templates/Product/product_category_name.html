@@ -61,7 +61,7 @@
                                             </ul>
                                         </div>
                                         <div class="na-top-heading text-center">
-                                            <a href="product_details.html" class="na-name">{{elm.name}}</a>
+                                            <a href="{% url 'product:detailproduct' elm.id %}" class="na-name">{{elm.name}}</a>
                                             <h2 class="na-price">{{elm.price}} تومان</h2>
                                         </div>
                                     </div> 

@@ -16,10 +16,8 @@ from project import settings
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
 
-
-
 from User.forms import ForgetPassForm, ForgetPasswordForm, RegisterForm ,LoginForm
-
+from django.core.cache import caches
 
 from .models import Address, Customer, Profile
 
@@ -38,9 +36,28 @@ def login(request):
             email = request.POST.get("email", "")
             password = request.POST.get("password", "")
             user = authenticate(request, email=email, password=password)
+            print("+_____________________________")
+
             if user is not None:
+                print("_____________________________")
                 _login(request, user)
                 next = request.GET.get("next", "")
+                #handling cart that was in cache:
+                if not request.session.session_key:
+                    request.session.save()
+
+                redis_cache=caches['default']
+                cart=redis_cache.client.get_client()
+                carts=cart.hgetall(request.session.session_key)
+                print(request.session.session_key,"=_____________+",carts)
+                for elm in carts:
+                    print(elm)
+                    cart.hset(request.user.email,elm.decode("utf-8"),carts[elm])
+                    #cart.hset(request.user.email,elm,carts[elm])
+
+
+
+
                 if next:
                     return redirect(next)
                 return redirect('home')

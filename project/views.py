@@ -6,7 +6,6 @@ from django.views.generic import View, ListView
 from Product.models import Category, Product
 
 
-
 class Home(ListView):
 
     def get(self,request):
@@ -14,6 +13,7 @@ class Home(ListView):
         # parent_cat=Category.objects.all().filter(sub_cat=None).order_by('cat_title')
         # for cat in parent_cat:
         #     sub_cat.append(cat.cattocat.all())
+
 
         newproduct=Product.objects.all().order_by('date_create')[:8]
 

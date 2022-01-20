@@ -1,8 +1,6 @@
 
-from django.contrib import admin
 from django.urls import path
 
-from django.urls import path
 
 from .views import ProductDetail, Show_wishList,ShowProduct,Filtering, add_to_wishlist
 
