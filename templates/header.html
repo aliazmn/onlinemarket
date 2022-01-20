@@ -12,7 +12,7 @@
                     {% if user.is_authenticated %}
                     
                     <li><a href='{% url "user:profile" user.id %}'>حساب کاربری </a></li>
-                    <li><a href=" url product:wishlist">لیست علاقه مندیها </a></li>
+                    <li><a href='{% url "product:Show_wishList" user.id %}'>لیست علاقه مندیها </a></li>
                     <li>
                         
 

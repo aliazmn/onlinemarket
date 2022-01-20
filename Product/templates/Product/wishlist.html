@@ -30,26 +30,26 @@
                                   <tr>
                                     <th>محصول </th>
                                     <th>قیمت </th>                                    
-                                    <th>وضعیت</th>
                                     <th>گزینه</th>
                                     <th>&nbsp;</th>
                                   </tr>
                                 </thead>
                                 <tbody>
+                                    {% csrf_token %}
+                                    {% if wish_list  %}
+                                    {% for elms  in wish_list %}
                                   <tr class="e-remove-wrap">
                                     <td >
                                         <div class="sc-productwrap">
                                             <a href="product_details.html" class="sc-product-thumb">
-                                                <img src='{%static "assets/images/index1/shopcart01.jpg"%}'  alt="محصول" class="img-fluid">
+                                                <img src='{{ elms.img.url }}'  alt="محصول" class="img-fluid">
                                             </a>
                                             <div class="sc-product-details">
-                                                <a href="product_details.html" class="sc-product-ttl">کت کلاه دار خاکستری مشکی</a>
-                                                <p class="sc-product-sz">اندازه: متوسط </p>
+                                                <span> {{elms.product.name}} </span>
                                             </div>
                                         </div>      
                                     </td>
-                                    <td><span class="sc-product-prc">2,240</span></td>
-                                    <td><span class="sc-wishlist-status stock-availble">در انبار</span></td>
+                                    <td><span class="sc-product-prc">{{elms.product.price}}</span></td>
                                     <td>
                                         <a href='{%static  "javascript:void(0);" %}' class="e-btn wishlist-ac">افزودن به سبد </a>
                                     </td>                                    
@@ -58,100 +58,10 @@
                                             <img src='{%static "assets/images/index1/svg/cut.svg"%}'  alt="icon">
                                         </a>
                                     </td>
-                                  </tr>                                                                  
-                                  <tr>
-                                    <td>
-                                        <div class="sc-productwrap">
-                                            <a href="product_details.html" class="sc-product-thumb">
-                                                <img src='{%static "assets/images/index1/shopcart02.jpg"%}'  alt="محصول" class="img-fluid">
-                                            </a>
-                                            <div class="sc-product-details">
-                                                <a href="product_details.html" class="sc-product-ttl">کت بچه دار زرد</a>
-                                                <p class="sc-product-sz">اندازه: متوسط </p>
-                                            </div>
-                                        </div>      
-                                    </td>
-                                    <td><span class="sc-product-prc">2,240</span></td>
-                                    <td><span class="sc-wishlist-status stock-availble">در انبار</span></td>
-                                    <td>
-                                        <a href='{%static  "javascript:void(0);" %}' class="e-btn wishlist-ac">افزودن به سبد </a>
-                                    </td> 
-                                    <td>
-                                        <a href='{%static  "javascript:void(0);" %}' class="sc-produc-remove e-remove-product">
-                                            <img src='{%static "assets/images/index1/svg/cut.svg" %}' alt="icon">
-                                        </a>
-                                    </td>
-                                  </tr>                                                                  
-                                  <tr>
-                                    <td>
-                                        <div class="sc-productwrap">
-                                            <a href="product_details.html" class="sc-product-thumb">
-                                                <img src='{%static "assets/images/index1/shopcart03.jpg" %}' alt="محصول" class="img-fluid">
-                                            </a>
-                                            <div class="sc-product-details">
-                                                <a href="product_details.html" class="sc-product-ttl">کت بمب افکن سیاه</a>
-                                                <p class="sc-product-sz">اندازه: متوسط </p>
-                                            </div>
-                                        </div>      
-                                    </td>
-                                    <td><span class="sc-product-prc">2,240</span></td>
-                                    <td><span class="sc-wishlist-status stock-availble">در انبار</span></td>
-                                    <td>
-                                        <a href='{%static  "javascript:void(0);" %}' class="e-btn wishlist-ac">افزودن به سبد </a>
-                                    </td> 
-                                    <td>
-                                        <a href='{%static  "javascript:void(0);" %}' class="sc-produc-remove e-remove-product">
-                                            <img src='{%static "assets/images/index1/svg/cut.svg"%}'  alt="icon">
-                                        </a>
-                                    </td>
-                                  </tr>                                                                  
-                                  <tr>
-                                    <td>
-                                        <div class="sc-productwrap">
-                                            <a href="product_details.html" class="sc-product-thumb">
-                                                <img src='{%static "assets/images/index1/shopcart05.jpg"%}'  alt="محصول" class="img-fluid">
-                                            </a>
-                                            <div class="sc-product-details">
-                                                <a href="product_details.html" class="sc-product-ttl">ژاکت بادکنک آستین کامل</a>
-                                                <p class="sc-product-sz">اندازه: متوسط </p>
-                                            </div>
-                                        </div>      
-                                    </td>
-                                    <td><span class="sc-product-prc">2,240</span></td>
-                                    <td><span class="sc-wishlist-status stock-out">تمام شده</span></td>
-                                    <td>
-                                        <a href='{%static  "javascript:void(0);" %}' class="e-btn wishlist-ac">افزودن به سبد </a>
-                                    </td> 
-                                    <td>
-                                        <a href='{%static  "javascript:void(0);" %}' class="sc-produc-remove e-remove-product">
-                                            <img src='{%static "assets/images/index1/svg/cut.svg"%}'  alt="icon">
-                                        </a>
-                                    </td>
-                                  </tr>                                                                  
-                                  <tr>
-                                    <td>
-                                        <div class="sc-productwrap">
-                                            <a href="product_details.html" class="sc-product-thumb">
-                                                <img src='{%static "assets/images/index1/shopcart04.jpg" %}' alt="محصول" class="img-fluid">
-                                            </a>
-                                            <div class="sc-product-details">
-                                                <a href="product_details.html" class="sc-product-ttl">کت دو یقه</a>
-                                                <p class="sc-product-sz">اندازه: متوسط </p>
-                                            </div>
-                                        </div>      
-                                    </td>
-                                    <td><span class="sc-product-prc">2,240</span></td>
-                                    <td><span class="sc-wishlist-status stock-availble">در انبار</span></td>
-                                    <td>
-                                        <a href='{%static  "javascript:void(0);" %}' class="e-btn wishlist-ac">افزودن به سبد </a>
-                                    </td> 
-                                    <td>
-                                        <a href='{%static  "javascript:void(0);" %}' class="sc-produc-remove e-remove-product">
-                                            <img src='{%static "assets/images/index1/svg/cut.svg"%}'  alt="icon">
-                                        </a>
-                                    </td>
-                                  </tr>                                                                  
-                                </tbody>
+                                  </tr>      
+                                  {% endfor %}
+                                  {% endif %}                                                            
+                                    </tbody>
                               </table>
                         </form>
                     </div>

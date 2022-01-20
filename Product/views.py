@@ -1,3 +1,4 @@
+from urllib import request
 from django.shortcuts import render
 from django.views.generic import DetailView,ListView
 
@@ -7,7 +8,7 @@ from django.db.models import Q
 from Comment.models import CommentMe
 from Comment.forms import CommentForm
 
-
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404
 
@@ -125,25 +126,31 @@ class Filtering(ListView):
 
 
 
-
+@login_required(redirect_field_name='user:login')
 @require_POST
 def add_to_wishlist(request):
-    if request.user.is_authenticated:
-        user=request.user
-        count = int(request.POST.get('count'))
-        my_wishlist=WishList.objects.get_or_create(user_id=request.user.id) 
-        product = get_object_or_404(Product, name=request.POST.get("name"))
-        
-        if product.amount - count < 0 :
-            raise ValueError("product not exist")
-        else:
-            my_wishlist.product.add(product)
-            my_wishlist.save()
-            return render(request,"Product/product_category.html")
-
+    
+    user=request.user
+    count = int(request.POST.get('count'))
+    my_wishlist=WishList.objects.get_or_create(user_id=request.user.id) 
+    product = get_object_or_404(Product, name=request.POST.get("name"))
+    
+    if product.amount - count < 0 :
+        raise ValueError("product not exist")
     else:
-        pass
+        my_wishlist.product.add(product)
+        my_wishlist.save()
+        return render(request,"Product/product_category.html")
 
 
-# def test(request):
-#     return render(request,"Product/wishlist.html")
+# @login_required(redirect_field_name='user:login')
+class Show_wishList(ListView):
+    model=WishList
+    template_name="Product/wishlist.html"
+    context_object_name="wish_list"
+    paginate_by=8
+
+    def get_queryset(self) :
+        qs= super().get_queryset()
+        qs=WishList.objects.filter(user_id=self.request.user.id)
+        return qs
