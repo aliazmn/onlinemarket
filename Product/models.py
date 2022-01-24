@@ -65,5 +65,4 @@ class WishList(models.Model):
         verbose_name = "Wishlist"
         verbose_name_plural = "Wishlists"
 
-    def __str__(self) -> str:
-        return self.user
+

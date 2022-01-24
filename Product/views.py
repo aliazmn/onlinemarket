@@ -1,4 +1,5 @@
 
+from ssl import OP_NO_RENEGOTIATION
 from urllib import request
 from django.shortcuts import render,redirect
 from django.views.generic import DetailView,ListView
@@ -133,15 +134,12 @@ class Filtering(ListView):
 
 
 @login_required(login_url='user/login')
-@require_POST
 def add_to_wishlist(request):
-    print(request.POST.get("name"))
     user=get_object_or_404(Customer, profile__email=request.user.email)
     # user=request.user
     count = int(request.POST.get('count'))
-    my_wishlist=WishList.objects.get_or_create(user=user) 
-    product = get_object_or_404(Product, name=request.POST.get("name"))
-    
+    my_wishlist,_=WishList.objects.get_or_create(user=user)
+    product= get_object_or_404(Product, id=request.POST.get("id"))
     if product.amount - count < 0 :
         raise ValueError("product not exist")
     else:
@@ -155,9 +153,18 @@ class Show_wishList(ListView):
     model=WishList
     template_name="Product/wishlist.html"
     context_object_name="wish_list"
-    paginate_by=8
 
     def get_queryset(self) :
-        qs= super().get_queryset()
-        qs=WishList.objects.filter(user_id=self.request.user)
+        # qs= super().get_queryset()
+        qs=WishList.objects.get(user__profile__email=self.request.user.email)
         return qs
+
+@login_required(login_url='user/login')
+def delete_from_wishlist(request):
+    user=get_object_or_404(Customer, profile__email=request.user.email)
+    # user=request.user
+    my_wishlist,_=WishList.objects.get(user=user)
+    product= get_object_or_404(Product, id=request.POST.get("id"))
+    my_wishlist.product.remove(product)
+    my_wishlist.save()
+    return redirect("product:showproduct")

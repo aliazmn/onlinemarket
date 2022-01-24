@@ -35,21 +35,23 @@
                                   </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     {% csrf_token %}
                                     {% if wish_list  %}
-                                    {% for elms  in wish_list %}
-                                  <tr class="e-remove-wrap">
+                                    {% for elms  in wish_list.product.all %}
+                                    
+                                    <tr class="e-remove-wrap">
                                     <td >
                                         <div class="sc-productwrap">
                                             <a href="product_details.html" class="sc-product-thumb">
-                                                <img src='{{ elms.img.url }}'  alt="محصول" class="img-fluid">
+                                                <img src="{{elms.img.url}}"  value="{{elms.img.url}}" class="img-fluid">
                                             </a>
                                             <div class="sc-product-details">
-                                                <span> {{elms.product.name}} </span>
+                                                <option value={{elms.product.name}} >{{elms.name}}</option>
                                             </div>
                                         </div>      
                                     </td>
-                                    <td><span class="sc-product-prc">{{elms.product.price}}</span></td>
+                                    <td><span class="sc-product-prc">{{elms.price}}</span></td>
                                     <td>
                                         <a href='{%static  "javascript:void(0);" %}' class="e-btn wishlist-ac">افزودن به سبد </a>
                                     </td>                                    
@@ -58,9 +60,10 @@
                                             <img src='{%static "assets/images/index1/svg/cut.svg"%}'  alt="icon">
                                         </a>
                                     </td>
-                                  </tr>      
+                                  </tr>  
+                                    
                                   {% endfor %}
-                                  {% endif %}                                                            
+                                  {% endif %}                                                          
                                     </tbody>
                               </table>
                         </form>
