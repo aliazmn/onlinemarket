@@ -1,25 +1,21 @@
+from uuid import uuid4
+
+from django.contrib.auth import authenticate, logout as _logout, login as _login,get_user_model
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
-from django.http.response import HttpResponseRedirectBase, HttpResponseServerError
 from django.shortcuts import redirect, render
-from django.contrib.auth import get_user_model
-from django.http import JsonResponse
-from django.template.loader import render_to_string
+from django.db.models import Q
 from django.urls import reverse
-from uuid import uuid4
 from django.views.decorators.http import require_http_methods
-from django.contrib.auth import authenticate, logout as _logout, login as _login
 from django.core.cache import cache
+
 from project import settings
-
 from User.forms import ForgetPasswordForm, RegisterForm ,LoginForm
-
-
-from .models import Address, Customer, Profile
+from django.core.cache import caches
+from .models import Address, Customer, Profile, UserDevice
 
 
 User = get_user_model()
-
 
 @require_http_methods(["GET", "POST"])
 def login(request):
@@ -35,33 +31,31 @@ def login(request):
             if user is not None:
                 _login(request, user)
                 next = request.GET.get("next", "")
+                if not request.session.session_key:
+                    request.session.save()
+                redis_cache=caches['default']
+                cart=redis_cache.client.get_client()
+                carts=cart.hgetall(request.session.session_key)
+                for elm in carts:
+                    print(elm)
+                    cart.hset(request.user.email,elm.decode("utf-8"),carts[elm])
                 if next:
                     return redirect(next)
                 return redirect('home')
-
             else:
                  return render(request, 'User/login_page.html', {'login_form': login_form})
-
-
         else:
             return render(request, 'User/login_page.html', {'login_form': login_form})
-
-                
-
-
-
-
-
 
 
 def logout(request):
     _logout(request)
     return redirect('home')
 
+
 def register(request):
     register_form = RegisterForm(request.POST or None)
     print(register_form)
-
     if request.method == "GET":
         return render(request, 'User/register_page.html', {'register_form': register_form})
     elif request.method == "POST":
@@ -93,14 +87,6 @@ def register(request):
         else:
             return render(request, 'User/register_page.html', {'register_form': register_form})
 
-
-
-
-            
-
-# def profile_user(request):
-#     courect_user=request.id()
-#     qs=Profile.objects.values(courect_user=id)
 
 def activate(request, valid):
     user=Profile.objects.get(email=request.session.get("email"))
@@ -146,4 +132,36 @@ def forget_password(request):
 
 def forget_pass():
     pass
+
+
+
+
+def user_session_logedin(request):
+    if request.method == "GET":
+        user=request.user.username
+        print(user)
+        if request.user_agent.is_mobile:
+            device = "Mobile"
+        if request.user_agent.is_tablet:
+            device = "Tablet"
+        if request.user_agent.is_pc:
+            device = "PC"
+        browser=request.user_agent.browser.family
+        os=request.user_agent.os.family
+        query=UserDevice.objects.filter(Q(user=user)&Q(device=device))
+        if not query:
+            UserDevice.objects.create(user=user,device=device,browser=browser,os=os)
+        linked_devices=UserDevice.objects.all()
+
+        ctx={
+            'linked_devices':linked_devices
+        }
+    return render(request,'session.html',ctx)
+
+
+def delet_session(request):
+    pass
+
+
+
 

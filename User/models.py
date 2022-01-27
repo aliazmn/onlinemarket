@@ -4,7 +4,8 @@ from django.contrib.auth.models import AbstractUser
 from .managers import CustomUserManager
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
-
+from django.conf import settings
+from django.contrib.sessions.models import Session
 
 
 
@@ -88,3 +89,12 @@ class SalesMan(models.Model):
 
 
 
+class UserDevice(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True)
+    # session = models.ForeignKey(Session, on_delete=models.CASCADE, null=True , related_name='usertosession')  
+    device=models.CharField(max_length=150,null=True)
+    browser=models.CharField(max_length=150, null=True)
+    os=models.CharField(max_length=150, null=True)
+
+
+ 

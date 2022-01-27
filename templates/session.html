@@ -1,0 +1,15 @@
+<div class="card">
+    <h4 class="card-header">linked devices</h4>
+    <div class="card-body">
+      <h5 class="card-title">devices status</h5>
+        {% for linked_device in linked_devices %}
+      <p class="card-text">User:{{linked_device.user}}</p>
+      <p class="card-text">Device:{{linked_device.device}}</p>
+      <p class="card-text">Browser:{{linked_device.browser}}</p>
+      <p class="card-text">Os:{{linked_device.os}}</p>
+      <a href="#" class="btn btn-primary">Delet</a>
+        {% endfor %}
+    </div>
+  </div>
+
+  

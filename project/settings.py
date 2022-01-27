@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #my app
     'User',
     'Cart',
     'Comment',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'Notify',
     'Payment',
     'azbankgateways',
+    'django_user_agents',
 ]
 
 
@@ -62,6 +64,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #other MIDDLEWARE
+    'django_user_agents.middleware.UserAgentMiddleware',
+
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -99,14 +104,16 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        "BACKEND": "django_redis.cache.RedisCache",
         'LOCATION': 'redis://127.0.0.1:6379',
+        "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient",},
+        
     }
 }
 
+SESSION_ENGINE = 'Cart.session_backend'
 
-
-
+USER_AGENTS_CACHE = 'default'
 
 DATABASES = {
     'default': {
@@ -159,10 +166,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS=[BASE_DIR/"static"]
-
 MEDIA_URL="/media/"
-
 MEDIA_ROOT=BASE_DIR/"media/"
+CART_SESSION_ID='cart'
 
 
 

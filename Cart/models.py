@@ -1,5 +1,6 @@
+# pylint: disable=line-too-long
 from django.db import models
-from User.models import Customer, SalesMan
+from User.models import Customer, Profile, SalesMan
 from Product.models import Product
 from django.utils.translation import gettext as _
 
@@ -35,7 +36,7 @@ class CartItem(models.Model):
 
 
 class History(models.Model):
-    customer=models.ForeignKey(Customer,on_delete=models.CASCADE,related_name='HistorytoCustomer',help_text="مشتری")
+    customer=models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='HistorytoCustomer',help_text="مشتری")
     date=models.DateTimeField(auto_now_add=True)
     date_update=models.DateTimeField(auto_now=True)
     factor=models.JSONField(null=True,blank=True,verbose_name=_("factor"),help_text="فاکتور خرید")

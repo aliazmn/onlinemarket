@@ -1,99 +1,41 @@
-{% load static %}
+
+{%load static %}
+
+
+
 <!-- sidebar cart start -->
 <div class="sb-cartbox">
     <div class="sb-cartbox-inner">
         <div class="sb-cartbox-header text-center">
-            <h4 class="sb-cb-ttl">سبد خرید  ( 5 )</h4>
-            <p class="sb-cb-subttl">5 کالای خود را در سبد خرید خود داشته باشید</p>
+            <h4 class="sb-cb-ttl">سبد خرید </h4>
+            <p class="sb-cb-subttl"> کالای خود را در سبد خرید خود داشته باشید</p>
             <a href='#' class="sb-cb-close close-box">بستن </a>
         </div> 
         <div class="sb-cartbox-body">
             <ul class="sb-cartbox-list">
+                {% for elm in show  %}
                 <li>
                     <div class="sc-productwrap">
                         <a href="#" class="sc-product-thumb">
-                            <img src='{% static "assets/images/index1/shopcart01.jpg"%}' alt="محصول" class="img-fluid">
+                            {% if elm.img %}
+                            <img src='{{elm.img}}' alt="محصول" class="img-fluid">
+                            {% endif %}
                         </a>
                         <div class="sc-product-details">
-                            <a href="#" class="sc-product-ttl">کت کلاه دار خاکستری مشکی</a>
-                            <p class="sc-product-sz">اندازه: متوسط </p>
+                            <a href="#" class="sc-product-ttl">{{elm.name}}</a>
+                            {% if elm.size %}
+                            <p class="sc-product-sz">اندازه: {{elm.size}} </p>
+                            {% endif %}
                         </div>
                     </div> 
                     <div class="sc-quantity">
-                        1X <span class="sc-price"> 120000 تومان</span>                                                                
+                        {{elm.count}}X <span class="sc-price"> {{elm.price}} تومان</span>                                                                
                     </div>
                     <a href='#' class="sc-produc-remove">
-                        <img src='{% static "assets/images/index1/svg/cut.svg" %}'alt="icon">
+                        <img src="assets/images/index1/svg/cut.svg" alt="icon">
                     </a>
                 </li>
-                <li>
-                    <div class="sc-productwrap">
-                        <a href="product_details.html" class="sc-product-thumb">
-                            <img src='{% static "assets/images/index1/shopcart02.jpg"%}' alt="محصول" class="img-fluid">
-                        </a>
-                        <div class="sc-product-details">
-                            <a href="product_details.html" class="sc-product-ttl">کت بچه دار زرد</a>
-                            <p class="sc-product-sz">اندازه: متوسط </p>
-                        </div>
-                    </div> 
-                    <div class="sc-quantity">
-                        1X <span class="sc-price"> 860000 تومان</span>                                                                
-                    </div>
-                    <a href='#' class="sc-produc-remove">
-                        <img src='{% static "assets/images/index1/svg/cut.svg"%}' alt="icon">
-                    </a>
-                </li>
-                <li>
-                    <div class="sc-productwrap">
-                        <a href="product_details.html" class="sc-product-thumb">
-                            <img src='{% static "assets/images/index1/shopcart03.jpg"%}' alt="محصول" class="img-fluid">
-                        </a>
-                        <div class="sc-product-details">
-                            <a href="product_details.html" class="sc-product-ttl">کت بچه دار زرد</a>
-                            <p class="sc-product-sz">اندازه: متوسط </p>
-                        </div>
-                    </div> 
-                    <div class="sc-quantity">
-                        1X <span class="sc-price"> 190000 تومان</span>                                                                
-                    </div>
-                    <a href='#' class="sc-produc-remove">
-                        <img src='{% static "assets/images/index1/svg/cut.svg"%}' alt="icon">
-                    </a>
-                </li>
-                <li>
-                    <div class="sc-productwrap">
-                        <a href="product_details.html" class="sc-product-thumb">
-                            <img src='{% static "assets/images/index1/shopcart04.jpg"%}' alt="محصول" class="img-fluid">
-                        </a>
-                        <div class="sc-product-details">
-                            <a href="product_details.html" class="sc-product-ttl">کت بمب افکن سیاه</a>
-                            <p class="sc-product-sz">اندازه: متوسط </p>
-                        </div>
-                    </div> 
-                    <div class="sc-quantity">
-                        1X <span class="sc-price"> 29000 تومان</span>                                                                
-                    </div>
-                    <a href='{%static "javascript:void(0);" %}' class="sc-produc-remove">
-                        <img src='{% static "assets/images/index1/svg/cut.svg"%}' alt="icon">
-                    </a>
-                </li>
-                <li>
-                    <div class="sc-productwrap">
-                        <a href="product_details.html" class="sc-product-thumb">
-                            <img src='{% static "assets/images/index1/shopcart05.jpg"%}' alt="محصول" class="img-fluid">
-                        </a>
-                        <div class="sc-product-details">
-                            <a href="product_details.html" class="sc-product-ttl">ژاکت بادکنک آستین کامل</a>
-                            <p class="sc-product-sz">اندازه: متوسط </p>
-                        </div>
-                    </div> 
-                    <div class="sc-quantity">
-                        1X <span class="sc-price"> 320000 تومان</span>                                                                
-                    </div>
-                    <a href='#' class="sc-produc-remove">
-                        <img src='{% static "assets/images/index1/svg/cut.svg"%}' alt="icon">
-                    </a>
-                </li>
+                {% endfor %}
             </ul>
         </div> 
         <div class="sb-cartbox-footer">

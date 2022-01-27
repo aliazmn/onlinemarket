@@ -25,6 +25,8 @@ urlpatterns = [
     path("", include("User.urls", namespace='user')),
     path('bankgateways/', az_bank_gateways_urls()),
     path('payment/', include("Payment.urls",namespace="payment")),
+    path('cart/', include("Cart.urls",namespace="cart")),
+
     
 
 
