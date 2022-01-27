@@ -43,9 +43,11 @@
                                     <tr class="e-remove-wrap">
                                     <td >
                                         <div class="sc-productwrap">
+                                            {% if elms.img %}
                                             <a href="product_details.html" class="sc-product-thumb">
                                                 <img src="{{elms.img.url}}"  value="{{elms.img.url}}" class="img-fluid">
                                             </a>
+                                            {% endif %}
                                             <div class="sc-product-details">
                                                 <option value={{elms.product.name}} >{{elms.name}}</option>
                                             </div>
@@ -56,7 +58,7 @@
                                         <a href='{%static  "javascript:void(0);" %}' class="e-btn wishlist-ac">افزودن به سبد </a>
                                     </td>                                    
                                     <td>
-                                        <a href='{%static  "javascript:void(0);" %}' class="sc-produc-remove e-remove-product">
+                                        <a href='{% url "product:delete_wishlist" elms.id %}' class="sc-produc-remove e-remove-product">
                                             <img src='{%static "assets/images/index1/svg/cut.svg"%}'  alt="icon">
                                         </a>
                                     </td>

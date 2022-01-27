@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model,password_validation
 from django.forms import ModelForm, widgets, TextInput, EmailInput, PasswordInput
 from django.forms.fields import CharField, EmailField
 from django.utils.translation import gettext_lazy as _
@@ -50,7 +50,7 @@ User = get_user_model()
 
 #========================================================================
 
-class RegisterForm(ModelForm):
+class RegisterForm(forms.ModelForm):
     re_password = forms.CharField(widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را تکرار نمایید', 'type':'password', 'required':'', 'class':'e-field-inner'}),label='تکرار رمزعبور')
     
     class Meta:
@@ -98,6 +98,16 @@ class RegisterForm(ModelForm):
         re_password = self.cleaned_data.get('re_password')
         # print(password)
         # print(re_password)
+
+        if password != re_password:
+            raise forms.ValidationError('کلمه های عبور مغایرت دارند')
+
+        return password
+
+
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+
 
         if password != re_password:
             raise forms.ValidationError('کلمه های عبور مغایرت دارند')

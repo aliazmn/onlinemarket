@@ -136,17 +136,19 @@ class Filtering(ListView):
 @login_required(login_url='user/login')
 def add_to_wishlist(request):
     user=get_object_or_404(Customer, profile__email=request.user.email)
-    # user=request.user
-    count = int(request.POST.get('count'))
     my_wishlist,_=WishList.objects.get_or_create(user=user)
     product= get_object_or_404(Product, id=request.POST.get("id"))
-    if product.amount - count < 0 :
-        raise ValueError("product not exist")
-    else:
-        my_wishlist.product.add(product)
-        my_wishlist.save()
-        return redirect("product:showproduct")
+    my_wishlist.product.add(product)
+    my_wishlist.save()
+    return redirect("product:detailproduct", product_id=request.POST.get("id") )
 
+@login_required(login_url='user/login')
+def delete_from_wishlist(request,id):
+    object_product=get_object_or_404(Product,pk=id)
+    wishlist=get_object_or_404(WishList,product=id)
+    wishlist.product.remove(object_product)
+    return redirect("product:Show_wishList")
+ 
 
 # @login_required(redirect_field_name='user:login')
 class Show_wishList(ListView):
@@ -155,16 +157,7 @@ class Show_wishList(ListView):
     context_object_name="wish_list"
 
     def get_queryset(self) :
-        # qs= super().get_queryset()
-        qs=WishList.objects.get(user__profile__email=self.request.user.email)
+        qs=WishList.objects.filter(user__profile__email = self.request.user.email).first()
+        
         return qs
-
-@login_required(login_url='user/login')
-def delete_from_wishlist(request):
-    user=get_object_or_404(Customer, profile__email=request.user.email)
-    # user=request.user
-    my_wishlist,_=WishList.objects.get(user=user)
-    product= get_object_or_404(Product, id=request.POST.get("id"))
-    my_wishlist.product.remove(product)
-    my_wishlist.save()
-    return redirect("product:showproduct")
+       
