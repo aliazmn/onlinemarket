@@ -1,16 +1,24 @@
-from django.shortcuts import render
+from itertools import product
+import json
 import logging
+
+from django.shortcuts import render,get_object_or_404
 from django.urls import reverse
 from azbankgateways import bankfactories, models as bank_models, default_settings as settings
 from azbankgateways.exceptions import AZBankGatewaysException
-from django.http import HttpResponse, Http404   
+from django.http import HttpResponse, Http404 ,JsonResponse  
 from django.contrib.auth.decorators import login_required
+
+from Cart.models import History
+from django.core.cache import caches
+from Product.models import Product
 
 
 @login_required(login_url="user/login")
-def go_to_gateway_view(request):
+def go_to_gateway_view(request,price_total):
+
     # خواندن مبلغ از هر جایی که مد نظر است
-    amount = 500000
+    amount = price_total
     # تنظیم شماره موبایل کاربر از هر جایی که مد نظر است
     user_mobile_number = '+989112221234'  # اختیاری
 
@@ -53,9 +61,30 @@ def callback_gateway_view(request):
 
     # در این قسمت باید از طریق داده هایی که در بانک رکورد وجود دارد، رکورد متناظر یا هر اقدام مقتضی دیگر را انجام دهیم
     if bank_record.is_success:
-        # پرداخت با موفقیت انجام پذیرفته است و بانک تایید کرده است.
-        # می توانید کاربر را به صفحه نتیجه هدایت کنید یا نتیجه را نمایش دهید.
-        return HttpResponse("پرداخت با موفقیت انجام شد.")
+        history=History()
+        history.customer=request.user
+        redis_cache=caches['default']
+        cart=redis_cache.client.get_client()
+        my_cart=cart.hgetall(request.user.email)
+        value,counter={},1
+        for elm in my_cart:
+            value[f"product{counter}"]=json.loads(my_cart[elm])
+            for i in value:
+                product=get_object_or_404(Product,name=value[i].get("name"))
+                product.amount -= int(value[i].get("amount"))
+                product.save()
+                value[i].pop("csrfmiddlewaretoken")
+                value[i].pop("id")
+                value[i].pop("img")
+                value[i].pop("amount")
+                
+            counter+=1
+            cart.hdel(request.user.email,elm)
+        
+        history.factor=value
+        history.save()
+        
+        return JsonResponse(value)
 
     # پرداخت موفق نبوده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.
     return HttpResponse("پرداخت با شکست مواجه شده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.")

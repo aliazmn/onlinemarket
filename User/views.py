@@ -13,7 +13,7 @@ from django.core.cache import cache
 from project import settings
 
 from User.forms import ForgetPasswordForm, RegisterForm ,LoginForm
-
+from django.core.cache import caches
 
 from .models import Address, Customer, Profile
 
@@ -32,9 +32,26 @@ def login(request):
             email = request.POST.get("email", "")
             password = request.POST.get("password", "")
             user = authenticate(request, email=email, password=password)
+            
+
             if user is not None:
+                
                 _login(request, user)
                 next = request.GET.get("next", "")
+                #handling cart that was in cache:
+                if not request.session.session_key:
+                    request.session.save()
+
+                redis_cache=caches['default']
+                cart=redis_cache.client.get_client()
+                carts=cart.hgetall(request.session.session_key)
+                for elm in carts:
+                    cart.hset(request.user.email,elm.decode("utf-8"),carts[elm])
+                    
+
+
+
+
                 if next:
                     return redirect(next)
                 return redirect('home')
