@@ -3,12 +3,9 @@ from ssl import OP_NO_RENEGOTIATION
 from urllib import request
 from django.shortcuts import render,redirect
 from django.views.generic import DetailView,ListView
-
-from User.models import Customer
-
-
-from .models import Product,Category,Details,Property, WishList
 from django.db.models import Q
+
+from .models import Product,Category,Details,Property
 from Comment.models import CommentMe
 from Comment.forms import CommentForm
 
@@ -18,7 +15,6 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
-
 
 class ProductDetail(DetailView):
     model=Product
@@ -44,25 +40,12 @@ class ProductDetail(DetailView):
             details=Details.objects.filter(Q(product_id=self.kwargs["product_id"]) & Q(pro_id=elm.id))
             if details:
                 lst_details.append(details)
-        
-    
-
         ctnx["detail"]=lst_details
-        
-
-
-
         product_best=Product.objects.filter(cat_id=cat)
         ctnx["listproduct"]=product_best
-
-
         comments=CommentMe.objects.all().filter(product=self.kwargs["product_id"])
-
         ctnx["form"]=CommentForm()
         ctnx["comment"]=comments
-        
-
-
         return ctnx
 
 
@@ -85,10 +68,6 @@ class ShowProduct(ListView):
         ctx["fcategory"]=ctx["category"].sub_cat.cat_title
         ctx["c_get"]=self.request.GET.get("c")
         return ctx
-
-
-
-
 
 
 class Filtering(ListView):

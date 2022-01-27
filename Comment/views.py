@@ -2,11 +2,9 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from Comment.forms import CommentForm
-from Comment.models import CommentMe
 
 from Product.models import Product
 from User.models import Customer
-
 
 
 @login_required(login_url="login/")
@@ -21,14 +19,6 @@ def add_comment(request, product_id):
             comment.user = customer
             comment.product = product
             comment.save()
-            return redirect("product:detailproduct",int(product_id))
-        
+            return redirect("product:detailproduct",int(product_id))    
     else:
         return redirect("product:detailproduct",int(product_id))
-
-
-def aa(request):
-    return JsonResponse(request.POST)
-
-def aa1(request):
-    return JsonResponse(request.POST)

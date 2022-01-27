@@ -1,23 +1,27 @@
-from cgi import print_directory
-from django.shortcuts import render
+from itertools import product
+import json
 import logging
+
+from django.shortcuts import render,get_object_or_404
 from django.urls import reverse
-from azbankgateways import bankfactories, models as bank_models, default_settings as settings
-from azbankgateways.exceptions import AZBankGatewaysException
 from django.http import HttpResponse, Http404 ,JsonResponse  
 from django.contrib.auth.decorators import login_required
-from Cart.models import History
 from django.core.cache import caches
-import json
+
+from azbankgateways import bankfactories, models as bank_models, default_settings as settings
+from azbankgateways.exceptions import AZBankGatewaysException
+
+from Cart.models import History
+from Product.models import Product
 
 
 @login_required(login_url="user/login")
 def go_to_gateway_view(request,price_total):
+
     # خواندن مبلغ از هر جایی که مد نظر است
     amount = price_total
     # تنظیم شماره موبایل کاربر از هر جایی که مد نظر است
     user_mobile_number = '+989112221234'  # اختیاری
-
     factory = bankfactories.BankFactory()
     try:
         bank = factory.auto_create() # or factory.create(bank_models.BankType.BMI) or set identifier
@@ -39,16 +43,11 @@ def go_to_gateway_view(request,price_total):
         raise e
 
 
-
-
-
-
 def callback_gateway_view(request):
     tracking_code = request.GET.get(settings.TRACKING_CODE_QUERY_PARAM, None)
     if not tracking_code:
         logging.debug("این لینک معتبر نیست.")
         raise Http404
-
     try:
         bank_record = bank_models.Bank.objects.get(tracking_code=tracking_code)
     except bank_models.Bank.DoesNotExist:
@@ -65,9 +64,10 @@ def callback_gateway_view(request):
         value,counter={},1
         for elm in my_cart:
             value[f"product{counter}"]=json.loads(my_cart[elm])
-            print(value)
             for i in value:
-                print(value[i])
+                product=get_object_or_404(Product,name=value[i].get("name"))
+                product.amount -= int(value[i].get("amount"))
+                product.save()
                 value[i].pop("csrfmiddlewaretoken")
                 value[i].pop("id")
                 value[i].pop("img")
@@ -84,11 +84,7 @@ def callback_gateway_view(request):
     # پرداخت موفق نبوده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.
     return HttpResponse("پرداخت با شکست مواجه شده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.")
 
-
-
-
 factory = bankfactories.BankFactory()
-
 # غیر فعال کردن رکورد های قدیمی
 bank_models.Bank.objects.update_expire_records()
 

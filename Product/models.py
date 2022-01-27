@@ -17,7 +17,7 @@ class Product(models.Model):
     description=models.TextField(null=True)
     brand=models.CharField(max_length=50,null=True ,blank=True)
     price=models.BigIntegerField(null=True)
-    amount=models.IntegerField(null=True)
+    amount=models.PositiveIntegerField(null=True)
     activate=models.BooleanField(default=False)
     img=models.ImageField(upload_to="Products/",null=True,blank=True)
     img1=models.ImageField(upload_to="Products/",null=True,blank=True)

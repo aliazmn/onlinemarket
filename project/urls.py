@@ -10,6 +10,11 @@ from azbankgateways.urls import az_bank_gateways_urls
 
 
 
+
+
+    
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('search/',searchbox, name='serachbox'),

@@ -9,10 +9,10 @@
         <div class="ht-right">
             <div class="ht-right_info">
                 <ul class="ht-info-list">
-                    {% if user.is_authenticated %}
-                    
-                    <li><a href='{% url "user:profile" user.id %}'>حساب کاربری </a></li>
-                    <li><a href='{% url "product:Show_wishList" %}'>لیست علاقه مندیها </a></li>
+                
+                    <li><a href="'users:login'">حساب کاربری </a></li>
+                    <li><a href=" url product:wishlist">لیست علاقه مندیها </a></li>
+                    <li><a href="{% url 'user:user_session' %}">نشست های فعال </a></li>
                     <li>
                         
 
@@ -148,7 +148,7 @@
                         <div class="drop-menu normal-menu">
                             <ul class="sub-menu">
                                 <li><a href="product_category_sidebar.html">فروشگاه </a> </li>                                    
-                                <li><a href="cart.html">سبد خرید </a> </li>                                    
+                                <li><a href="">سبد خرید </a> </li>                                    
                                 <li><a href="product_category.html">محصولات </a> </li>                                    
                                 <li><a href="contact.html">تماس با ما </a> </li>                                 
                             </ul>

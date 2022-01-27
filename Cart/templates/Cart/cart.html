@@ -32,6 +32,7 @@
                                     <th>محصول </th>
                                     <th>رنگ</th>
                                     <th>تعداد </th>
+                                    <th>موجودی </th>
                                     <th>قیمت </th>
                                     <th>قیمت جمع </th>
                                     <th>&nbsp;</th>
@@ -75,8 +76,15 @@
                                             <span class="quantity-plus  pa-add quantity-icon"> + </span> {% endcomment %} 
                                         </div>
                                     </td>
-                                    <td><span class="sc-product-prc">{{elm.price}} تومان</span></td>
+                                    {% if elm.status %}
+                                    <td><span class="sc-product-prc">موجود است</span> </td>
+                                    <td><span class="sc-product-prc">{{elm.price}} تومان</span></td> 
                                     <td><span class="sc-product-prc">{{elm.price_total}}</span></td>
+                                    {% else %}
+                                    <td><span class="sc-product-prc">موجود نیست</span> </td>
+                                    <td><span class="sc-product-prc">-</span></td> 
+                                    <td><span class="sc-product-prc">-</span></td>
+                                    {% endif %}
                                     <td>
                                         <a href='{% url "cart:delete-cart" elm.detect %}' class="sc-produc-remove e-remove-product">
                                             <img src='{% static "assets/images/index1/svg/cut.svg"%}' alt="icon">
@@ -92,7 +100,7 @@
                         <ul class="shopcart-dis-list">
  
                             <li>                                
-                                <a href='{%static "javascript:void(0);" %}' class="e-btn black update-cart">بروز رسانی سبد </a>
+                                <a href='' class="e-btn black update-cart">بروز رسانی سبد </a>
                             </li>
                         </ul>
                     </div> 
