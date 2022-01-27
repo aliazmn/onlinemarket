@@ -12,6 +12,8 @@
                     
                     <li><a href="'users:login'">حساب کاربری </a></li>
                     <li><a href=" url product:wishlist">لیست علاقه مندیها </a></li>
+                    <li><a href=" {% url 'payment:showfactor' %}">فاکتور ها </a></li>
+
                     <li>
                         
                         {% if user.is_authenticated %}
