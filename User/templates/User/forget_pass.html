@@ -1,0 +1,44 @@
+{% extends 'home.html' %}
+{%load static %}
+
+{% block main %}
+<!-- Breadcumbs start -->
+<div class="e-breadcumb-wrap text-center">
+    <h2 class="e-breadcumb-title">ورود به حساب کاربری</h2>
+    <ul class="e-breadcumb-kist">
+        <li>
+            <a href="{% url 'home' %}">خانه </a>
+        </li>
+        <li>
+            <a href='{%static "javascript:void(0);" %}'> ورود به حساب کاربری</a>
+        </li>
+    </ul>
+</div>
+<!-- Product Category start -->
+<div class="e-forgotpassword-wrap e-forgotpassword-cloth">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">                   
+                <div class="e-fp-box">
+                    <form action="{% url 'user:forget_pass' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                        
+                              
+                            <div class="col-md-12"> 
+
+                            {{forget_pass_form}}
+                        </div>
+                            <div class="col-md-12">                                       
+                                <div class="">
+                                    <button class="e-btn" style="margin-top: 10px;"> ثبت رمز عبور جدید</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>        
+            </div>           
+        </div>
+    </div>
+</div>
+{% endblock main %}

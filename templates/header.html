@@ -15,7 +15,6 @@
                     <li><a href="{% url 'user:user_session' %}">نشست های فعال </a></li>
                     <li>
                         
-                        {% if user.is_authenticated %}
 
                         <a href='{% url "user:logout" %}' >خروج از</a>
                             <a href="">{{user.email}}</a> 
@@ -23,8 +22,8 @@
                         
                         
                         {% else %}
-                            <a href='{% url "user:register" %}' >ثبت نام </a> یا
-                            <a href='{% url "user:login" %}' >ورود </a>
+                          <li>  <a href='{% url "user:register" %}' >ثبت نام </a> یا
+                            <a href='{% url "user:login" %}' >ورود </a></li>
       
                         {% endif %}
                     </li>

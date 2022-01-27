@@ -55,8 +55,11 @@
                     <form action="" method="POST">
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
 
 >>>>>>> bbc40c406b7bd6d71e2c13b8759efb422e5823a9
+>>>>>>> 383575db56cb3953b3f744017113aa5380f7d088
                        {% csrf_token %}
                     <div class="pd-infotop">
                         <h2 class="pd-title">{{singleproduct.name}}</h2>
@@ -72,10 +75,6 @@
                         
                         
 
-<<<<<<< HEAD
-=======
-
->>>>>>> bbc40c406b7bd6d71e2c13b8759efb422e5823a9
                         {% comment %} <div class="pd-special-price">
                             <span class="pd-price-end" id="headline">قیمت ویژه در کمتر از</span>                      
                             <div id="countdown">                            
@@ -92,8 +91,8 @@
                             <li><span class="pd-price-off">10% تخفیف </span></li>   {% endcomment %}
                             <li><span class="pd-price-ttile">{{singleproduct.price}}تومان</li>
 
-                            <input type="hidden"  name="price" value="{{singleproduct.price}}">  
 
+                            <input type="hidden"  name="price" value="{{singleproduct.price}}">  
 
                         </ul>
                     </div>
@@ -166,7 +165,6 @@
                                             <div class="quantity-box">
 
                                                 <input type="text" name='count' class="quantity" value=1 >
-                                                
 
                                                 <span class="quantity-minus pa-sub quantity-icon"> - </span>                                                
                                                 <span class="quantity-plus  pa-add quantity-icon"> + </span>
@@ -177,7 +175,7 @@
                                         
                                         <li>
                                         {% comment %} inja url bzn {% endcomment %}
-                                            <input type="submit"class="e-btn light pd-heart"value="افزودن به علاقه مندی ها" formaction=""/>
+                                            <input type="submit"class="e-btn light pd-heart"value="افزودن به علاقه مندی ها" formaction="{% url 'product:add_wishlist' %}"/>
                                                 <svg 
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -192,6 +190,7 @@
                             </div>
 
                             <input type="submit"class="e-btn light pd-heart"value="افزودن به سبد" formaction="{% url 'cart:add-to-cart' %}"/>   
+
 
                             </li>
                         </ul>

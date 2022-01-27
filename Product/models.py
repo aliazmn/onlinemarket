@@ -41,7 +41,7 @@ class Product(models.Model):
 class Property(models.Model):
     property_name=models.CharField(max_length=50,null=True,blank=True)
     cat_id=models.ForeignKey(Category,on_delete=models.CASCADE, null=True,blank=True,related_name='propertytocat')
-
+    
     def __str__(self) -> str:
         return self.property_name
 
@@ -65,5 +65,4 @@ class WishList(models.Model):
         verbose_name = "Wishlist"
         verbose_name_plural = "Wishlists"
 
-    def __str__(self) -> str:
-        return self.user
+

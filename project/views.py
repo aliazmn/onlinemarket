@@ -15,7 +15,8 @@ class Home(ListView):
         context = { 
             'new_products':newproduct,
             'product':product
-             }
+        }
+        
         return render(request , 'home.html' ,context)
 
 
