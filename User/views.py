@@ -20,7 +20,6 @@ User = get_user_model()
 @require_http_methods(["GET", "POST"])
 def login(request):
     login_form = LoginForm(request.POST or None)
-
     if request.method == "GET":
         return render(request, 'User/login_page.html', {'login_form': login_form})
     else:
@@ -28,16 +27,28 @@ def login(request):
             email = request.POST.get("email", "")
             password = request.POST.get("password", "")
             user = authenticate(request, email=email, password=password)
-            if user is not None:
+            if user is not None:  
                 _login(request, user)
                 next = request.GET.get("next", "")
+                user=user
+                print(user)
+                if request.user_agent.is_mobile:
+                    device = "Mobile"
+                if request.user_agent.is_tablet:
+                    device = "Tablet"
+                if request.user_agent.is_pc:
+                    device = "PC"
+                browser=request.user_agent.browser.family
+                os=request.user_agent.os.family
+                query=UserDevice.objects.filter(Q(user=user)&Q(device=device))
+                if not query:
+                    UserDevice.objects.create(user=user,device=device,browser=browser,os=os)
                 if not request.session.session_key:
                     request.session.save()
                 redis_cache=caches['default']
                 cart=redis_cache.client.get_client()
                 carts=cart.hgetall(request.session.session_key)
                 for elm in carts:
-                    print(elm)
                     cart.hset(request.user.email,elm.decode("utf-8"),carts[elm])
                 if next:
                     return redirect(next)
@@ -47,11 +58,9 @@ def login(request):
         else:
             return render(request, 'User/login_page.html', {'login_form': login_form})
 
-
 def logout(request):
     _logout(request)
     return redirect('home')
-
 
 def register(request):
     register_form = RegisterForm(request.POST or None)
@@ -68,8 +77,7 @@ def register(request):
             address=Address(add=register_form.cleaned_data.get("address"),postalcode=register_form.cleaned_data.get("postal_code"))
             address.save()
             cus.add.add(address)
-            cus.save()
-            
+            cus.save()     
             uid=str(uuid4())
             link=reverse("user:activate",kwargs={"valid":uid})
             current_site = get_current_site(request)
@@ -78,7 +86,6 @@ def register(request):
             to_email = register_form.cleaned_data.get('email')
             request.session["email"]=to_email
             request.session["uid"]=uid
-
             cache.set(to_email,uid,180)
             send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [to_email])
 
@@ -86,7 +93,6 @@ def register(request):
             return redirect('user:login')
         else:
             return render(request, 'User/register_page.html', {'register_form': register_form})
-
 
 def activate(request, valid):
     user=Profile.objects.get(email=request.session.get("email"))
@@ -102,13 +108,9 @@ def activate(request, valid):
 
 def forget_password(request):
     forget_password_form = ForgetPasswordForm(request.POST or None)
-
-
     if request.method == "GET":
         return render(request, 'User/forget_password_form.html', {'forget_password_form': forget_password_form})
-
-    else:
-        
+    else:     
         if forget_password_form.is_valid():
             miss_email=forget_password_form.cleaned_data.get('email')
             #user = authenticate(request, email=miss_email)
@@ -120,12 +122,9 @@ def forget_password(request):
                 message = "127.0.0.1:8000"+link
                 to_email = forget_password_form.cleaned_data.get('email')
                 request.session["email"]=to_email
-
                 cache.set(user,to_email,180)
                 send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [to_email])
-
                 return redirect('user:login')
-
             else:
                 return redirect('user:forget_password')
 
@@ -134,29 +133,27 @@ def forget_pass():
     pass
 
 
-
-
 def user_session_logedin(request):
-    if request.method == "GET":
-        user=request.user.username
-        print(user)
-        if request.user_agent.is_mobile:
-            device = "Mobile"
-        if request.user_agent.is_tablet:
-            device = "Tablet"
-        if request.user_agent.is_pc:
-            device = "PC"
-        browser=request.user_agent.browser.family
-        os=request.user_agent.os.family
-        query=UserDevice.objects.filter(Q(user=user)&Q(device=device))
-        if not query:
-            UserDevice.objects.create(user=user,device=device,browser=browser,os=os)
+     if request.method == "GET":
+    #     user=request.user.email
+    #     print(user)
+    #     if request.user_agent.is_mobile:
+    #         device = "Mobile"
+    #     if request.user_agent.is_tablet:
+    #         device = "Tablet"
+    #     if request.user_agent.is_pc:
+    #         device = "PC"
+    #     browser=request.user_agent.browser.family
+    #     os=request.user_agent.os.family
+    #     query=UserDevice.objects.filter(Q(user=user)&Q(device=device))
+    #     if not query:
+    #         UserDevice.objects.create(user=user,device=device,browser=browser,os=os)
         linked_devices=UserDevice.objects.all()
 
         ctx={
             'linked_devices':linked_devices
         }
-    return render(request,'session.html',ctx)
+        return render(request,'session.html',ctx)
 
 
 def delet_session(request):
