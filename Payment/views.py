@@ -1,18 +1,22 @@
-from cgi import print_directory
-from django.shortcuts import render
+from itertools import product
+import json
 import logging
+
+from django.shortcuts import render,get_object_or_404
 from django.urls import reverse
 from azbankgateways import bankfactories, models as bank_models, default_settings as settings
 from azbankgateways.exceptions import AZBankGatewaysException
 from django.http import HttpResponse, Http404 ,JsonResponse  
 from django.contrib.auth.decorators import login_required
+
 from Cart.models import History
 from django.core.cache import caches
-import json
+from Product.models import Product
 
 
 @login_required(login_url="user/login")
 def go_to_gateway_view(request,price_total):
+
     # خواندن مبلغ از هر جایی که مد نظر است
     amount = price_total
     # تنظیم شماره موبایل کاربر از هر جایی که مد نظر است
@@ -65,9 +69,10 @@ def callback_gateway_view(request):
         value,counter={},1
         for elm in my_cart:
             value[f"product{counter}"]=json.loads(my_cart[elm])
-            print(value)
             for i in value:
-                print(value[i])
+                product=get_object_or_404(Product,name=value[i].get("name"))
+                product.amount -= int(value[i].get("amount"))
+                product.save()
                 value[i].pop("csrfmiddlewaretoken")
                 value[i].pop("id")
                 value[i].pop("img")

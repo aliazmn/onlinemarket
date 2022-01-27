@@ -1,6 +1,7 @@
 import json
+
 from django.http import HttpResponse
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.core.cache import caches
 from Product.models import Product
 
@@ -20,10 +21,10 @@ def add_to_cart(request):
                 keys=cart.hkeys(request.session.session_key)
                 for elm in keys:
                     if elm.decode("utf-8")==detect:
-                        s=cart.hget(request.session.session_key,detect)
-                        s=json.loads(s)
-                        s["count"]=int(s["count"])+int(request.POST["count"])
-                        cart.hset(request.session.session_key,detect,json.dumps(s))
+                        same_product=cart.hget(request.session.session_key,detect)
+                        same_product=json.loads(same_product)
+                        same_product["count"]=int(same_product["count"])+int(request.POST["count"])
+                        cart.hset(request.session.session_key,detect,json.dumps(same_product))
 
             else:
                 
@@ -36,10 +37,10 @@ def add_to_cart(request):
                 keys=cart.hkeys(request.user.email)
                 for elm in keys:
                     if elm.decode("utf-8")==detect:
-                        s=cart.hget(request.user.email,detect)
-                        s=json.loads(s)
-                        s["count"]=int(s["count"])+int(request.POST["count"])
-                        cart.hset(request.user.email,detect,json.dumps(s))
+                        same_product=cart.hget(request.user.email,detect)
+                        same_product=json.loads(same_product)
+                        same_product["count"]=int(same_product["count"])+int(request.POST["count"])
+                        cart.hset(request.user.email,detect,json.dumps(same_product))
             else:
                 cart.hset(request.user.email,detect,json.dumps(request.POST))
             return redirect("product:detailproduct",request.POST.get("id"))
@@ -85,14 +86,19 @@ def show_cart(request):
         
         prod_list,ctx,price_totoal=[],{},0
         for elm in value:
-            elm["price"]=int(elm.get("price"))*int(elm.get("count"))
-            price_totoal+=elm["price"]
-            elm["price_total"]=price_totoal
-            elm["detect"]=elm.get("name","")+elm.get("color","")+elm.get("سایزلباس","")
+            product = get_object_or_404(Product,name = elm.get("name"))
+            if int(elm.get("count")) > int(product.amount):
+                elm["status"] = False
+            else:
+                elm["status"]=True
+                elm["price"] = int(product.price)*int(elm.get("count"))
+                price_totoal+= elm["price"]
+                elm["price_total"] = price_totoal
+            elm["detect"] = elm.get("name","")+elm.get("color","")+elm.get("سایزلباس","")
             prod_list.append(elm)
 
-        ctx["show"]=prod_list
-        ctx["price_total"]=price_totoal
+        ctx["show"] = prod_list
+        ctx["price_total"] = price_totoal
         
 
 
