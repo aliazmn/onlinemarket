@@ -5,7 +5,9 @@ from django.shortcuts import render,redirect
 from django.views.generic import DetailView,ListView
 from django.db.models import Q
 
-from .models import Product,Category,Details,Property
+from User.models import Customer
+
+from .models import Product,Category,Details,Property,WishList
 from Comment.models import CommentMe
 from Comment.forms import CommentForm
 
