@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-from http.client import HTTPResponse
-from urllib import request
-=======
 from uuid import uuid4
 
 from django.contrib.auth import authenticate, logout as _logout, login as _login,get_user_model
->>>>>>> 383575db56cb3953b3f744017113aa5380f7d088
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
@@ -13,17 +8,10 @@ from django.db.models import Q
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 from django.core.cache import cache
-<<<<<<< HEAD
 from project import settings
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
-
 from User.forms import ForgetPassForm, ForgetPasswordForm, RegisterForm ,LoginForm
-=======
-
-from project import settings
-from User.forms import ForgetPasswordForm, RegisterForm ,LoginForm
->>>>>>> 383575db56cb3953b3f744017113aa5380f7d088
 from django.core.cache import caches
 from .models import Address, Customer, Profile, UserDevice
 
@@ -93,7 +81,7 @@ def register(request):
             cus.save()     
             uid=str(uuid4())
             link=reverse("user:activate",kwargs={"valid":uid})
-            current_site = get_current_site(request)
+            # current_site = get_current_site(request)
             mail_subject = 'Activate your account on online market.'
             message = "127.0.0.1:8000"+link
             to_email = register_form.cleaned_data.get('email')
@@ -122,15 +110,8 @@ def activate(request, valid):
 def forget_password(request):
     forget_password_form = ForgetPasswordForm(request.POST or None)
     if request.method == "GET":
-<<<<<<< HEAD
-        return render(request, 'User/forget_password.html', {'forget_password_form': forget_password_form})
-
-    else:
-        
-=======
         return render(request, 'User/forget_password_form.html', {'forget_password_form': forget_password_form})
     else:     
->>>>>>> 383575db56cb3953b3f744017113aa5380f7d088
         if forget_password_form.is_valid():
             miss_email=forget_password_form.cleaned_data.get('email')
             #user = authenticate(request, email=miss_email)
@@ -146,20 +127,9 @@ def forget_password(request):
                 # forget= f'{to_email}+flag'
                 # request.session["forget"]=forget
                 request.session["email"]=to_email
-<<<<<<< HEAD
-                request.session["uid"]=uid
-                cache.set(to_email,uid,300)
-                cache.set("forget",0,300)
-
-                send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [to_email])
-
-                return render(request,'User/forget_status.html',{'status':"please check your email for continue."})
-
-=======
                 cache.set(user,to_email,180)
                 send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [to_email])
                 return redirect('user:login')
->>>>>>> 383575db56cb3953b3f744017113aa5380f7d088
             else:
                 return redirect('user:forget_password')
 
