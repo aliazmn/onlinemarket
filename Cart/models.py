@@ -47,6 +47,6 @@ class History(models.Model):
         verbose_name_plural="Historys"
     
     def __str__(self) -> str:
-        return self.profile.firstname
+        return self.customer.email
 
     

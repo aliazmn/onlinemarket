@@ -2,7 +2,7 @@ from itertools import product
 import json
 import logging
 
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import redirect, render,get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponse, Http404 ,JsonResponse  
 from django.contrib.auth.decorators import login_required
@@ -64,14 +64,14 @@ def callback_gateway_view(request):
         value,counter={},1
         for elm in my_cart:
             value[f"product{counter}"]=json.loads(my_cart[elm])
-            for i in value:
-                product=get_object_or_404(Product,name=value[i].get("name"))
-                product.amount -= int(value[i].get("amount"))
-                product.save()
-                value[i].pop("csrfmiddlewaretoken")
-                value[i].pop("id")
-                value[i].pop("img")
-                value[i].pop("amount")
+        for i in value:
+            product=get_object_or_404(Product,name=value[i].get("name"))
+            product.amount = product.amount - int(value[i].get("count"))
+            product.save()
+            value[i].pop("csrfmiddlewaretoken")
+            value[i].pop("id")
+            value[i].pop("img")
+            value[i].pop("count")
                 
             counter+=1
             cart.hdel(request.user.email,elm)
@@ -79,7 +79,7 @@ def callback_gateway_view(request):
         history.factor=value
         history.save()
         
-        return JsonResponse(value)
+        return redirect("home")
 
     # پرداخت موفق نبوده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.
     return HttpResponse("پرداخت با شکست مواجه شده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.")
@@ -95,3 +95,17 @@ for item in bank_models.Bank.objects.filter_return_from_bank():
 	bank_record = bank_models.Bank.objects.get(tracking_code=item.tracking_code)
 	if bank_record.is_success:
 		logging.debug("This record is verify now.", extra={'pk': bank_record.pk})
+  
+  
+  
+  
+def show_factors(request):
+    history=History.objects.filter(customer=request.user)
+    ctx,counter={},1
+    for elm in history:
+        ctx[f"factor{counter} in date {elm.date}"]=elm.factor
+        
+        
+    return JsonResponse(ctx)
+
+

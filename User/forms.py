@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model,password_validation
-from django.forms import ModelForm, widgets, TextInput, EmailInput, PasswordInput
+
+from django.forms import ModelForm, ValidationError, widgets, TextInput, EmailInput, PasswordInput
+
 from django.forms.fields import CharField, EmailField
 from django.utils.translation import gettext_lazy as _
 from User.models import Customer,Profile
@@ -54,13 +56,22 @@ class RegisterForm(forms.ModelForm):
 
         return email
 
-    
+    def clean_password(self):
+
+        try:
+            password_validation.validate_password(self.cleaned_data.get("password"), self.instance)
+        except ValidationError as error:
+            raise forms.ValidationError("""
+                                        1-این پسورد خیلی کوتاه است حداقل 8 کاراکتر
+                                        2-پسورد خیلی ساده است
+                                        3-پسورد فقط عدد است
+                                        """)
 
     def clean_re_password(self):
         password = self.cleaned_data.get('password')
         re_password = self.cleaned_data.get('re_password')
-        # print(password)
-        # print(re_password)
+
+        
 
         if password != re_password:
             raise forms.ValidationError('کلمه های عبور مغایرت دارند')
@@ -68,14 +79,7 @@ class RegisterForm(forms.ModelForm):
         return password
 
 
-    def clean_password(self):
-        password = self.cleaned_data.get('password')
 
-
-        if password != re_password:
-            raise forms.ValidationError('کلمه های عبور مغایرت دارند')
-
-        return password
 
     def save(self, commit: bool = ...) :
         self.instance.set_password(self.cleaned_data.get("password"))
