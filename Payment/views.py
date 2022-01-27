@@ -4,13 +4,14 @@ import logging
 
 from django.shortcuts import render,get_object_or_404
 from django.urls import reverse
-from azbankgateways import bankfactories, models as bank_models, default_settings as settings
-from azbankgateways.exceptions import AZBankGatewaysException
 from django.http import HttpResponse, Http404 ,JsonResponse  
 from django.contrib.auth.decorators import login_required
+from django.core.cache import caches
+
+from azbankgateways import bankfactories, models as bank_models, default_settings as settings
+from azbankgateways.exceptions import AZBankGatewaysException
 
 from Cart.models import History
-from django.core.cache import caches
 from Product.models import Product
 
 
@@ -21,7 +22,6 @@ def go_to_gateway_view(request,price_total):
     amount = price_total
     # تنظیم شماره موبایل کاربر از هر جایی که مد نظر است
     user_mobile_number = '+989112221234'  # اختیاری
-
     factory = bankfactories.BankFactory()
     try:
         bank = factory.auto_create() # or factory.create(bank_models.BankType.BMI) or set identifier
@@ -43,16 +43,11 @@ def go_to_gateway_view(request,price_total):
         raise e
 
 
-
-
-
-
 def callback_gateway_view(request):
     tracking_code = request.GET.get(settings.TRACKING_CODE_QUERY_PARAM, None)
     if not tracking_code:
         logging.debug("این لینک معتبر نیست.")
         raise Http404
-
     try:
         bank_record = bank_models.Bank.objects.get(tracking_code=tracking_code)
     except bank_models.Bank.DoesNotExist:
@@ -89,11 +84,7 @@ def callback_gateway_view(request):
     # پرداخت موفق نبوده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.
     return HttpResponse("پرداخت با شکست مواجه شده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.")
 
-
-
-
 factory = bankfactories.BankFactory()
-
 # غیر فعال کردن رکورد های قدیمی
 bank_models.Bank.objects.update_expire_records()
 
