@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model,password_validation
+
 from django.forms import ModelForm, ValidationError, widgets, TextInput, EmailInput, PasswordInput
+
 from django.forms.fields import CharField, EmailField
 from django.utils.translation import gettext_lazy as _
 from User.models import Customer,Profile
@@ -12,45 +14,8 @@ from django.core.validators import EmailValidator
 User = get_user_model()
 
 
-# class CustomUserCreationForm(UserCreationForm):
 
-#     class Meta:
-#         model = User
-#         fields = ["first_name","last_name",'email','password', 're_password',"address","postalcode"]
-#         labels = {
-#             "first_name":"نام",
-#             "last_name":"نام خانوادگی",
-#             "email": "ایمیل",
-#             "password1": "رمز عبور",
-#             "re_password": "تکرار رمز عبور",
-#             "address":"ادرس",
-#             "postalcode":"کد پستی",
-
-#         }
-
-#         help_texts = {
-#             "email": "ایمیل خود را به درستی وارد کنید",
-#         }
-
-#     def save(self, commit=True):
-#         '''
-#         override user create form to create profile after register!
-#         '''
-#         user = super().save(commit=False)
-#         user.set_password(self.cleaned_data["password"])
-#         user.save()
-#         return user
-
-
-# class CustomUserChangeForm(UserChangeForm):
-
-#     class Meta:
-#         model = User
-#         fields = ('first_name', 'last_name')
-
-#========================================================================
-
-class RegisterForm(ModelForm):
+class RegisterForm(forms.ModelForm):
     re_password = forms.CharField(widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را تکرار نمایید', 'type':'password', 'required':'', 'class':'e-field-inner'}),label='تکرار رمزعبور')
     
     class Meta:
@@ -106,11 +71,15 @@ class RegisterForm(ModelForm):
         password = self.cleaned_data.get('password')
         re_password = self.cleaned_data.get('re_password')
 
+        
 
         if password != re_password:
             raise forms.ValidationError('کلمه های عبور مغایرت دارند')
 
         return password
+
+
+
 
     def save(self, commit: bool = ...) :
         self.instance.set_password(self.cleaned_data.get("password"))
@@ -133,4 +102,56 @@ class LoginForm(forms.Form):
         }
 
 class ForgetPasswordForm(forms.Form):
-    pass
+            email=forms.EmailField(widget=EmailInput(attrs={'placeholder': 'لطفا ایمیل خود را وارد نمایید', 'type':'email', 'required':'', 'class':'e-field-inner'}),label='ایمیل  ')
+            
+
+            
+            fields = ['email']
+
+
+
+            labels = {
+                'email' : _('ایمیل'),
+            }
+
+class ForgetPassForm(forms.Form):
+        password=forms.CharField(max_length=16,widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را وارد نمایید', 'type':'password', 'required':'', 'class':'e-field-inner'}),label=' رمزعبور')
+        re_password = forms.CharField(widget=PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را تکرار نمایید', 'type':'password', 'required':'', 'class':'e-field-inner'}),label='تکرار رمزعبور')
+
+
+
+        
+        fields = ['password',"re_password"]
+
+        widgets = {
+
+            'password': PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را وارد نمایید', 'type':'password', 'required':'', 'class':'e-field-inner', "id":"password"}),
+
+        }
+
+        labels = {
+
+            'password' : _('رمزعبور'),
+            're_password' :'تکرار رمزعبور',
+
+        }
+
+        validators = {
+            
+        }
+    
+
+        def clean_re_password(self):
+            password = self.cleaned_data.get('password')
+            re_password = self.cleaned_data.get('re_password')
+            # print(password)
+            # print(re_password)
+
+            if password != re_password:
+                raise forms.ValidationError('کلمه های عبور مغایرت دارند')
+
+            return password
+
+        def save(self, commit: bool = ...) :
+            self.instance.set_password(self.cleaned_data.get("password"))
+            return super().save(commit=commit)

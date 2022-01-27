@@ -9,14 +9,13 @@
         <div class="ht-right">
             <div class="ht-right_info">
                 <ul class="ht-info-list">
-                    
+                {% if user.is_authenticated %}
                     <li><a href="'users:login'">حساب کاربری </a></li>
                     <li><a href=" url product:wishlist">لیست علاقه مندیها </a></li>
                     <li><a href=" {% url 'payment:showfactor' %}">فاکتور ها </a></li>
-
+                    <li><a href="{% url 'user:user_session' %}">نشست های فعال </a></li>
                     <li>
-                        
-                        {% if user.is_authenticated %}
+                
 
                         <a href='{% url "user:logout" %}' >خروج از</a>
                             <a href="">{{user.email}}</a> 
@@ -24,8 +23,8 @@
                         
                         
                         {% else %}
-                            <a href='{% url "user:register" %}' >ثبت نام </a> یا
-                            <a href='{% url "user:login" %}' >ورود </a>
+                          <li>  <a href='{% url "user:register" %}' >ثبت نام </a> یا
+                            <a href='{% url "user:login" %}' >ورود </a></li>
       
                         {% endif %}
                     </li>
@@ -150,7 +149,7 @@
                         <div class="drop-menu normal-menu">
                             <ul class="sub-menu">
                                 <li><a href="product_category_sidebar.html">فروشگاه </a> </li>                                    
-                                <li><a href="cart.html">سبد خرید </a> </li>                                    
+                                <li><a href="">سبد خرید </a> </li>                                    
                                 <li><a href="product_category.html">محصولات </a> </li>                                    
                                 <li><a href="contact.html">تماس با ما </a> </li>                                 
                             </ul>

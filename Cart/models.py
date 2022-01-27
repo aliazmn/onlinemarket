@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long
 from django.db import models
 from User.models import Customer, Profile, SalesMan
 from Product.models import Product

@@ -17,7 +17,7 @@ class Product(models.Model):
     description=models.TextField(null=True)
     brand=models.CharField(max_length=50,null=True ,blank=True)
     price=models.BigIntegerField(null=True)
-    amount=models.IntegerField(null=True)
+    amount=models.PositiveIntegerField(null=True)
     activate=models.BooleanField(default=False)
     img=models.ImageField(upload_to="Products/",null=True,blank=True)
     img1=models.ImageField(upload_to="Products/",null=True,blank=True)
@@ -41,7 +41,7 @@ class Product(models.Model):
 class Property(models.Model):
     property_name=models.CharField(max_length=50,null=True,blank=True)
     cat_id=models.ForeignKey(Category,on_delete=models.CASCADE, null=True,blank=True,related_name='propertytocat')
-
+    
     def __str__(self) -> str:
         return self.property_name
 
@@ -65,5 +65,4 @@ class WishList(models.Model):
         verbose_name = "Wishlist"
         verbose_name_plural = "Wishlists"
 
-    def __str__(self) -> str:
-        return self.user
+

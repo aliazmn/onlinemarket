@@ -1,5 +1,5 @@
 {% extends 'home.html' %}
-{%load static %}
+{% load static %}
 
   
 {% block main %}
@@ -24,7 +24,7 @@
                     <div class="e-profile-img">
                         <div class="e-userpro-img">
                             <img src='{%static "assets/images/user_profile.jpg"%}' alt="image">
-                            <input type="file" id="user_profile">
+                            <!-- <input type="file" id="user_profile"> -->
                             <label for="user_profile">
                                 <span>                                    
                                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 485.219 485.22" style="enable-background:new 0 0 485.219 485.22;" xml:space="preserve">
@@ -48,38 +48,38 @@
                         <div class="row">
                             <div class="col-md-6 ">                                       
                                 <div class="e-form-field mb-26">
-                                    <label>نام کوچک </label>
-                                    <input class="e-field-inner require" type="text" placeholder="جعفر">
+                                    <label> نام کوچک </label>
+                                    <span>{{profile_item.first_name}}</span>
                                 </div>
                             </div>
                             <div class="col-md-6 ">                                       
                                 <div class="e-form-field mb-26">
                                     <label>نام خانوادگی  </label>
-                                    <input class="e-field-inner require" type="text" placeholder="عباسی">
+                                    <span>{{profile_item.last_name}}</span>
                                 </div>
                             </div>
                             <div class="col-md-6 ">                                       
                                 <div class="e-form-field mb-26">
                                     <label>ایمیل </label>
-                                    <input class="e-field-inner require" type="email" placeholder="John@example.com">
+                                    <span>{{profile_item.email}}</span>
                                 </div>
                             </div>
                             <div class="col-md-6 ">                                       
                                 <div class="e-form-field mb-26">
-                                    <label>شماره تلفن</label>
-                                    <input class="e-field-inner require" type="text" placeholder="+(98) 9902799593">
+                                    <label>کد پستی</label>
+                                    <span>{{profile_item.postal_code}}</span>
                                 </div>
                             </div>                                    
                             <div class="col-md-12">                                       
                                 <div class="e-form-field mb-26">
                                     <label>آدرس</label>
-                                    <textarea class="e-field-inner require" placeholder="jabasi26@gmail.com"></textarea>
+                                    <span>{{profile_item.address}}</span>
                                 </div>
                             </div>
                             <div class="col-md-12">                                       
-                                <div class="">
+                                <!-- <div class="">
                                     <button type="button" class="e-btn">ذخیره</button>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>                    

@@ -53,6 +53,13 @@
             <div class="col-lg-6 col-md-12">
                 <div class="prodetails-info">
                     <form action="" method="POST">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> bbc40c406b7bd6d71e2c13b8759efb422e5823a9
+>>>>>>> 383575db56cb3953b3f744017113aa5380f7d088
                        {% csrf_token %}
                     <div class="pd-infotop">
                         <h2 class="pd-title">{{singleproduct.name}}</h2>
@@ -83,6 +90,8 @@
                             {% comment %} <li><span class="pd-price-ttile">120000 تومان <span>90000 تومان</span></span></li>                            
                             <li><span class="pd-price-off">10% تخفیف </span></li>   {% endcomment %}
                             <li><span class="pd-price-ttile">{{singleproduct.price}}تومان</li>
+
+
                             <input type="hidden"  name="price" value="{{singleproduct.price}}">  
 
                         </ul>
@@ -108,7 +117,9 @@
                                 <div class="ib-list-right">
                                     <select name="color" >
                                         {% for elm in color %}
+
                                             <option value="{{elm.detail}}">{{elm.detail}}</option>
+
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -152,8 +163,9 @@
                                     <ul class="pd-qua-wrap">
                                         <li>
                                             <div class="quantity-box">
+
                                                 <input type="text" name='count' class="quantity" value=1 >
-                                                
+
                                                 <span class="quantity-minus pa-sub quantity-icon"> - </span>                                                
                                                 <span class="quantity-plus  pa-add quantity-icon"> + </span>
                                                 <div class="clearfix"></div>
@@ -163,7 +175,7 @@
                                         
                                         <li>
                                         {% comment %} inja url bzn {% endcomment %}
-                                            <input type="submit"class="e-btn light pd-heart"value="افزودن به علاقه مندی ها" formaction=""/>
+                                            <input type="submit"class="e-btn light pd-heart"value="افزودن به علاقه مندی ها" formaction="{% url 'product:add_wishlist' %}"/>
                                                 <svg 
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -176,7 +188,10 @@
                                 </ul>
                                 {% comment %} inja url bzn {% endcomment %}
                             </div>
+
                             <input type="submit"class="e-btn light pd-heart"value="افزودن به سبد" formaction="{% url 'cart:add-to-cart' %}"/>   
+
+
                             </li>
                         </ul>
                         

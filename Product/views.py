@@ -1,11 +1,20 @@
-from django.shortcuts import render
+
+from ssl import OP_NO_RENEGOTIATION
+from urllib import request
+from django.shortcuts import render,redirect
 from django.views.generic import DetailView,ListView
-from .models import Product,Category,Details,Property
 from django.db.models import Q
+
+from .models import Product,Category,Details,Property
 from Comment.models import CommentMe
 from Comment.forms import CommentForm
 
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 class ProductDetail(DetailView):
     model=Product
@@ -31,25 +40,12 @@ class ProductDetail(DetailView):
             details=Details.objects.filter(Q(product_id=self.kwargs["product_id"]) & Q(pro_id=elm.id))
             if details:
                 lst_details.append(details)
-        
-    
-
         ctnx["detail"]=lst_details
-        
-
-
-
         product_best=Product.objects.filter(cat_id=cat)
         ctnx["listproduct"]=product_best
-
-
         comments=CommentMe.objects.all().filter(product=self.kwargs["product_id"])
-
         ctnx["form"]=CommentForm()
         ctnx["comment"]=comments
-        
-
-
         return ctnx
 
 
@@ -72,10 +68,6 @@ class ShowProduct(ListView):
         ctx["fcategory"]=ctx["category"].sub_cat.cat_title
         ctx["c_get"]=self.request.GET.get("c")
         return ctx
-
-
-
-
 
 
 class Filtering(ListView):
@@ -114,3 +106,37 @@ class Filtering(ListView):
         ctx["b_get"]=self.request.GET.get("brand")
 
         return ctx
+
+
+
+
+
+
+@login_required(login_url='user/login')
+def add_to_wishlist(request):
+    user=get_object_or_404(Customer, profile__email=request.user.email)
+    my_wishlist,_=WishList.objects.get_or_create(user=user)
+    product= get_object_or_404(Product, id=request.POST.get("id"))
+    my_wishlist.product.add(product)
+    my_wishlist.save()
+    return redirect("product:detailproduct", product_id=request.POST.get("id") )
+
+@login_required(login_url='user/login')
+def delete_from_wishlist(request,id):
+    object_product=get_object_or_404(Product,pk=id)
+    wishlist=get_object_or_404(WishList,product=id)
+    wishlist.product.remove(object_product)
+    return redirect("product:Show_wishList")
+ 
+
+# @login_required(redirect_field_name='user:login')
+class Show_wishList(ListView):
+    model=WishList
+    template_name="Product/wishlist.html"
+    context_object_name="wish_list"
+
+    def get_queryset(self) :
+        qs=WishList.objects.filter(user__profile__email = self.request.user.email).first()
+        
+        return qs
+       
