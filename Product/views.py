@@ -5,8 +5,8 @@ from django.shortcuts import render,redirect
 from django.views.generic import DetailView,ListView
 from django.db.models import Q
 
-from .models import Product,Category,Details,Property
-from Comment.models import CommentMe
+from .models import Product,Category,Details,Property,WishList
+from Comment.models import CommentMe,Customer
 from Comment.forms import CommentForm
 
 from django.contrib.auth.decorators import login_required

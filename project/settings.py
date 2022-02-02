@@ -51,8 +51,14 @@ INSTALLED_APPS = [
     'Payment',
     'azbankgateways',
     'django_user_agents',
-]
+    'rest_framework',
+    'rest_framework.authtoken',
 
+    
+    'social_django',
+
+
+]
 
 
 
@@ -207,4 +213,17 @@ AZ_IRANIAN_BANK_GATEWAYS = {
    'BANK_PRIORITIES': [
        # and so on ...
    ], # اختیاری
+}
+
+MY_USER_TOKEN_VALIDATION_DAY = 2
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+    ],
+# 'DEFAULT_PERMISSION_CLASSES': [
+#     'rest_framework.permissions.IsAuthenticated',
+# ]
 }
