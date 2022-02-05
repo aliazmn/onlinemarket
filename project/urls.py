@@ -21,7 +21,7 @@ urlpatterns = [
     path('' , Home.as_view() ,  name='home'),
     path('comment/',include('Comment.urls', namespace='comment')),
     path('product/',include("Product.urls",namespace="product") ),
-    path("", include("User.urls", namespace='user')),
+    path("user/", include("User.urls", namespace='user')),
     path('bankgateways/', az_bank_gateways_urls()),
     path('payment/', include("Payment.urls",namespace="payment")),
     path('cart/', include("Cart.urls",namespace="cart")),

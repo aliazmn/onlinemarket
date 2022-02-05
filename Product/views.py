@@ -1,11 +1,12 @@
 
 from ssl import OP_NO_RENEGOTIATION
+from unicodedata import name
 from urllib import request
 from django.shortcuts import render,redirect
 from django.views.generic import DetailView,ListView
 from django.db.models import Q
 
-from User.models import Customer
+from User.models import Customer, Profile
 
 from .models import Product,Category,Details,Property,WishList
 from Comment.models import CommentMe
@@ -15,6 +16,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
+from django.utils.decorators import method_decorator
 
 User = get_user_model()
 
@@ -85,17 +87,17 @@ class Filtering(ListView):
         p=filter_price.split(",")
         if filter_brand!="برند" and filter_price!="قیمت":
             p=filter_price.split(",")
-            qs=Product.objects.filter(Q(cat_id_id=self.request.session.get("c")) & Q(brand=filter_brand)  &Q(price__range=(int(p[0]),int(p[1]))) )
+            qs=qs.filter(Q(cat_id_id=self.request.session.get("c")) & Q(brand=filter_brand)  &Q(price__range=(int(p[0]),int(p[1]))) )
         
         elif filter_brand!="برند" and filter_price=="قیمت": 
-            qs=Product.objects.filter(Q(cat_id_id=self.request.session.get("c")) & Q(brand=filter_brand)  )
+            qs=qs.filter(Q(cat_id_id=self.request.session.get("c")) & Q(brand=filter_brand)  )
 
         elif filter_price!="قیمت" and filter_brand =="برند":
             p=filter_price.split(",")
-            qs=Product.objects.filter(Q(cat_id_id=self.request.session.get("c")) & Q(price__range=(int(p[0]),int(p[1]))) )
+            qs=qs.filter(Q(cat_id_id=self.request.session.get("c")) & Q(price__range=(int(p[0]),int(p[1]))) )
 
         else :
-            qs=Product.objects.filter(cat_id_id=self.request.session.get("c"))
+            qs=qs.filter(cat_id_id=self.request.session.get("c"))
         
         return qs
 
@@ -114,16 +116,16 @@ class Filtering(ListView):
 
 
 
-@login_required(login_url='user/login')
+@login_required(login_url='/user/login')
 def add_to_wishlist(request):
-    user=get_object_or_404(Customer, profile__email=request.user.email)
+    user=get_object_or_404(Profile, email=request.user.email)
     my_wishlist,_=WishList.objects.get_or_create(user=user)
     product= get_object_or_404(Product, id=request.POST.get("id"))
     my_wishlist.product.add(product)
     my_wishlist.save()
     return redirect("product:detailproduct", product_id=request.POST.get("id") )
 
-@login_required(login_url='user/login')
+@login_required(login_url='/user/login')
 def delete_from_wishlist(request,id):
     object_product=get_object_or_404(Product,pk=id)
     wishlist=get_object_or_404(WishList,product=id)
@@ -131,14 +133,14 @@ def delete_from_wishlist(request,id):
     return redirect("product:Show_wishList")
  
 
-# @login_required(redirect_field_name='user:login')
+@method_decorator(login_required(login_url='/user/login'), name='dispatch')
 class Show_wishList(ListView):
     model=WishList
     template_name="Product/wishlist.html"
     context_object_name="wish_list"
 
     def get_queryset(self) :
-        qs=WishList.objects.filter(user__profile__email = self.request.user.email).first()
+        qs=WishList.objects.filter(user = self.request.user).first()
         
         return qs
        

@@ -11,10 +11,12 @@ from django.core.cache import cache
 from project import settings
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
-from User.forms import ForgetPassForm, ForgetPasswordForm, RegisterForm ,LoginForm
-from django.core.cache import caches
-from .models import Address, Customer, Profile, UserDevice
 
+
+
+from User.forms import ForgetPassForm, ForgetPasswordForm, RegisterForm ,LoginForm
+from .models import Address, Customer, Profile, UserDevice
+from .utils import filling_cart
 
 User = get_user_model()
 
@@ -22,7 +24,13 @@ User = get_user_model()
 def login(request):
     login_form = LoginForm(request.POST or None)
     if request.method == "GET":
-        return render(request, 'User/login_page.html', {'login_form': login_form})
+        next = request.GET.get("next", "")
+        
+        if next:
+            return render(request, 'User/login_page.html', {'login_form': login_form,'next':next})
+        else:
+            return render(request, 'User/login_page.html', {'login_form': login_form,})
+            
     else:
         if login_form.is_valid():
             email = request.POST.get("email", "")
@@ -32,7 +40,6 @@ def login(request):
                 _login(request, user)
                 next = request.GET.get("next", "")
                 user=user
-                print(user)
                 if request.user_agent.is_mobile:
                     device = "Mobile"
                 if request.user_agent.is_tablet:
@@ -44,13 +51,7 @@ def login(request):
                 query=UserDevice.objects.filter(Q(user=user)&Q(device=device))
                 if not query:
                     UserDevice.objects.create(user=user,device=device,browser=browser,os=os)
-                if not request.session.session_key:
-                    request.session.save()
-                redis_cache=caches['default']
-                cart=redis_cache.client.get_client()
-                carts=cart.hgetall(request.session.session_key)
-                for elm in carts:
-                    cart.hset(request.user.email,elm.decode("utf-8"),carts[elm])
+                filling_cart(request)
                 if next:
                     return redirect(next)
                 return redirect('home')
@@ -65,7 +66,6 @@ def logout(request):
 
 def register(request):
     register_form = RegisterForm(request.POST or None)
-    print(register_form)
     if request.method == "GET":
         return render(request, 'User/register_page.html', {'register_form': register_form})
     elif request.method == "POST":
@@ -122,7 +122,6 @@ def forget_password(request):
                 current_site = get_current_site(request)
                 mail_subject = 'click on the link for change password.'
                 message = "127.0.0.1:8000"+link
-                print(message)
                 to_email = forget_password_form.cleaned_data.get('email')
                 # forget= f'{to_email}+flag'
                 # request.session["forget"]=forget
@@ -189,7 +188,6 @@ class show_profile(DetailView):
 def user_session_logedin(request):
      if request.method == "GET":
     #     user=request.user.email
-    #     print(user)
     #     if request.user_agent.is_mobile:
     #         device = "Mobile"
     #     if request.user_agent.is_tablet:

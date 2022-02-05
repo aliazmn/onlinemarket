@@ -1,5 +1,5 @@
 from django.utils.translation import gettext as _
-from User.models import Customer
+from User.models import Customer, Profile
 from django.db import models
 
 
@@ -57,7 +57,7 @@ class Details(models.Model):
     
 
 class WishList(models.Model):
-    user=models.ForeignKey(Customer,on_delete=models.CASCADE, related_name="wishlisttocustomer")
+    user=models.ForeignKey(Profile,on_delete=models.CASCADE, related_name="wishlisttocustomer")
     product=models.ManyToManyField(Product)
     datetime =models.DateTimeField(auto_now=True,verbose_name=_('date and time'))
 

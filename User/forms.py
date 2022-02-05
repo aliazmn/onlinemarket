@@ -144,8 +144,7 @@ class ForgetPassForm(forms.Form):
         def clean_re_password(self):
             password = self.cleaned_data.get('password')
             re_password = self.cleaned_data.get('re_password')
-            # print(password)
-            # print(re_password)
+
 
             if password != re_password:
                 raise forms.ValidationError('کلمه های عبور مغایرت دارند')
