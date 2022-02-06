@@ -1,5 +1,6 @@
 {% extends 'home.html' %}
-{%load static %}
+{% load static %}
+{% load queryparams %}
 
 {% block main %}
 <!-- Breadcumbs start -->
@@ -10,10 +11,10 @@
             <a href="{% url 'home' %}">خانه </a>
         </li>
         <li>
-            <a href=''> {{fcategory}} </a>
+            <a href=''> {{category.sub_cat.cat_title}} </a>
         </li>
         <li>
-            <a href=''> {{category}} </a>
+            <a href="{% url 'product:showproduct' %}?c={{category.id}}"> {{category.cat_title}} </a>
         </li>
     </ul>
 </div>
@@ -26,8 +27,9 @@
                     <div class="e-filter-leftbar">
                     </div>
                     <div class="e-filter-rightbar">
-                        <form action="{% url 'product:filter' %}" method="GET">
+                        <form action="{% url 'product:showproduct'  %}" method="GET">
                         <ul class="e-filter-list">
+                            <input type="hidden" name="c" value="{{category.id}}" />
                             <li><input type="submit" value= "فیلتر"  />
                                 
                                 <span class="e-filter-icon">
@@ -36,7 +38,7 @@
                             </li>
                             <li>
                                 <select name="price">
-                                    <option>قیمت </option>
+                                    <option value="">قیمت </option>
                                     <option value="500000,990000">500000 تومان - 990000 تومان</option>
                                     <option value="1000000,2000000">1000000 تومان - 2000000 تومان</option>
                                     <option value="3000000,5000000">3000000 تومان - 5000000 تومان</option>
@@ -45,7 +47,7 @@
                             </li>
                             <li>
                                 <select name="brand">
-                                    <option>برند</option>
+                                    <option value="">برند</option>
                                     {% for elm in productlist %}
                                     {% if elm.brand %}
                                     <option value="{{elm.brand}}">{{elm.brand}}</option>
@@ -104,18 +106,14 @@
                 <div class="e-pagination-wrap mt-10">
                     <ul class="e-pagination justify-content-center e-line">
                         {% if page_obj.has_previous %}
-                        <li class="e-page-item disabled"><a class="e-btn light" href="product/show-product-by-category/?page={{ page_obj.previous_page_number }}&c={{c_get}}"> قبلی </a></li>
+                        <li class="e-page-item disabled"><a class="e-btn light" href="{% add_get_param page=page_obj.previous_page_number %}"> قبلی </a></li>
                         {% else %}
                         <li class="e-page-item disabled"><a class="e-btn light" href=""> قبلی </a></li>
 
                         {% endif %}
-                        {% comment %} <li class="e-page-item"><a class="active e-btn light" href='{%static   "javascript:void(0);" %}'>01</a></li> {% endcomment %}
-                        {% comment %} <li class="e-page-item"><a class="e-btn light" href='{%static   "javascript:void(0);" %}'>02</a></li>
-                        <li class="e-page-item"><a class="e-btn light pointer-events-none" href=''>...</a></li>
-                        <li class="e-page-item"><a class="e-btn light" href='{%static   "javascript:void(0);" %}'>08</a></li>
-                        <li class="e-page-item"><a class="e-btn light" href='{%static   "javascript:void(0);" %}'>09</a></li> {% endcomment %}
+
                         {% if page_obj.has_next %}
-                        <li class="e-page-item"><a class="e-btn light" href="product/show-product-by-category/?page={{ page_obj.next_page_number }}&c={{c_get}}">بعدی </a></li>
+                        <li class="e-page-item"><a class="e-btn light" href="{% add_get_param page=page_obj.next_page_number %}">بعدی </a></li>
                         {% else %}
                         <li class="e-page-item disabled"><a class="e-btn light" href=""> بعدی </a></li>
 

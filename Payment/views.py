@@ -15,7 +15,7 @@ from Cart.models import History
 from Product.models import Product
 
 
-@login_required(login_url="user/login")
+@login_required(login_url="/user/login")
 def go_to_gateway_view(request,price_total):
 
     # خواندن مبلغ از هر جایی که مد نظر است
@@ -65,14 +65,15 @@ def callback_gateway_view(request):
         for elm in my_cart:
             value[f"product{counter}"]=json.loads(my_cart[elm])
         for i in value:
-            product=get_object_or_404(Product,name=value[i].get("name"))
+            product=get_object_or_404(Product,id=value[i].get("id"))
             product.amount = product.amount - int(value[i].get("count"))
             product.save()
             value[i].pop("csrfmiddlewaretoken")
             value[i].pop("id")
             value[i].pop("img")
-            value[i].pop("count")
-                
+            value[i].pop("amount")
+            value[i].setdefault("bank",bank_record.bank_type)
+            value[i].setdefault("tracingcode", bank_record.tracking_code)
             counter+=1
             cart.hdel(request.user.email,elm)
         

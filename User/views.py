@@ -11,10 +11,12 @@ from User.utils import linked_devices
 from project import settings
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
-from User.forms import ForgetPassForm, ForgetPasswordForm, RegisterForm ,LoginForm
-from django.core.cache import caches
-from .models import Address, Customer, Profile, UserDevice
 
+
+
+from User.forms import ForgetPassForm, ForgetPasswordForm, RegisterForm ,LoginForm
+from .models import Address, Customer, Profile, UserDevice
+from .utils import filling_cart
 
 
 
@@ -24,7 +26,13 @@ User = get_user_model()
 def login(request):
     login_form = LoginForm(request.POST or None)
     if request.method == "GET":
-        return render(request, 'User/login_page.html', {'login_form': login_form})
+        next = request.GET.get("next", "")
+        
+        if next:
+            return render(request, 'User/login_page.html', {'login_form': login_form,'next':next})
+        else:
+            return render(request, 'User/login_page.html', {'login_form': login_form,})
+            
     else:
         if login_form.is_valid():
             email = request.POST.get("email", "")
@@ -33,6 +41,7 @@ def login(request):
             if user is not None:  
                 _login(request, user)
                 next = request.GET.get("next", "")
+<<<<<<< HEAD
                 linked_devices(request,user)
                 if not request.session.session_key:
                     request.session.save()
@@ -41,6 +50,21 @@ def login(request):
                 carts=cart.hgetall(request.session.session_key)
                 for elm in carts:
                     cart.hset(request.user.email,elm.decode("utf-8"),carts[elm])
+=======
+                user=user
+                if request.user_agent.is_mobile:
+                    device = "Mobile"
+                if request.user_agent.is_tablet:
+                    device = "Tablet"
+                if request.user_agent.is_pc:
+                    device = "PC"
+                browser=request.user_agent.browser.family
+                os=request.user_agent.os.family
+                query=UserDevice.objects.filter(Q(user=user)&Q(device=device))
+                if not query:
+                    UserDevice.objects.create(user=user,device=device,browser=browser,os=os)
+                filling_cart(request)
+>>>>>>> 9442d28210b8e6876660c106286e5ba3b6fe9e42
                 if next:
                     return redirect(next)
                 return redirect('home')
@@ -55,7 +79,6 @@ def logout(request):
 
 def register(request):
     register_form = RegisterForm(request.POST or None)
-    print(register_form)
     if request.method == "GET":
         return render(request, 'User/register_page.html', {'register_form': register_form})
     elif request.method == "POST":
@@ -112,7 +135,6 @@ def forget_password(request):
                 current_site = get_current_site(request)
                 mail_subject = 'click on the link for change password.'
                 message = "127.0.0.1:8000"+link
-                print(message)
                 to_email = forget_password_form.cleaned_data.get('email')
                 # forget= f'{to_email}+flag'
                 # request.session["forget"]=forget
@@ -178,6 +200,21 @@ class show_profile(DetailView):
 
 def user_session_logedin(request):
      if request.method == "GET":
+<<<<<<< HEAD
+=======
+    #     user=request.user.email
+    #     if request.user_agent.is_mobile:
+    #         device = "Mobile"
+    #     if request.user_agent.is_tablet:
+    #         device = "Tablet"
+    #     if request.user_agent.is_pc:
+    #         device = "PC"
+    #     browser=request.user_agent.browser.family
+    #     os=request.user_agent.os.family
+    #     query=UserDevice.objects.filter(Q(user=user)&Q(device=device))
+    #     if not query:
+    #         UserDevice.objects.create(user=user,device=device,browser=browser,os=os)
+>>>>>>> 9442d28210b8e6876660c106286e5ba3b6fe9e42
         linked_devices=UserDevice.objects.all()
         ctx={
             'linked_devices':linked_devices
