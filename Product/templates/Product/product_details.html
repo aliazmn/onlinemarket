@@ -7,8 +7,8 @@
     <h2 class="e-breadcumb-title">تک محصول</h2>
     <ul class="e-breadcumb-kist">
         <li><a href="{% url 'home' %}">صفحه اصلی </a></li>
-        <li><a href=''>{{parent_cat}}</a></li>
-        <li><a href=''>{{singleproduct.cat_id.cat_title}} </a></li>
+        <li><a href=''>{{cat.sub_cat.cat_title}}</a></li>
+        <li><a href="{% url 'product:showproduct' %}?c={{cat.id}}">{{cat.cat_title}} </a></li>
     </ul>
 </div>
 <!-- Product Details start -->
@@ -118,24 +118,28 @@
                                     </select>
                                 </div>
                                 {% endif %}
+                                
                             </li>
-                            {% if detail  %}
-                            {% for elms  in detail %}
+                            {% for key, value in property.items %} 
                             <li>
                                 <div class="ib-list-left">
-                                    <span> {{elms.first.pro_id.property_name}} </span>
+                                    <span> {{key}} </span>
                                 </div>
+                                {% comment %} {% if detail  %} {% endcomment %}
+
                                 <div class="ib-list-right">
                                     <select name={{elms.first.pro_id.property_name}}>
-                                        {% for elm in elms %}
-                                        <option value={{elm.detail}} >{{elm.detail}}</option>
+                                        
+                                        {% for elms  in value %}
+                                        <option value={{elm.detail}} >{{elms.detail}}</option>
+                                       
                                         {% endfor %}
                                     </select>
                                 </div>
+                                {% comment %} {% endif %} {% endcomment %}
                             </li>
                             {% endfor %}
 
-                            {% endif %}
                             <li>
                                 <div class="ib-list-left">
                                     <span>ارائه به </span>
@@ -229,7 +233,7 @@
     
                                {% else %}
                                 {% for elm in comment%}
-                                <h2 class="pdtab-rev-title">{{elm.user}}: </h2><br>
+                                <h2 class="pdtab-rev-title">{{elm.user.first_name}}: </h2><br>
                                 <h4 class="pdtab-rev-title">  {{elm.comment }}</h4><hr>
                                 {% endfor %}
                                 {% endif %}

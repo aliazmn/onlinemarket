@@ -1,12 +1,20 @@
 from django.utils.translation import gettext as _
-from User.models import Customer, Profile
+from User.models import Profile
 from django.db import models
+from django.shortcuts import get_object_or_404
 
 
+import Comment
 
 class Category(models.Model):
     cat_title=models.CharField(max_length=150)
     sub_cat=models.ForeignKey('self',on_delete=models.CASCADE,null=True, blank=True, related_name='cattocat')
+
+    @classmethod
+    def get_cat(cls,id):
+        cat = get_object_or_404 (Category,pk = id)
+        return cat
+
     
     def __str__(self) -> str:
         return self.cat_title
@@ -32,7 +40,18 @@ class Product(models.Model):
         verbose_name = "Product"
         verbose_name_plural = "Products"
 
+    @property
+    def return_category(self):
+        cat=Category.objects.get(pk=self.cat_id.id)
+        return cat
 
+    @property
+    def comments(self):
+        if self.id:
+            return Comment.models.CommentMe.objects.filter(product_id=self.id)
+        return None
+    
+    
     def __str__(self) -> str:
         return f"{self.name}-{self.brand}"
 
