@@ -1,6 +1,4 @@
 
-from ssl import OP_NO_RENEGOTIATION
-from urllib import request
 from django.shortcuts import render,redirect
 from django.views.generic import DetailView,ListView
 from django.db.models import Q

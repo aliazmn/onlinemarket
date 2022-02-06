@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'Payment',
     'azbankgateways',
     'django_user_agents',
+    'rest_framework',
+    'django_filters',
 ]
 
 
@@ -207,4 +209,8 @@ AZ_IRANIAN_BANK_GATEWAYS = {
    'BANK_PRIORITIES': [
        # and so on ...
    ], # اختیاری
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
