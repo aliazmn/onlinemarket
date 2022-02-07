@@ -1,6 +1,5 @@
 
 from django.shortcuts import render
-
 from django.views.generic import View, ListView
 
 from Product.models import Category, Product

@@ -1,12 +1,10 @@
-from django.urls import path,include
-from .views import go_to_gateway_view,callback_gateway_view,show_factors
+from django.urls import path
+from .views import payment_start,payment_return,show_factors
 
 app_name="Payment"
-
 urlpatterns = [
-    path("go_to/<int:price_total>",go_to_gateway_view,name="gotogetway"),
-    path("callback",callback_gateway_view,name="callback"),
-    path("showfactor",show_factors,name="showfactor"),
-    
 
+    path('payment-start/<int:amount>', payment_start, name="payment_start"),
+    path('payment-return/', payment_return, name="payment_return"),
+    path("showfactor",show_factors,name="showfactor"),
 ]

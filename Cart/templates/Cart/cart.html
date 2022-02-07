@@ -39,7 +39,8 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                    {% for elm in show %}
+                                    {% for key,elm in show.items %}
+                  
                                   <tr>
                                     <td>
                                         <div class="sc-productwrap">
@@ -91,7 +92,8 @@
                                         </a>
                                     </td>
                                   </tr>                                                                  
-                                  {% endfor %}                    
+                                  {% endfor %}
+                                     
                                 </tbody>
                               </table>
                         </form>
@@ -136,7 +138,7 @@
                             </ul>
                         </div>  
                     </div> 
-                    <a href="{% url 'payment:gotogetway' price_total %}" class="e-btn">پرداخت صورتحساب </a>
+                    <a href="{% url 'payment:payment_start' price_total %}" class="e-btn">پرداخت صورتحساب </a>
                 </div>                      
             </div>            
         </div>

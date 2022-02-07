@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-12">                   
                 <div class="e-fp-box">
-                    <form action="{% url 'user:login' %}" method="POST">
+                    <form action="{% url 'user:login' %}?next={{next}}" method="POST">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-md-12">                                        

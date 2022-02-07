@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    
+    'rest_framework',
+    
     #my app
     'User',
     'Cart',
@@ -49,8 +53,10 @@ INSTALLED_APPS = [
     'Product',
     'Notify',
     'Payment',
-    'azbankgateways',
+
     'django_user_agents',
+    
+    'django_filters',
 ]
 
 
@@ -207,4 +213,8 @@ AZ_IRANIAN_BANK_GATEWAYS = {
    'BANK_PRIORITIES': [
        # and so on ...
    ], # اختیاری
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }

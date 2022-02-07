@@ -1,112 +1,68 @@
 
-from ssl import OP_NO_RENEGOTIATION
-from urllib import request
 from django.shortcuts import render,redirect
 from django.views.generic import DetailView,ListView
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
+from django.utils.decorators import method_decorator
 
-from User.models import Customer
 
+from User.models import Profile
 from .models import Product,Category,Details,Property,WishList
 from Comment.models import CommentMe
 from Comment.forms import CommentForm
+from .utils import property_and_details , color_property , filter_product_with_param,filtering
 
-from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_POST
-from django.shortcuts import get_object_or_404
-from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
 class ProductDetail(DetailView):
     model=Product
-    template_name="Product/product_details.html"
-    context_object_name="singleproduct"
-    pk_url_kwarg="product_id"
+    template_name = "Product/product_details.html"
+    context_object_name = "singleproduct"
+    pk_url_kwarg = "product_id"
 
     def get_context_data(self, *args, **kwargs):
         ctnx = super().get_context_data(*args, **kwargs)
         
-        cat=Category.objects.get(pk=self.get_object().cat_id.id)
-        ctnx["parent_cat"]=cat.sub_cat.cat_title
-               
-        property_color=Property.objects.get(property_name="رنگ")
-        detail_color=Details.objects.filter(Q(product_id=self.kwargs["product_id"]) & Q(pro_id=property_color.id))
-        ctnx["color"]=detail_color
+        cat = self.get_object().return_category
+        ctnx["cat"] = cat
 
-        properties=Property.objects.filter(cat_id=cat.sub_cat)
-        lst_details=[]
+        ctnx["color"] = color_property(self.kwargs["product_id"])
+        ctnx["property"] = property_and_details(self.kwargs["product_id"],cat)
+        
+        ctnx["listproduct"] = filter_product_with_param (cat_id=cat)
+        
+        comments = self.get_object().comments
 
-        for elm in properties:
-
-            details=Details.objects.filter(Q(product_id=self.kwargs["product_id"]) & Q(pro_id=elm.id))
-            if details:
-                lst_details.append(details)
-        ctnx["detail"]=lst_details
-        product_best=Product.objects.filter(cat_id=cat)
-        ctnx["listproduct"]=product_best
-        comments=CommentMe.objects.all().filter(product=self.kwargs["product_id"])
-        ctnx["form"]=CommentForm()
-        ctnx["comment"]=comments
+        ctnx["form"] = CommentForm()
+        ctnx["comment"] = comments
         return ctnx
 
 
 
+
 class ShowProduct(ListView):
-    model=Product
-    template_name="Product/product_category.html"
-    context_object_name="productlist"
-    paginate_by=8
+    model = Product
+    template_name = "Product/product_category.html"
+    context_object_name = "productlist"
+    paginate_by = 8
 
     def get_queryset(self) :
-        qs= super().get_queryset()
-        qs=Product.objects.filter(cat_id_id=self.request.GET.get("c"))
-        self.request.session["c"]=self.request.GET.get("c")
+        qs = super().get_queryset()
+        if len(self.request.GET)>1:
+           qs = filtering(self.request.GET)                
+            
+        else:    
+            qs = filter_product_with_param(cat_id_id = self.request.GET.get("c"))
+            
         return qs
 
     def get_context_data(self, **kwargs):
-        ctx= super().get_context_data(**kwargs)
-        ctx["category"]=Category.objects.get(pk=self.request.GET.get("c"))
-        ctx["fcategory"]=ctx["category"].sub_cat.cat_title
-        ctx["c_get"]=self.request.GET.get("c")
-        return ctx
-
-
-class Filtering(ListView):
-    model=Product
-    template_name="Product/product_category.html"
-    context_object_name="productlist"
-    paginate_by=8
-
-    def get_queryset(self) :
-        qs= super().get_queryset()
-        filter_brand=self.request.GET.get("brand")
-        filter_price=self.request.GET.get("price")
-        p=filter_price.split(",")
-        if filter_brand!="برند" and filter_price!="قیمت":
-            p=filter_price.split(",")
-            qs=Product.objects.filter(Q(cat_id_id=self.request.session.get("c")) & Q(brand=filter_brand)  &Q(price__range=(int(p[0]),int(p[1]))) )
-        
-        elif filter_brand!="برند" and filter_price=="قیمت": 
-            qs=Product.objects.filter(Q(cat_id_id=self.request.session.get("c")) & Q(brand=filter_brand)  )
-
-        elif filter_price!="قیمت" and filter_brand =="برند":
-            p=filter_price.split(",")
-            qs=Product.objects.filter(Q(cat_id_id=self.request.session.get("c")) & Q(price__range=(int(p[0]),int(p[1]))) )
-
-        else :
-            qs=Product.objects.filter(cat_id_id=self.request.session.get("c"))
-        
-        return qs
-
-    def get_context_data(self, **kwargs):
-        ctx= super().get_context_data(**kwargs)
-        ctx["category"]=Category.objects.get(pk=self.request.session.get("c"))
-        ctx["fcategory"]=ctx["category"].sub_cat.cat_title
-        ctx["c_get"]=self.request.session.get("c")
-        ctx["p_get"]=self.request.GET.get("price")
-        ctx["b_get"]=self.request.GET.get("brand")
-
+        ctx =  super().get_context_data(**kwargs)
+        ctx["category"] = Category.get_cat(self.request.GET.get("c"))
+        ctx["c_get"] = self.request.GET.get("c")
         return ctx
 
 
@@ -114,16 +70,17 @@ class Filtering(ListView):
 
 
 
-@login_required(login_url='user/login')
+
+@login_required(login_url='/user/login')
 def add_to_wishlist(request):
-    user=get_object_or_404(Customer, profile__email=request.user.email)
+    user=get_object_or_404(Profile, email=request.user.email)
     my_wishlist,_=WishList.objects.get_or_create(user=user)
     product= get_object_or_404(Product, id=request.POST.get("id"))
     my_wishlist.product.add(product)
     my_wishlist.save()
     return redirect("product:detailproduct", product_id=request.POST.get("id") )
 
-@login_required(login_url='user/login')
+@login_required(login_url='/user/login')
 def delete_from_wishlist(request,id):
     object_product=get_object_or_404(Product,pk=id)
     wishlist=get_object_or_404(WishList,product=id)
@@ -131,14 +88,14 @@ def delete_from_wishlist(request,id):
     return redirect("product:Show_wishList")
  
 
-# @login_required(redirect_field_name='user:login')
+@method_decorator(login_required(login_url='/user/login'), name='dispatch')
 class Show_wishList(ListView):
     model=WishList
     template_name="Product/wishlist.html"
     context_object_name="wish_list"
 
     def get_queryset(self) :
-        qs=WishList.objects.filter(user__profile__email = self.request.user.email).first()
+        qs=WishList.objects.filter(user = self.request.user).first()
         
         return qs
        
