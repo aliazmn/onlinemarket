@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #my app
+    
+  
     'User',
     'Cart',
     'Comment',
@@ -53,11 +54,9 @@ INSTALLED_APPS = [
     'django_user_agents',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_simplejwt',
 
-    
-    'social_django',
-
-
+    'social_django', 
 ]
 
 
@@ -72,6 +71,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #other MIDDLEWARE
     'django_user_agents.middleware.UserAgentMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 
 ]
 
@@ -89,7 +89,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'Product.context.header',
-        
+
+                'social_django.context_processors.backends',  
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -220,10 +222,40 @@ MY_USER_TOKEN_VALIDATION_DAY = 2
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
         # 'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 # 'DEFAULT_PERMISSION_CLASSES': [
 #     'rest_framework.permissions.IsAuthenticated',
 # ]
 }
+
+
+
+AUTHENTICATION_BACKENDS = (
+    
+    'social_core.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_GITHUB_KEY = '7f218aebcdd6b15f20a1'
+SOCIAL_AUTH_GITHUB_SECRET = 'a9fc85a106f588d342ef02f09e45f90c1b511894'
+
+
+# LOGIN_URL = '/'
+# LOGOUT_URL = '/'
+LOGIN_REDIRECT_URL = 'home'
+# SOCIAL_AUTH_GITHUB_SCOPE = []
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.social_user',
+    # 'social_core.pipeline.social_auth.social_details',
+    # 'social_core.pipeline.user.get_username',
+    # 'social_core.pipeline.social_auth.associate_by_email',
+    # 'social_core.pipeline.user.create_user',
+    # 'social_core.pipeline.social_auth.associate_user',
+    # 'social_core.pipeline.social_auth.load_extra_data',
+    # 'social_core.pipeline.user.user_details',
+)

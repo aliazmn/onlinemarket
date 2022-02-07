@@ -1,5 +1,7 @@
 {% extends 'home.html' %}
-{%load static %}
+
+{% load static %}
+
 
 {% block main %}
 <!-- Breadcumbs start -->
@@ -42,7 +44,9 @@
                             <div class="col-md-12">                                       
                                 <div class="">
                                     <button class="e-btn" style="margin-top: 10px;"> ورود </a>
+                                    
                                 </div>
+                                <p> <a href="{% url 'social:begin' 'github' %}">login with GitHub</a></p>
                             </div>
                         </div>
                     </form>
