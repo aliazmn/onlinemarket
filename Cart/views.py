@@ -1,4 +1,5 @@
 import json
+from charset_normalizer import detect
 
 from django.http import HttpResponse
 from django.shortcuts import render,redirect,get_object_or_404
@@ -26,8 +27,7 @@ def add_to_cart(request):
 def show_cart(request):
 
     if not request.user.is_authenticated:
-        if not request.session.session_key:
-            request.session.save()
+
         ctx=show_cart_utils(request,request.session.session_key)
         return render(request,"Cart/cart.html",ctx)
         
@@ -37,14 +37,14 @@ def show_cart(request):
 
 
 
-def delete_cart(request,detail):
+def delete_cart(request,detect):
     redis_cache=caches['default']
     cart=redis_cache.client.get_client()
     if not request.user.is_authenticated:
-        cart.hdel(request.session.session_key,detail)
+        cart.hdel(request.session.session_key,detect)
         return redirect("cart:show-cart")
     else:
-        cart.hdel(request.user.email,detail)
+        cart.hdel(request.user.email,detect)
         return redirect("cart:show-cart")
 
 

@@ -1,22 +1,48 @@
-from rest_framework import viewsets
+import json
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.http import HttpResponse
+from Cart.utils import show_cart_utils
+from .serializer import CartSerializer
 
-
-class Cart(viewsets.ViewSet):
+class Cart(APIView):
     
-    def list(self, request):
-        pass
+    def get(self,request):
 
-    def create(self, request):
-        pass
+        if not request.user.is_authenticated:
+            dict_cart = show_cart_utils(request,request.session.session_key)
+        else:
+            
+            dict_cart = show_cart_utils(request,request.user.email)
 
-    def retrieve(self, request, pk=None):
-        pass
+        
+        dict_cart = dict_cart["show"]
+        print(dict_cart,"+++++++++++++++++++++++++")
+        dicc={}
+        for key,value in dict_cart.items():
+            dicc[key]={
+     
+                    "id":value["id"],
+                    "name":value["name"],
+                    "color":value.get("color",""),
+                    "size":value.get("size",""),
+                    "count":value["count"],
+                    "price_total":value["price_total"],
+                
+            }
+        return Response(dicc)  
+    
 
-    def update(self, request, pk=None):
-        pass
+    def post(self,request):
 
-    def partial_update(self, request, pk=None):
-        pass
+        serialized=CartSerializer(request,data=request.data)
+        if serialized.is_valid():
+            return serialized.create_cart()
+            
 
-    def destroy(self, request, pk=None):
-        pass
+        else:
+            return Response(serialized.errors,status=status.HTTP_400_BAD_REQUEST)
+        
+        
+    

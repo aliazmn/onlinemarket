@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'Product',
     'Notify',
     'Payment',
-    'azbankgateways',
+
     'django_user_agents',
 ]
 
