@@ -5,9 +5,11 @@ backports.zoneinfo==0.2.1
 cached-property==1.5.2
 certifi==2021.10.8
 charset-normalizer==2.0.10
+coverage==3.6
 Deprecated==1.2.13
 Django==4.0
 django-extensions==3.1.5
+django-filter==21.1
 django-js-asset==1.2.2
 django-mptt==0.13.4
 django-redis==5.2.0

@@ -101,7 +101,7 @@ def activate(request, valid):
 def forget_password(request):
     forget_password_form = ForgetPasswordForm(request.POST or None)
     if request.method == "GET":
-        return render(request, 'User/forget_password_form.html', {'forget_password_form': forget_password_form})
+        return render(request, 'User/forget_password.html', {'forget_password_form': forget_password_form})
     else:     
         if forget_password_form.is_valid():
             miss_email=forget_password_form.cleaned_data.get('email')

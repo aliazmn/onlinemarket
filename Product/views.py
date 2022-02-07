@@ -19,9 +19,9 @@ User = get_user_model()
 
 class ProductDetail(DetailView):
     model=Product
-    template_name="Product/product_details.html"
-    context_object_name="singleproduct"
-    pk_url_kwarg="product_id"
+    template_name = "Product/product_details.html"
+    context_object_name = "singleproduct"
+    pk_url_kwarg = "product_id"
 
     def get_context_data(self, *args, **kwargs):
         ctnx = super().get_context_data(*args, **kwargs)
@@ -44,10 +44,10 @@ class ProductDetail(DetailView):
 
 
 class ShowProduct(ListView):
-    model=Product
-    template_name="Product/product_category.html"
-    context_object_name="productlist"
-    paginate_by=8
+    model = Product
+    template_name = "Product/product_category.html"
+    context_object_name = "productlist"
+    paginate_by = 8
 
     def get_queryset(self) :
         qs = super().get_queryset()
