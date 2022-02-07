@@ -1,9 +1,7 @@
 
 from django.urls import path
 
-from Product.Api.Product_api import ProductDetailView, ProductListView
-
-
+from Product.Api.Product_api import  ProductDetailView, ProductListView,CategoryDetailView
 from .views import ProductDetail, Show_wishList,ShowProduct, add_to_wishlist, delete_from_wishlist
 
 app_name="Product"
@@ -14,12 +12,14 @@ urlpatterns = [
     path("del-wishlist/<int:id>", delete_from_wishlist, name="delete_wishlist"),
     path("show-wishlist/", Show_wishList.as_view(), name="Show_wishList"),
 
-    path('apiproduct-list/', ProductListView.as_view(), name='product-list'),
-    path('apiproduct-detail/<str:slug>', ProductDetailView.as_view(), name='product_detail')
-    
 
-    
 
+   #API PATH
+  
+    path('apiproduct-list/', ProductListView.as_view(), name='product_list'),
+    path('apiproduct-detail/<str:slug>', ProductDetailView.as_view(), name='product_detail'),
+    path('categorydetail/<int:pk>',CategoryDetailView.as_view(),name='category_detail'),
+   
 
 ]
 

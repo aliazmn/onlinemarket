@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'Payment',
     'azbankgateways',
     'django_user_agents',
-    'rest_framework',
+    
     'django_filters',
 ]
 

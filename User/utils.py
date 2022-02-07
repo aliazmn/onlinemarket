@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 from django.db.models import Q
-
+from django.core.cache import caches
 from User.models import UserDevice
 
 def linked_devices(request,user):
@@ -18,8 +17,7 @@ def linked_devices(request,user):
 
 
 
-=======
-from django.core.cache import caches
+
 
 
 def filling_cart(request):
@@ -30,4 +28,3 @@ def filling_cart(request):
     carts=cart.hgetall(request.session.session_key)
     for elm in carts:
         cart.hset(request.user.email,elm.decode("utf-8"),carts[elm])
->>>>>>> 9442d28210b8e6876660c106286e5ba3b6fe9e42

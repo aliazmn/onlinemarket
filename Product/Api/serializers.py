@@ -1,5 +1,10 @@
 
 
+from itertools import product
+from pickle import TRUE
+from pyexpat import model
+from unicodedata import category
+from attr import field
 from rest_framework import serializers
 from Comment.Api.serializers import CommentSerializer
 from Product.models import Product,Category
@@ -16,10 +21,8 @@ class ProductListSerializer(serializers.HyperlinkedModelSerializer):
     
 
 
-
-
 class ProductDetailSerializer(serializers.ModelSerializer):
-    comments = CommentSerializer(many=True, read_only=True)
+    # comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
@@ -29,12 +32,35 @@ class ProductDetailSerializer(serializers.ModelSerializer):
 
 
 
+class RelatedCategorySerializer(serializers.ModelSerializer):
+    producttocat=ProductListSerializer(many=True)
+    class Meta:
+        model=Category
+        fields=['cat_title','producttocat']
+        # extra_kwargs={
+        #     'url' :{'view_name':'product:product_list'}
+        # }
 
-class CategorySerializer(serializers.HyperlinkedModelSerializer):
-    
-    cattocat = serializers.StringRelatedField(many=True)
+
+class CategoryDetailSerializer(serializers.ModelSerializer):
+    cattocat=RelatedCategorySerializer(many=True)
+
+    class Meta:
+        model=Category
+        fields = ['cattocat']
+        
+       
+
+
+class CategoryListgSerializer(serializers.HyperlinkedModelSerializer):
+    cattocat=serializers.StringRelatedField(many=True)
+   
 
     class Meta:
         model = Category
-        fields = ['cat_title','cattocat']
+        fields = ['url','cat_title','cattocat',]
+        extra_kwargs = {
+        'url': {'view_name': 'product:category_detail', 'lookup_field':'pk'}
+        }
+      
 

@@ -41,30 +41,8 @@ def login(request):
             if user is not None:  
                 _login(request, user)
                 next = request.GET.get("next", "")
-<<<<<<< HEAD
                 linked_devices(request,user)
-                if not request.session.session_key:
-                    request.session.save()
-                redis_cache=caches['default']
-                cart=redis_cache.client.get_client()
-                carts=cart.hgetall(request.session.session_key)
-                for elm in carts:
-                    cart.hset(request.user.email,elm.decode("utf-8"),carts[elm])
-=======
-                user=user
-                if request.user_agent.is_mobile:
-                    device = "Mobile"
-                if request.user_agent.is_tablet:
-                    device = "Tablet"
-                if request.user_agent.is_pc:
-                    device = "PC"
-                browser=request.user_agent.browser.family
-                os=request.user_agent.os.family
-                query=UserDevice.objects.filter(Q(user=user)&Q(device=device))
-                if not query:
-                    UserDevice.objects.create(user=user,device=device,browser=browser,os=os)
                 filling_cart(request)
->>>>>>> 9442d28210b8e6876660c106286e5ba3b6fe9e42
                 if next:
                     return redirect(next)
                 return redirect('home')
@@ -200,8 +178,6 @@ class show_profile(DetailView):
 
 def user_session_logedin(request):
      if request.method == "GET":
-<<<<<<< HEAD
-=======
     #     user=request.user.email
     #     if request.user_agent.is_mobile:
     #         device = "Mobile"
@@ -214,7 +190,6 @@ def user_session_logedin(request):
     #     query=UserDevice.objects.filter(Q(user=user)&Q(device=device))
     #     if not query:
     #         UserDevice.objects.create(user=user,device=device,browser=browser,os=os)
->>>>>>> 9442d28210b8e6876660c106286e5ba3b6fe9e42
         linked_devices=UserDevice.objects.all()
         ctx={
             'linked_devices':linked_devices
