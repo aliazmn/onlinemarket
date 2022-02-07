@@ -1,6 +1,7 @@
 from django.utils.translation import gettext as _
 from User.models import Profile
 from django.db import models
+from django.utils.text import slugify
 from django.shortcuts import get_object_or_404
 
 
@@ -33,7 +34,7 @@ class Product(models.Model):
     date_create=models.DateField(auto_now_add=True)
     data_update=models.DateField(auto_now=True)
     cat_id=models.ForeignKey(Category, on_delete=models.CASCADE,  related_name='producttocat' )
-
+    slug = models.SlugField(null=True, unique=True, blank=True)
 
 
     class Meta:
@@ -55,6 +56,11 @@ class Product(models.Model):
     def __str__(self) -> str:
         return f"{self.name}-{self.brand}"
 
+
+    def save(self, *args, **kwargs) -> None:
+        if not self.slug:
+            self.slug = slugify(self.name, allow_unicode=True)
+        return super().save(*args, **kwargs)
          
 
 class Property(models.Model):

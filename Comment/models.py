@@ -25,7 +25,7 @@ class rate(models.Model):
         return f"{self.user.first_name}+{self.id}"        
 
 class CommentMe(models.Model):
-    user=models.ForeignKey(Profile,on_delete=models.CASCADE,related_name="commenttouser",verbose_name=_("comment"))   
+    user=models.ForeignKey(Profile,null=True,on_delete=models.SET_NULL,related_name="commenttouser",verbose_name=_("comment"))   
     product=models.ForeignKey(Product,on_delete=models.CASCADE,related_name="commenttoproduct",verbose_name=_("product"))
 
     comment=models.CharField(max_length=255,verbose_name=_("comment"),help_text="کامنت خود را وارد کنید",null=True,blank=True)

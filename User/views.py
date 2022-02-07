@@ -4,10 +4,10 @@ from django.contrib.auth import authenticate, logout as _logout, login as _login
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
-from django.db.models import Q
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 from django.core.cache import cache
+from User.utils import linked_devices
 from project import settings
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
@@ -17,6 +17,8 @@ from django.contrib.auth.decorators import login_required
 from User.forms import ForgetPassForm, ForgetPasswordForm, RegisterForm ,LoginForm
 from .models import Address, Customer, Profile, UserDevice
 from .utils import filling_cart
+
+
 
 User = get_user_model()
 
@@ -39,18 +41,7 @@ def login(request):
             if user is not None:  
                 _login(request, user)
                 next = request.GET.get("next", "")
-                user=user
-                if request.user_agent.is_mobile:
-                    device = "Mobile"
-                if request.user_agent.is_tablet:
-                    device = "Tablet"
-                if request.user_agent.is_pc:
-                    device = "PC"
-                browser=request.user_agent.browser.family
-                os=request.user_agent.os.family
-                query=UserDevice.objects.filter(Q(user=user)&Q(device=device))
-                if not query:
-                    UserDevice.objects.create(user=user,device=device,browser=browser,os=os)
+                linked_devices(request,user)
                 filling_cart(request)
                 if next:
                     return redirect(next)
@@ -200,16 +191,12 @@ def user_session_logedin(request):
     #     if not query:
     #         UserDevice.objects.create(user=user,device=device,browser=browser,os=os)
         linked_devices=UserDevice.objects.all()
-
         ctx={
             'linked_devices':linked_devices
         }
         return render(request,'session.html',ctx)
 
-
 def delet_session(request):
     pass
-
-
 
 
