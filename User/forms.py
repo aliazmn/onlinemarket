@@ -53,13 +53,13 @@ class RegisterForm(forms.ModelForm):
 
         try:
             password_validation.validate_password(self.cleaned_data.get("password"), self.instance)
+            return self.cleaned_data.get("password") 
         except ValidationError as error:
             raise forms.ValidationError("""
                                         1-این پسورد خیلی کوتاه است حداقل 8 کاراکتر
                                         2-پسورد خیلی ساده است
                                         3-پسورد فقط عدد است
                                         """)
-
     def clean_re_password(self):
         password = self.cleaned_data.get('password')
         re_password = self.cleaned_data.get('re_password')

@@ -14,7 +14,8 @@ from django.core.cache import caches
 
 from User.forms import ForgetPassForm, ForgetPasswordForm, RegisterForm ,LoginForm
 from .models import Address, Customer, Profile, UserDevice
-from .utils import Send_email
+from .utils import Send_email,make_session
+from .tasks import my_validate
 
 
 
@@ -85,7 +86,7 @@ def register(request):
             cus.save() 
             opt="activate"
             to_email = register_form.cleaned_data.get('email')
-            Send_email(request,to_email,opt)    
+            my_validate.delay(request,to_email,opt)    
             return redirect('user:login')
         else:
             return render(request, 'User/register_page.html', {'register_form': register_form})
@@ -115,8 +116,8 @@ def forget_password(request):
             if user:
                 opt = "forget-pass"
                 to_email = forget_password_form.cleaned_data.get('email')
-                Send_email(request,to_email,opt)
-
+                uid=make_session(request,to_email)
+                my_validate.delay(to_email,uid,opt)
                 return render(request,'User/forget_status.html',{'status':"please check your email for continue."})
             else:
                 return redirect('user:forget_password')

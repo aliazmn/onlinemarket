@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
+    'django_celery_results',
 
     'social_django', 
 ]
@@ -259,3 +260,9 @@ SOCIAL_AUTH_PIPELINE = (
     # 'social_core.pipeline.social_auth.load_extra_data',
     # 'social_core.pipeline.user.user_details',
 )
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_TIMEZONE = "Asia/Tehran"
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_CACHE_BACKEND = 'default'
+CELERY_RESULT_SERIALIZER = 'json'
