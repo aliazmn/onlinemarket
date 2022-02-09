@@ -7,13 +7,13 @@
     <h2 class="e-breadcumb-title">علاقه مندیها</h2>
     <ul class="e-breadcumb-kist">
         <li>
-            <a href="index.html">خانه </a>
+            <a href="{% url 'home' %}">خانه </a>
         </li>
         <li>
-            <a href='{%static  "javascript:void(0);" %}'> صفحات </a>
+            <a href=''> صفحات </a>
         </li>
         <li>
-            <a href='{%static  "javascript:void(0);" %}'>علاقه مندیها </a>
+            <a href=''>علاقه مندیها </a>
         </li>
     </ul>
 </div>
@@ -55,7 +55,7 @@
                                     </td>
                                     <td><span class="sc-product-prc">{{elms.price}}</span></td>
                                     <td>
-                                        <a href='{%static  "javascript:void(0);" %}' class="e-btn wishlist-ac">افزودن به سبد </a>
+                                        <a href="{% url 'product:detailproduct' elms.id %}" class="e-btn wishlist-ac">اطلاعات محصول  </a>
                                     </td>                                    
                                     <td>
                                         <a href='{% url "product:delete_wishlist" elms.id %}' class="sc-produc-remove e-remove-product">

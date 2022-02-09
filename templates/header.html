@@ -11,7 +11,7 @@
                 <ul class="ht-info-list">
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'user:profile' user.id %}">حساب کاربری </a></li>
-                    <li><a href=" {% url 'product:Show_wishList' %}">لیست علاقه مندیها </a></li>
+                    <li><a href=" {% url 'product:Show_wishList'%}">لیست علاقه مندیها </a></li>
                     <li><a href=" {% url 'payment:showfactor' %}">فاکتور ها </a></li>
                     <li><a href="{% url 'user:user_session' %}">نشست های فعال </a></li>
                     <li>
@@ -36,7 +36,7 @@
     <div class="header-sticky-wrapper">
         <div class="hs-left">
             <div class="hs-left-logo">
-                <a href="index.html"><img src='{% static "assets/images/index1/logo.png"%}' alt="logo" class="img-fluid"></a>
+                <a href="{% url 'home' %}"><img src='{% static "assets/images/index1/logo.png"%}' alt="logo" class="img-fluid"></a>
             </div>
         </div>
         <div class="hs-medium custom-scroll">

@@ -10,10 +10,6 @@ from .views import *
 from User.api.views import Login_api,logout_api,RegisterView
 
 
-
-
-
-
 app_name="User"
 
 urlpatterns = [

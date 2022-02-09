@@ -56,6 +56,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'django_celery_results',
+    
+    'django_filters',
+
 
     'social_django', 
 ]
@@ -227,6 +230,7 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 # 'DEFAULT_PERMISSION_CLASSES': [
 #     'rest_framework.permissions.IsAuthenticated',
 # ]
@@ -266,3 +270,4 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_CACHE_BACKEND = 'default'
 CELERY_RESULT_SERIALIZER = 'json'
+
