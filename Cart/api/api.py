@@ -18,7 +18,6 @@ class Cart(APIView):
 
         
         dict_cart = dict_cart["show"]
-        print(dict_cart,"+++++++++++++++++++++++++")
         dicc={}
         for key,value in dict_cart.items():
             dicc[key]={

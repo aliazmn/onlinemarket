@@ -1,4 +1,4 @@
-asgiref==3.4.1
+fasgiref==3.4.1
 attrs==21.4.0
 az-iranian-bank-gateways==1.6.15
 backports.zoneinfo==0.2.1
