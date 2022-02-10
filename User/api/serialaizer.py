@@ -14,7 +14,10 @@ from User.utils import Send_email
 from User.models import Customer,Address
 from User.models import Profile
 
-
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 
 

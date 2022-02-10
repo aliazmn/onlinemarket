@@ -31,7 +31,7 @@ urlpatterns = [
     path("user/", include("User.urls", namespace='user')),
     path('payment/', include("Payment.urls",namespace="payment")),
     path('cart/', include("Cart.urls",namespace="cart")),
-    path('api-auth/', include('rest_framework.urls')),
+    # path('api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', views.obtain_auth_token),
     path('oauth/', include('social_django.urls', namespace='social'))
 

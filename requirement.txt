@@ -13,9 +13,9 @@ click==8.0.3
 click-didyoumean==0.3.0
 click-plugins==1.1.1
 click-repl==0.2.0
+coverage==3.6
 cryptography==36.0.1
 defusedxml==0.7.1
-coverage==3.6
 Deprecated==1.2.13
 Django==4.0
 django-allauth==0.47.0
@@ -31,6 +31,7 @@ django-user-agents==0.4.0
 djangorestframework==3.13.1
 djangorestframework-simplejwt==5.0.0
 idna==3.3
+idpay==0.0.1
 isodate==0.6.1
 kombu==5.2.3
 lxml==4.7.1
