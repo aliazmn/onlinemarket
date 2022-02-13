@@ -6,7 +6,6 @@ from django.conf.urls.static import static
 
 from rest_framework.routers import DefaultRouter
 
-from azbankgateways.urls import az_bank_gateways_urls
 
 from Comment.Api.Comment_Api import CommentView
 from .views import Home, searchbox

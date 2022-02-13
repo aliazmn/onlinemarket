@@ -1,7 +1,7 @@
 from django.urls import path
 from django.urls.conf import re_path
 
-from .views import forget_password, login, logout, register, activate,forget_pass, show_profile,user_session_logedin
+from .views import forget_password, login, logout, register, activate,forget_pass, show_profile,user_session_logedin ,set_true
 app_name="User"
 
 urlpatterns = [
@@ -13,6 +13,8 @@ urlpatterns = [
     path("forget_pass/", forget_pass, name="forget_pass"),
     path("linked_dev/", user_session_logedin, name="user_session"),
     path('profile/<int:id>',show_profile.as_view(), name='profile'),
+    path('set_true/<str:auten>',set_true, name='set_true'),
+    
     
 
 

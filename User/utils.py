@@ -20,6 +20,7 @@ def linked_devices(request,user):
 
 
 
+
 def filling_cart(request):
     if not request.session.session_key:
         request.session.save()
