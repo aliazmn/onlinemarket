@@ -46,12 +46,9 @@ services:
   celery:
     image: onlinemarket_django_web
     restart: always
-    # build:
-    #   context: .
-#      dockerfile: dokckerfile-name-alternative
-
+    
     command: >
-      ash -c "touch celery.log && touch celery_beat.log && celery -A roadMap worker -l info &> celery.log & celery -A roadMap beat -l info -S django &> celery_beat.log"
+      ash -c "touch celery.log && touch celery_beat.log && celery -A onlinemarket worker -l info &> celery.log  &> celery_beat.log"
     volumes:
       - .:/app
     depends_on:

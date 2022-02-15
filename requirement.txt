@@ -44,6 +44,11 @@ jsonschema==3.2.0
 kombu==5.2.3
 lxml==4.7.1
 migrate==0.3.8
+idna==3.3
+idpay==0.0.1
+isodate==0.6.1
+kombu==5.2.3
+lxml==4.7.1
 oauthlib==3.2.0
 packaging==21.3
 paramiko==2.9.2
