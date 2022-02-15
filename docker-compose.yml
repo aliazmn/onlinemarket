@@ -32,7 +32,7 @@ services:
       - static:/app/static
       - media:/app/media
     ports:
-      - 8008:80
+      - 8001:80
     depends_on:
       - django_web
     networks:
@@ -48,7 +48,7 @@ services:
     restart: always
     
     command: >
-      ash -c "touch celery.log && touch celery_beat.log && celery -A onlinemarket worker -l info &> celery.log  &> celery_beat.log"
+      ash -c "touch celery.log && celery -A project worker -l info &> celery.log"
     volumes:
       - .:/app
     depends_on:
