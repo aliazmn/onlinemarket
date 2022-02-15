@@ -12,14 +12,11 @@ urlpatterns = [
     path("del-wishlist/<int:id>", delete_from_wishlist, name="delete_wishlist"),
     path("show-wishlist/", Show_wishList.as_view(), name="Show_wishList"),
 
-
-
    #API PATH
   
     path('apiproduct-list/', ProductListView.as_view(), name='product_list'),
     path('apiproduct-detail/<str:slug>', ProductDetailView.as_view(), name='product_detail'),
     path('categorydetail/<int:pk>',CategoryDetailView.as_view(),name='category_detail'),
-   
-
 ]
+
 

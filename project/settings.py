@@ -177,12 +177,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS=[BASE_DIR/"static"]
+# STATICFILES_DIRS=[BASE_DIR/"static"]
 MEDIA_URL="/media/"
 MEDIA_ROOT=BASE_DIR/"media/"
 CART_SESSION_ID='cart'
 
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -264,9 +264,11 @@ SOCIAL_AUTH_PIPELINE = (
     # 'social_core.pipeline.social_auth.load_extra_data',
     # 'social_core.pipeline.user.user_details',
 )
-CELERY_BROKER_URL = "redis://localhost:6379"
+
+REDIS_HOST= os.environ.get("REDIS_HOST", "")
+CELERY_BROKER_URL = f"redis://{REDIS_HOST}:6379"
 CELERY_TIMEZONE = "Asia/Tehran"
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
+CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:6379/1'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_CACHE_BACKEND = 'default'
 CELERY_RESULT_SERIALIZER = 'json'
