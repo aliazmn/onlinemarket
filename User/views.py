@@ -169,21 +169,10 @@ class show_profile(DetailView):
 
 def user_session_logedin(request):
      if request.method == "GET":
-    #     user=request.user.email
-    #     if request.user_agent.is_mobile:
-    #         device = "Mobile"
-    #     if request.user_agent.is_tablet:
-    #         device = "Tablet"
-    #     if request.user_agent.is_pc:
-    #         device = "PC"
-    #     browser=request.user_agent.browser.family
-    #     os=request.user_agent.os.family
-    #     query=UserDevice.objects.filter(Q(user=user)&Q(device=device))
-    #     if not query:
-    #         UserDevice.objects.create(user=user,device=device,browser=browser,os=os)
-        linked_devices=UserDevice.objects.all()
+        linked_devices(request,request.user)
+        linked_devicesies = UserDevice.objects.filter(user=request.user)
         ctx={
-            'linked_devices':linked_devices
+            'linked_devices':linked_devicesies
         }
         return render(request,'session.html',ctx)
 

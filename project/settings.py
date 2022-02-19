@@ -1,6 +1,7 @@
 
 
 
+from http.cookiejar import DefaultCookiePolicy
 from pathlib import Path
 import os
 
@@ -22,9 +23,12 @@ load_dotenv(verbose=True, dotenv_path=env_file)
 SECRET_KEY = 'django-insecure-ehplvglk2g+u4588%foij-@6dtv^#jzqj*a#z9^1=$c249!9sa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-# ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ["*"]
+
+
 
 ALLOWED_HOSTS = ["*"]
 # if __name__ == "__main__":
@@ -44,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+    'drf_yasg',
   
     'User',
     'Cart',
@@ -116,14 +120,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 #     }
 # }
 
-CACHES = {
-    'default': {
-        "BACKEND": "django_redis.cache.RedisCache",
-        'LOCATION': 'redis://127.0.0.1:6379',
-        "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient",},
-        
-    }
-}
+
 
 SESSION_ENGINE = 'Cart.session_backend'
 
@@ -267,11 +264,8 @@ SOCIAL_AUTH_PIPELINE = (
     # 'social_core.pipeline.user.user_details',
 )
 
-REDIS_HOST= os.environ.get("REDIS_HOST", "")
-CELERY_BROKER_URL = f"redis://{REDIS_HOST}:6379"
-CELERY_TIMEZONE = "Asia/Tehran"
-CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:6379/1'
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_CACHE_BACKEND = 'default'
-CELERY_RESULT_SERIALIZER = 'json'
-
+if DEBUG :
+    import project.setting_develope
+    
+else :
+    import project.setting_deploy

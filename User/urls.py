@@ -1,5 +1,6 @@
 from django.urls import path
 
+from .views import forget_password, login, logout, register, activate,forget_pass, show_profile,user_session_logedin ,set_true
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -24,6 +25,11 @@ urlpatterns = [
     path('profile/<int:id>',show_profile.as_view(),name="profile"),
 #----------------linked divice---------------
     path("linked_dev/", user_session_logedin, name="user_session"),
+    path('profile/<int:id>',show_profile.as_view(), name='profile'),
+    path('set_true/<str:auten>',set_true, name='set_true'),
+    
+    
+
 #---------------API-----------------------
     path("api/login/",Login_api.as_view(), name="api-login"),
     path("api/register",RegisterView.as_view()),
