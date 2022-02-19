@@ -23,9 +23,9 @@ load_dotenv(verbose=True, dotenv_path=env_file)
 SECRET_KEY = 'django-insecure-ehplvglk2g+u4588%foij-@6dtv^#jzqj*a#z9^1=$c249!9sa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # if __name__ == "__main__":
@@ -260,7 +260,7 @@ SOCIAL_AUTH_PIPELINE = (
 )
 
 if DEBUG :
-    from .setting_develope import *
+    import project.setting_develope
     
 else :
-    from .setting_deploy import *
+    import project.setting_deploy
