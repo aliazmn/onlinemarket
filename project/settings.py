@@ -43,22 +43,25 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    
-    'rest_framework',
-    
-    #my app
+  
     'User',
     'Cart',
     'Comment',
     'Product',
     'Notify',
     'Payment',
-
+    'azbankgateways',
     'django_user_agents',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'django_celery_results',
     
     'django_filters',
-]
 
+
+    'social_django', 
+]
 
 
 
@@ -72,6 +75,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #other MIDDLEWARE
     'django_user_agents.middleware.UserAgentMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 
 ]
 
@@ -89,7 +93,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'Product.context.header',
-        
+
+                'social_django.context_processors.backends',  
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -171,12 +177,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS=[BASE_DIR/"static"]
+# STATICFILES_DIRS=[BASE_DIR/"static"]
 MEDIA_URL="/media/"
 MEDIA_ROOT=BASE_DIR/"media/"
 CART_SESSION_ID='cart'
 
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -215,6 +221,55 @@ AZ_IRANIAN_BANK_GATEWAYS = {
    ], # اختیاری
 }
 
+MY_USER_TOKEN_VALIDATION_DAY = 2
+
+
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+# 'DEFAULT_PERMISSION_CLASSES': [
+#     'rest_framework.permissions.IsAuthenticated',
+# ]
 }
+
+
+
+AUTHENTICATION_BACKENDS = (
+    
+    'social_core.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_GITHUB_KEY = '7f218aebcdd6b15f20a1'
+SOCIAL_AUTH_GITHUB_SECRET = 'a9fc85a106f588d342ef02f09e45f90c1b511894'
+
+
+# LOGIN_URL = '/'
+# LOGOUT_URL = '/'
+LOGIN_REDIRECT_URL = 'home'
+# SOCIAL_AUTH_GITHUB_SCOPE = []
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.social_user',
+    # 'social_core.pipeline.social_auth.social_details',
+    # 'social_core.pipeline.user.get_username',
+    # 'social_core.pipeline.social_auth.associate_by_email',
+    # 'social_core.pipeline.user.create_user',
+    # 'social_core.pipeline.social_auth.associate_user',
+    # 'social_core.pipeline.social_auth.load_extra_data',
+    # 'social_core.pipeline.user.user_details',
+)
+
+REDIS_HOST= os.environ.get("REDIS_HOST", "")
+CELERY_BROKER_URL = f"redis://{REDIS_HOST}:6379"
+CELERY_TIMEZONE = "Asia/Tehran"
+CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:6379/1'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_CACHE_BACKEND = 'default'
+CELERY_RESULT_SERIALIZER = 'json'
+

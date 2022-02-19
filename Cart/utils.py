@@ -17,7 +17,7 @@ def set():
     
 def add_cart(request,name,detect = None):
     cart = set()
-    if cart.hlen(name) > 0:
+    if cart.hlen(name) > 1:
         keys = cart.hkeys(name)
         for elm in keys:
             if elm.decode("utf-8") == detect:
@@ -25,6 +25,10 @@ def add_cart(request,name,detect = None):
                 same_product = json.loads(same_product)
                 same_product["count"] = int(same_product["count"]) + int(request.POST["count"])
                 cart.hset(name,detect,json.dumps(same_product))
+                break
+        else:
+            cart.hset(name,detect,json.dumps(request.POST))
+
     else:             
         cart.hset(name,detect,json.dumps(request.POST))
     
@@ -53,6 +57,9 @@ def add_cart_api(valid_data,name):
                 same_product = json.loads(same_product)
                 same_product["count"] = int(same_product["count"]) + int(dict_cart["count"])
                 cart.hset(name,detect,json.dumps(same_product))
+                break
+        else:       
+            cart.hset(name,detect,json.dumps(dict_cart))
     else:       
         cart.hset(name,detect,json.dumps(dict_cart))
 
