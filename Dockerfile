@@ -12,5 +12,6 @@ RUN apk update \
     && apk add --virtual build-deps \
     && apk add jpeg-dev zlib-dev libjpeg \
     && apk del build-deps
+COPY requirements.txt ./
 RUN pip install --upgrade pip
 RUN pip install -r requirement.txt

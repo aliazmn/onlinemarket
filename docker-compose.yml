@@ -2,7 +2,8 @@ version: "3.7"
 
 services:
   django_web:
-    build: .
+    # build: .
+    image: django_image_with_tzdata
     command: >
       ash -c "python manage.py migrate && gunicorn project.wsgi:application --bind 0.0.0.0:8000"
     volumes:
@@ -44,7 +45,7 @@ services:
     networks:
       - db_net
   celery:
-    image: onlinemarket_django_web
+    image: django_image_with_tzdata
     restart: always
     
     command: >
