@@ -25,11 +25,16 @@ SECRET_KEY = 'django-insecure-ehplvglk2g+u4588%foij-@6dtv^#jzqj*a#z9^1=$c249!9sa
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+
 ALLOWED_HOSTS = ["*"]
 
 
+
+ALLOWED_HOSTS = ["*"]
 # if __name__ == "__main__":
 #     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
+
+CSRF_TRUSTED_ORIGINS = ['http://onlinemarket', 'http://*.127.0.0.1', 'http://217.182.230.17:8001']
 
 
 AUTH_USER_MODEL = "User.Profile"
