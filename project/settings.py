@@ -1,6 +1,7 @@
 
 
 
+from http.cookiejar import DefaultCookiePolicy
 from pathlib import Path
 import os
 
@@ -42,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+    'drf_yasg',
   
     'User',
     'Cart',
@@ -114,14 +115,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 #     }
 # }
 
-CACHES = {
-    'default': {
-        "BACKEND": "django_redis.cache.RedisCache",
-        'LOCATION': 'redis://127.0.0.1:6379',
-        "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient",},
-        
-    }
-}
+
 
 SESSION_ENGINE = 'Cart.session_backend'
 
@@ -265,11 +259,8 @@ SOCIAL_AUTH_PIPELINE = (
     # 'social_core.pipeline.user.user_details',
 )
 
-REDIS_HOST= os.environ.get("REDIS_HOST", "")
-CELERY_BROKER_URL = f"redis://{REDIS_HOST}:6379"
-CELERY_TIMEZONE = "Asia/Tehran"
-CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:6379/1'
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_CACHE_BACKEND = 'default'
-CELERY_RESULT_SERIALIZER = 'json'
-
+if DEBUG :
+    from .setting_develope import *
+    
+else :
+    from .setting_deploy import *
