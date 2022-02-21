@@ -19,7 +19,12 @@ def Send_email(to_email,uid,opt):
         link=reverse("user:set_true",kwargs={"auten":uid})
         
     mail_subject = 'click on link for continue'
-    message = "127.0.0.1:8000"+link
+    if settings.DEBUG :
+        
+        message = "127.0.0.1:8000"+link
+    else :
+        message = "217.182.230.17:8001"+link
+        
     # request.session["email"]=to_email
     # request.session["uid"]=uid
     # cache.set(to_email,uid,180)

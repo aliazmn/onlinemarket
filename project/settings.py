@@ -20,14 +20,14 @@ load_dotenv(verbose=True, dotenv_path=env_file)
 SECRET_KEY = 'django-insecure-ehplvglk2g+u4588%foij-@6dtv^#jzqj*a#z9^1=$c249!9sa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ["*"]
 
 
 
-ALLOWED_HOSTS = ["*"]
+
 # if __name__ == "__main__":
 #     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
 
@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'Product',
     'Notify',
     'Payment',
-    'azbankgateways',
     'django_user_agents',
     'rest_framework',
     'rest_framework.authtoken',
@@ -196,26 +195,7 @@ EMAIL_HOST_PASSWORD =os.environ.get("EMAIL_HOST_PASSWORD","")
 
 
 
-AZ_IRANIAN_BANK_GATEWAYS = {
-   'GATEWAYS': {
-      
-       'IDPAY': {
-           'MERCHANT_CODE': os.environ.get("MERCHANT_CODE",""),
-           'METHOD': 'POST',  # GET or POST
-           'X_SANDBOX': 1,  # 0 disable, 1 active
-       }
 
-   },
-   'IS_SAMPLE_FORM_ENABLE': True, # اختیاری و پیش فرض غیر فعال است
-   'DEFAULT': 'IDPAY',
-   'CURRENCY': 'IRR', # اختیاری
-   'TRACKING_CODE_QUERY_PARAM': 'tc', # اختیاری
-   'TRACKING_CODE_LENGTH': 16, # اختیاری
-   'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader', # اختیاری
-   'BANK_PRIORITIES': [
-       # and so on ...
-   ], # اختیاری
-}
 
 MY_USER_TOKEN_VALIDATION_DAY = 2
 
@@ -261,42 +241,29 @@ SOCIAL_AUTH_PIPELINE = (
     # 'social_core.pipeline.user.user_details',
 )
 
-# if DEBUG :
-#     import project.setting_develope
-#     CACHES = {
-#     'default': {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         'LOCATION': 'redis://127.0.0.1:6379',
-        
-#         "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient",},
-        
-#     }
-# }
-
-
-
-# else :
-#     import project.setting_deploy
-#     CACHES = {
-        
-#         'default': {
-#             "BACKEND": "django_redis.cache.RedisCache",
-#             'LOCATION': 'redis://217.182.230.17:6379',
-#             "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient",},
-            
-#         }
-#     }
-
-import project.setting_deploy
-
-CACHES = {
-    
+if DEBUG :
+    import project.setting_develope
+    CACHES = {
     'default': {
         "BACKEND": "django_redis.cache.RedisCache",
-        'LOCATION': 'redis://217.182.230.17:6379',
+        'LOCATION': 'redis://127.0.0.1:6379',
+        
         "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient",},
         
     }
 }
 
+
+
+else :
+    import project.setting_deploy
+    CACHES = {
+        
+        'default': {
+            "BACKEND": "django_redis.cache.RedisCache",
+            'LOCATION': 'redis://217.182.230.17:6379',
+            "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient",},
+            
+        }
+    }
 
