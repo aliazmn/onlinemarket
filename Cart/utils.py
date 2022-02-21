@@ -70,27 +70,28 @@ def show_cart_utils(request,name):
     if not request.session.session_key:
         request.session.save()
     prod_list,ctx,price_totoal={},{},0
-    # try:
-    my_cart=cart.hgetall(name)
+    try:
+        my_cart=cart.hgetall(name)
 
-    for item in my_cart:
-        elm = json.loads(my_cart[item])
-        product = get_object_or_404(Product,id = elm.get("id"))
-        if int(elm.get("count")) > int(product.amount):
-            elm["status"] = False
-        else:
-            elm["status"]=True
-            elm["price"] = int(product.price)*int(elm.get("count"))
-            price_totoal+= elm["price"]
-            elm["price_total"] = price_totoal
-        prod_list[elm["name"]]=elm
+        for item in my_cart:
+            elm = json.loads(my_cart[item])
+            elm.setdefault("detect" , item.decode("utf-8"))
+            product = get_object_or_404(Product,id = elm.get("id"))
+            if int(elm.get("count")) > int(product.amount):
+                elm["status"] = False
+            else:
+                elm["status"]=True
+                elm["price"] = int(product.price)*int(elm.get("count"))
+                price_totoal+= elm["price"]
+                elm["price_total"] = price_totoal
+            prod_list[elm["name"]]=elm
 
-    
-    ctx["show"] = prod_list
-    ctx["price_total"] = price_totoal
-    return ctx
-    # except:
-    #     ctx ["show"]=""
-    #     ctx["price_total"] = 0
         
-    #     return ctx 
+        ctx["show"] = prod_list
+        ctx["price_total"] = price_totoal
+        return ctx
+    except:
+        ctx ["show"]=""
+        ctx["price_total"] = 0
+        
+        return ctx 

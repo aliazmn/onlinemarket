@@ -1,7 +1,4 @@
 
-
-
-from http.cookiejar import DefaultCookiePolicy
 from pathlib import Path
 import os
 
@@ -23,7 +20,7 @@ load_dotenv(verbose=True, dotenv_path=env_file)
 SECRET_KEY = 'django-insecure-ehplvglk2g+u4588%foij-@6dtv^#jzqj*a#z9^1=$c249!9sa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ["*"]
@@ -264,8 +261,42 @@ SOCIAL_AUTH_PIPELINE = (
     # 'social_core.pipeline.user.user_details',
 )
 
-if DEBUG :
-    import project.setting_develope
+# if DEBUG :
+#     import project.setting_develope
+#     CACHES = {
+#     'default': {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         'LOCATION': 'redis://127.0.0.1:6379',
+        
+#         "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient",},
+        
+#     }
+# }
+
+
+
+# else :
+#     import project.setting_deploy
+#     CACHES = {
+        
+#         'default': {
+#             "BACKEND": "django_redis.cache.RedisCache",
+#             'LOCATION': 'redis://217.182.230.17:6379',
+#             "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient",},
+            
+#         }
+#     }
+
+import project.setting_deploy
+
+CACHES = {
     
-else :
-    import project.setting_deploy
+    'default': {
+        "BACKEND": "django_redis.cache.RedisCache",
+        'LOCATION': 'redis://217.182.230.17:6379',
+        "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient",},
+        
+    }
+}
+
+

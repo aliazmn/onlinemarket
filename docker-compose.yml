@@ -5,7 +5,7 @@ services:
     # build: .
     image: django_image_with_tzdata
     command: >
-      ash -c "python manage.py migrate && gunicorn project.wsgi:application --bind 0.0.0.0:8000"
+      ash -c " pip install -U drf-yasg && python manage.py migrate && gunicorn project.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - static:/app/static
       - media:/app/media
@@ -40,7 +40,21 @@ services:
       - ng_net
   redis:
     image: redis:alpine
+    restart: always
+    expose :
+      - 12534
+
+    stop_grace_period: 3m
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+    ports:
+      - '6379:6379'
+    # command:  redis-server /etc/redis/redis.conf
     volumes:
+      # - ./conf/ :/etc/redis/
       - redis_val:/data
     networks:
       - db_net
@@ -49,7 +63,7 @@ services:
     restart: always
     
     command: >
-      ash -c "touch celery.log && celery -A project worker -l info &> celery.log"
+      ash -c "pip install -U drf-yasg && touch celery.log && celery -A project worker -l info &> celery.log"
     volumes:
       - .:/app
     depends_on:
