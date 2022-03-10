@@ -4,28 +4,12 @@ from django.contrib.auth.models import AbstractUser
 from .managers import CustomUserManager
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
+from django.conf import settings
+from django.contrib.sessions.models import Session
 
 
 
 
-
-
-
-
-class Profile(AbstractUser):
-    username = None
-    email = models.EmailField('email address', unique=True)
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-    objects = CustomUserManager()
-
-    def __str__(self):
-        return self.email
-    
-
-
- 
 
 
 class Address(models.Model):
@@ -39,6 +23,21 @@ class Address(models.Model):
     def __str__(self) -> str:
         return self.add        
 
+class Profile(AbstractUser):
+    username = None
+    email = models.EmailField('email address', unique=True)
+    address=models.TextField(null=True,blank=True)
+    postal_code=models.CharField(max_length=10,null=True,blank=True)
+
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return self.email
+    
+
 
 class Admin(models.Model):
     add=models.ManyToManyField(Address)
@@ -51,7 +50,7 @@ class Admin(models.Model):
 
 
     def __str__(self) -> str:
-        return self.profile_ptr.firstname
+        return self.profile.first_name
 
 
 
@@ -68,7 +67,7 @@ class Customer(models.Model):
 
 
     def __str__(self) -> str:
-        return self.profile_ptr.firstname
+        return self.profile.first_name
 
 
 class SalesMan(models.Model):
@@ -86,7 +85,16 @@ class SalesMan(models.Model):
         
 
     def __str__(self) -> str:
-        return self.profile_ptr.firstname
+        return self.profile.first_name
 
 
 
+class UserDevice(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True)
+    # session = models.ForeignKey(Session, on_delete=models.CASCADE, null=True , related_name='usertosession')  
+    device=models.CharField(max_length=150,null=True)
+    browser=models.CharField(max_length=150, null=True)
+    os=models.CharField(max_length=150, null=True)
+
+
+ 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import CartMe, CartItem
+from .models import CartMe, CartItem, History
 
 
 class CartItemInline(admin.StackedInline):
@@ -11,3 +11,6 @@ class CartItemInline(admin.StackedInline):
 class CartModelAdmin(admin.ModelAdmin):
     inlines = [CartItemInline]
 
+
+
+admin.site.register(History)

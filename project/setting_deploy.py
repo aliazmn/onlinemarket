@@ -1,0 +1,11 @@
+import os
+
+
+REDIS_HOST= os.environ.get("REDIS_HOST", "")
+CELERY_BROKER_URL = f"redis://{REDIS_HOST}:6379"
+CELERY_TIMEZONE = "Asia/Tehran"
+CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:6379/1'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_CACHE_BACKEND = 'default'
+CELERY_RESULT_SERIALIZER = 'json'
+

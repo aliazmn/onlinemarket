@@ -1,0 +1,78 @@
+{% extends 'home.html' %}
+{%load static %}
+
+{% block main %}
+<!-- Breadcumbs start -->
+<div class="e-breadcumb-wrap text-center">
+    <h2 class="e-breadcumb-title">علاقه مندیها</h2>
+    <ul class="e-breadcumb-kist">
+        <li>
+            <a href="{% url 'home' %}">خانه </a>
+        </li>
+        <li>
+            <a href=''> صفحات </a>
+        </li>
+        <li>
+            <a href=''>علاقه مندیها </a>
+        </li>
+    </ul>
+</div>
+<!-- Product Category start -->
+<div class="e-shopcart-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="e-shopcart-sec">                    
+                    <div class="shopcart-table-wrap mb-30">
+                        <form class="table-responsive">
+                            <table class="shopcart-table">
+                                <thead>
+                                  <tr>
+                                    <th>محصول </th>
+                                    <th>قیمت </th>                                    
+                                    <th>گزینه</th>
+                                    <th>&nbsp;</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    {% csrf_token %}
+                                    {% if wish_list  %}
+                                    {% for elms  in wish_list.product.all %}
+                                    
+                                    <tr class="e-remove-wrap">
+                                    <td >
+                                        <div class="sc-productwrap">
+                                            {% if elms.img %}
+                                            <a href="product_details.html" class="sc-product-thumb">
+                                                <img src="{{elms.img.url}}"  value="{{elms.img.url}}" class="img-fluid">
+                                            </a>
+                                            {% endif %}
+                                            <div class="sc-product-details">
+                                                <option value={{elms.product.name}} >{{elms.name}}</option>
+                                            </div>
+                                        </div>      
+                                    </td>
+                                    <td><span class="sc-product-prc">{{elms.price}}</span></td>
+                                    <td>
+                                        <a href="{% url 'product:detailproduct' elms.id %}" class="e-btn wishlist-ac">اطلاعات محصول  </a>
+                                    </td>                                    
+                                    <td>
+                                        <a href='{% url "product:delete_wishlist" elms.id %}' class="sc-produc-remove e-remove-product">
+                                            <img src='{%static "assets/images/index1/svg/cut.svg"%}'  alt="icon">
+                                        </a>
+                                    </td>
+                                  </tr>  
+                                    
+                                  {% endfor %}
+                                  {% endif %}                                                          
+                                    </tbody>
+                              </table>
+                        </form>
+                    </div>
+                </div>                      
+            </div>          
+        </div>
+    </div>
+</div>
+{% endblock main %}

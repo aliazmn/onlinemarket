@@ -1,0 +1,52 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block main %}
+<!-- Breadcumbs start -->
+<div class="e-breadcumb-wrap text-center">
+    <h2 class="e-breadcumb-title">ثبت نام</h2>
+    <ul class="e-breadcumb-kist">
+        <li>
+            <a href='{% url "home" %}'>خانه </a>
+        </li>
+        <li>
+            <a href='{%static "javascript:void(0);" %}'> ثبت نام</a>
+        </li>
+    </ul>
+</div>
+<!-- Product Category start -->
+<div class="e-forgotpassword-wrap e-forgotpassword-cloth">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">                   
+                <div class="e-fp-box">
+                
+                    
+                    {% if register_form.error %}
+                    {% for field in register_form %}
+                        {% for error in field.error %}
+                            <h1>{{error}}</h1>
+                    {% endfor %}
+                    {% endfor %}
+
+                    {% endif %}
+                    
+                    <form action='{% url "user:register" %}' method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12">                                        
+                            {{register_form}}
+                            </div>
+                        </div>
+                        <div class="">
+                            <button class="e-btn" style="margin-top: 10px;">ثبت نام </a>
+                        </div>
+                            
+                        </div>
+                    </form>
+                </div>        
+            </div>           
+        </div>
+    </div>
+</div>
+{% endblock main %}

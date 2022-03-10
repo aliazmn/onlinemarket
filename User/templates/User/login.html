@@ -1,64 +1,58 @@
 {% load static %}
-<!-- Login form start -->  
-    <!-- The Modal -->
-    <div class="e-autho-model modal fade" id="login">
-        <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">        
-            <!-- Modal body -->
-            <div class="modal-body">
-            <div class="modal-inner">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="modal-inner-box">
-                            <div class="autho-model-header text-center">
-                                <a href='{%static "javascript:void(0);" %}'><img src='{% static "assets/images/index1/big_logo.png"%}' alt="logo" class="img-fluid"></a>
-                                <p class="autho-model-sttl">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</p>
-                                <h2 class="autho-model-ttl">ورود </h2>
-                            </div>
-                            
-                            <div class="autho-model-filed">
-                                <form>
-                                    <div class="row">                                        
-                                        <div class="col-md-12">                                       
-                                            <div class="e-form-field mb-20">
-                                                <label>ایمیل </label>
-                                                <input class="e-field-inner" type="email">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">                                       
-                                            <div class="e-form-field mb-20">
-                                                <label>رمز عبور </label>
-                                                <input class="e-field-inner" type="Password">
-                                            </div>
-                                        </div> 
-                                        <div class="col-md-12">                                       
-                                            <div class="e-form-field mb-20">
-                                                <ul class="e-rememberforgot-list">
-                                                    <li>
-                                                        <div class="e-checkbox-wrap">
-                                                            <input class="e-checkbox-input" type="checkbox" id="remember_me">
-                                                            <label for="remember_me" class="e-checkbox">مرا به خاطر بسپار </label>
-                                                        </div>
-                                                    </li>
-                                                    <li><a href="forgot_password.html" class="e-comn-link">فراموشی رمز عبور؟ </a></li>
-                                                </ul>                                            
-                                            </div>
-                                        </div> 
-                                        <div class="col-md-12">                                       
-                                            <div class="">
-                                                <a href="index.html" class="e-btn">ورود </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+<!-- The Modal -->
+<div class="e-autho-model modal fade" id="login">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">        
+        <!-- Modal body -->
+        <div class="modal-body">
+        <div class="modal-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="modal-inner-box">
+                        <div class="autho-model-header text-center">
+                            <a href="javascript:void(0);"><img src="assets/images/index1/big_logo.png" alt="logo" class="img-fluid"></a>
+                            <p class="autho-model-sttl">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</p>
+                            <h2 class="autho-model-ttl">ورود </h2>
                         </div>
                         
+                        <div class="autho-model-filed">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-12">                                        
+                                    {{login_form}}
+                                </div>
+                                    <div class="col-md-12">                                       
+                                        <div class="e-form-field mb-20">
+                                            <ul class="e-rememberforgot-list">
+                                                <li>
+                                                    <div class="e-checkbox-wrap">
+                                                        <input class="e-checkbox-input" type="checkbox" id="remember_me">
+                                                        <label for="remember_me" class="e-checkbox">مرا به خاطر بسپار </label>
+                                                    </div>
+                                                </li>
+                                                <li><a href="forgot_password.html" class="e-comn-link">فراموشی رمز عبور؟ </a></li>
+                                            </ul>                                            
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-12">                                       
+                                        <div class="">
+                                            <a href="index.html" class="e-btn">ورود </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
-            <button type="button" class="autho-close" data-dismiss="modal">&times;</button>
-            </div>         
         </div>
-        </div>
+        <button type="button" class="autho-close" data-dismiss="modal">&times;</button>
+        </div>         
     </div>
+    </div>
+</div>
+
+
+
+

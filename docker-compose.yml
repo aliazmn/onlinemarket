@@ -1,0 +1,83 @@
+version: "3.7"
+
+services:
+  django_web:
+    # build: .
+    image: django_image_with_tzdata
+    command: >
+      ash -c " pip install -U drf-yasg && python manage.py migrate && gunicorn project.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - static:/app/static
+      - media:/app/media
+      - .:/app/
+    env_file:
+      - ./.env
+    depends_on:
+      - postgres_db
+    networks:
+      - db_net
+      - ng_net
+  postgres_db:
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=1111
+      - POSTGRES_DB=onlinemarket
+    networks:
+      - db_net
+  nginx:
+    build: ./nginx
+    volumes:
+      - static:/app/static
+      - media:/app/media
+    ports:
+      - 8001:80
+    depends_on:
+      - django_web
+    networks:
+      - ng_net
+  redis:
+    image: redis:alpine
+    restart: always
+    expose :
+      - 12534
+
+    stop_grace_period: 3m
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+    ports:
+      - '6379:6379'
+    # command:  redis-server /etc/redis/redis.conf
+    volumes:
+      # - ./conf/ :/etc/redis/
+      - redis_val:/data
+    networks:
+      - db_net
+  celery:
+    image: django_image_with_tzdata
+    restart: always
+    
+    command: >
+      ash -c "pip install -U drf-yasg && touch celery.log && celery -A project worker -l info &> celery.log"
+    volumes:
+      - .:/app
+    depends_on:
+      - django_web
+      - redis
+    networks:
+      - db_net
+volumes:
+  postgres_data:
+  static:
+  media:
+  redis_val:
+
+networks:
+  db_net:
+  ng_net:
+
